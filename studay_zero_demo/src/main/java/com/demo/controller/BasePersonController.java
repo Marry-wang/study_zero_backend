@@ -15,15 +15,15 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("/base")
-public class BasePersonController{
+public class BasePersonController {
 
     @Autowired
     private BasePersonService basePersonService;
 
     @RequestMapping("/person")
 //    public BasePerson getPerson(@RequestBody BasePerson basePerson){
-    public BasePerson getPerson(){
-        BasePerson basePerson =new BasePerson();
+    public BasePerson getPerson() {
+        BasePerson basePerson = new BasePerson();
         basePerson.setPhone("11111111111");
         return basePersonService.getBasePerson(basePerson);
     }
