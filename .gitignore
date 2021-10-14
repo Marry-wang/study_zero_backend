@@ -1,0 +1,23 @@
+# maven #
+target/
+logs/
+*.data
+
+# IDEA #
+.idea/
+*.iml
+
+# Eclipse #
+.settings/
+.metadata/
+.classpath
+.project
+
+# mac #
+*.DS_Store
+
+# other #
+hs_err_pid*.log
+.vscode
+*.iml
+/log
