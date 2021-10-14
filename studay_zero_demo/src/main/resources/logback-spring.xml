@@ -6,7 +6,7 @@
 <configuration scan="true" scanPeriod="120 seconds" debug="false">
 
 	<!-- 定义日志文件所在目录 -->
-<!--	<property name="LOG_HOME" value="d:/logs/" />-->
+	<property name="LOG_HOME" value="e:/StudayZerologs/" />
 
 	<!--控制台输出 -->
 	<appender name="stdout" class="ch.qos.logback.core.ConsoleAppender">
@@ -39,7 +39,7 @@
 		</encoder>
 		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
 			<fileNamePattern>${LOG_HOME}/logs/info.%d{yyyy-MM-dd}.log</fileNamePattern>
-			<maxHistory>30</maxHistory><!--保存最近30天的日志 -->
+			<maxHistory>2</maxHistory><!--保存最近30天的日志 -->
 		</rollingPolicy>
 	</appender>
 
@@ -56,7 +56,7 @@
 		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
 			<fileNamePattern>${LOG_HOME}/error.%d{yyyy-MM-dd}.log</fileNamePattern>
 			<!--保存最近30天的日志 -->
-			<maxHistory>30</maxHistory>
+			<maxHistory>2</maxHistory>
 		</rollingPolicy>
 	</appender>
 
