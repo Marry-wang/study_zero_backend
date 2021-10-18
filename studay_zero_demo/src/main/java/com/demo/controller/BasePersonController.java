@@ -1,5 +1,6 @@
 package com.demo.controller;
 
+import com.demo.annotation.ZeroAnnotation;
 import com.demo.model.BasePerson;
 import com.demo.service.BasePersonService;
 import io.swagger.annotations.Api;
@@ -23,6 +24,7 @@ public class BasePersonController {
     @Autowired
     private BasePersonService basePersonService;
 
+    @ZeroAnnotation
     @PostMapping("/person")
     @ApiOperation(value = "获取人员基本信息", notes = "获取人员基本信息")
 //    public BasePerson getPerson(@RequestBody BasePerson basePerson){
