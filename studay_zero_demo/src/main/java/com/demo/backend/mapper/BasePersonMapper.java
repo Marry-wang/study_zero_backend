@@ -1,7 +1,7 @@
-package com.demo.mapper;
+package com.demo.backend.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.demo.model.BasePerson;
+import com.demo.backend.model.BasePerson;
 import org.apache.ibatis.annotations.Mapper;
 
 @Mapper

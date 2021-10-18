@@ -42,7 +42,7 @@ public class ZeroAspect {
      * @Aspect 将一个类定义为一个切面类
      */
 
-    @Pointcut("execution(public * com.demo.controller.*.*(..)) && @annotation(com.demo.annotation.ZeroAnnotation)")
+    @Pointcut("execution(public * com.demo.backend.controller.*.*(..)) && @annotation(com.demo.annotation.ZeroAnnotation)")
     public void addAdvice(){}
 
     @Around("addAdvice()")

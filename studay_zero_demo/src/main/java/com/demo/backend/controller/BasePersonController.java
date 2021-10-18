@@ -1,8 +1,8 @@
-package com.demo.controller;
+package com.demo.backend.controller;
 
 import com.demo.annotation.ZeroAnnotation;
-import com.demo.model.BasePerson;
-import com.demo.service.BasePersonService;
+import com.demo.backend.model.BasePerson;
+import com.demo.backend.service.BasePersonService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;

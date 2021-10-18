@@ -1,6 +1,6 @@
-package com.demo.service;
+package com.demo.backend.service;
 
-import com.demo.model.BasePerson;
+import com.demo.backend.model.BasePerson;
 
 public interface BasePersonService {
 
