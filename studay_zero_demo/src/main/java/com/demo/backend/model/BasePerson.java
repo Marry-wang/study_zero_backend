@@ -16,7 +16,7 @@ import lombok.Data;
  */
 @Data
 @TableName("zero_base_person")
-@ApiModel(value = "BasePerson" ,description = "")
+@ApiModel(value = "BasePerson", description = "")
 public class BasePerson {
 
     @TableId(type = IdType.AUTO)
