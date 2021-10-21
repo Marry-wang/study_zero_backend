@@ -25,7 +25,7 @@ public class Swagger2Config {
         return new Docket(DocumentationType.SWAGGER_2)   //主要api配置机制初始化为swagger规范2.0
                 .apiInfo(apiInfo())
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("com.demo.controller"))
+                .apis(RequestHandlerSelectors.basePackage("com.demo.backend.controller"))
                 .paths(PathSelectors.any())
                 .build();
     }

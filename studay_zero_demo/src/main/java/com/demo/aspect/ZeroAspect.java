@@ -1,5 +1,8 @@
 package com.demo.aspect;
 
+import com.demo.backend.dto.Result;
+import com.demo.backend.dto.ResultCode;
+import com.demo.backend.dto.ResultFactory;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.*;
@@ -58,6 +61,7 @@ public class ZeroAspect {
             result = joinPoint.proceed();
         } catch (Throwable e) {
             e.printStackTrace();
+            return ResultFactory.buildResult(ResultCode.FAIL.code, "系统异常，请联系管理员","");
         }
         System.out.println("Around End");
         return result;

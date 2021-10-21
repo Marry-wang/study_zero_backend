@@ -1,6 +1,8 @@
 package com.demo.backend.controller;
 
 import com.demo.annotation.ZeroAnnotation;
+import com.demo.backend.dto.Result;
+import com.demo.backend.dto.ResultFactory;
 import com.demo.backend.model.BasePerson;
 import com.demo.backend.service.BasePersonService;
 import io.swagger.annotations.Api;
@@ -28,9 +30,12 @@ public class BasePersonController {
     @PostMapping("/person")
     @ApiOperation(value = "获取人员基本信息", notes = "获取人员基本信息")
 //    public BasePerson getPerson(@RequestBody BasePerson basePerson){
-    public BasePerson getPerson() {
+    public Result<BasePerson> getPerson() {
         BasePerson basePerson = new BasePerson();
         basePerson.setPhone("11111111111");
-        return basePersonService.getBasePerson(basePerson);
+        int a =0;
+        int b=1;
+        int c =b/a;
+        return ResultFactory.buildSuccess(basePersonService.getBasePerson(basePerson));
     }
 }
