@@ -13,17 +13,17 @@ import org.springframework.test.context.junit4.SpringRunner;
  * @Date 2021/10/20 17:12
  * @Version 1.0
  */
-@Slf4j
-@RunWith(SpringRunner.class)
-@SpringBootTest(classes = {AppZero.class})
+//@Slf4j
+//@RunWith(SpringRunner.class)
+//@SpringBootTest(classes = {AppZero.class})
 public class RedisTest {
 
-    @Autowired
-    private RedisTemplate<String,String> redisTemplate;
-
-    @Test
-    public void residZwero(){
-        redisTemplate.opsForValue().set("myKey","myValue");
-        System.out.println(redisTemplate.opsForValue().get("myKey"));
-    }
+//    @Autowired
+//    private RedisTemplate<String,String> redisTemplate;
+//
+//    @Test
+//    public void residZwero(){
+//        redisTemplate.opsForValue().set("myKey","myValue");
+//        System.out.println(redisTemplate.opsForValue().get("myKey"));
+//    }
 }

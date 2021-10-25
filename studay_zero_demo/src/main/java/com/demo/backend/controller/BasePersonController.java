@@ -33,9 +33,9 @@ public class BasePersonController {
     public Result<BasePerson> getPerson() {
         BasePerson basePerson = new BasePerson();
         basePerson.setPhone("11111111111");
-        int a =0;
-        int b=1;
-        int c =b/a;
+//        int a =0;
+//        int b=1;
+//        int c =b/a;
         return ResultFactory.buildSuccess(basePersonService.getBasePerson(basePerson));
     }
 }

@@ -1,6 +1,5 @@
 package com.demo.aspect;
 
-import com.demo.backend.dto.Result;
 import com.demo.backend.dto.ResultCode;
 import com.demo.backend.dto.ResultFactory;
 import org.aspectj.lang.JoinPoint;
