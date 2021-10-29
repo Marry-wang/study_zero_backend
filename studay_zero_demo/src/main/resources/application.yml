@@ -82,6 +82,14 @@ logging:
   config: classpath:logback-spring.xml
 
 
+config:
+  jwt:
+    # 加密密钥
+    secret: qwer
+    # token有效时长
+    expire: 3600
+    #header 名称
+    header: token
 
 
 

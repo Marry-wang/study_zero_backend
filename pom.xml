@@ -10,6 +10,7 @@
   <version>1.0-SNAPSHOT</version>
   <modules>
     <module>studay_zero_demo</module>
+    <module>studay_zero_jwt</module>
   </modules>
 
   <parent>
