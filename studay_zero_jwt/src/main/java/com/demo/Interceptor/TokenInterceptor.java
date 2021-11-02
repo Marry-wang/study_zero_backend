@@ -35,7 +35,6 @@ public class TokenInterceptor extends HandlerInterceptorAdapter {
         if(url.contains("/error")){
             return true;
         }
-        System.out.println(url);
         /**
          * token 验证
          */
