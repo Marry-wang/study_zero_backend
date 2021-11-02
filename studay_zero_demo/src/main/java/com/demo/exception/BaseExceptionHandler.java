@@ -27,6 +27,7 @@ public class BaseExceptionHandler {
     @ExceptionHandler(value =Exception.class)
     public Result exceptionHandler(HttpServletRequest req, Exception e){
         log.info(e.getMessage());
-        return ResultFactory.buildResult(ResultCode.FAIL.code,"系统异常,请联系管理员","") ;
+//        return ResultFactory.buildResult(ResultCode.FAIL.code,"系统异常,请联系管理员","") ;
+        return ResultFactory.buildResult(ResultCode.FAIL.code,e.getMessage(),"") ;
     }
 }

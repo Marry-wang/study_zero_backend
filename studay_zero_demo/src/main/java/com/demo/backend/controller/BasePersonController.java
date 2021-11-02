@@ -30,7 +30,7 @@ public class BasePersonController {
     @PostMapping("/person")
     @ApiOperation(value = "获取人员基本信息", notes = "获取人员基本信息")
 //    public BasePerson getPerson(@RequestBody BasePerson basePerson){
-    public Result<BasePerson> getPerson() {
+    public Result getPerson() {
         BasePerson basePerson = new BasePerson();
         basePerson.setPhone("11111111111");
 //        int a =0;
