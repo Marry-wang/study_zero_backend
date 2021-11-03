@@ -1,6 +1,6 @@
-package com.demo.Interceptor;
+package com.demo.jwt.Interceptor;
 
-import com.demo.config.JwtConfig;
+import com.demo.jwt.jwtconfig.JwtConfig;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.SignatureException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +26,9 @@ public class TokenInterceptor extends HandlerInterceptorAdapter {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         String url = request.getRequestURI();
+        if(url.equals("/demo/")){
+            return true;
+        }
         if(url.contains("/login")){
             return true;
         }
@@ -35,6 +38,11 @@ public class TokenInterceptor extends HandlerInterceptorAdapter {
         if(url.contains("/error")){
             return true;
         }
+        if(url.contains("/csrf")){
+            return true;
+        }
+
+
         /**
          * token 验证
          */

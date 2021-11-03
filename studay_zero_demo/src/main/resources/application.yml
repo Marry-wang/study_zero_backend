@@ -6,6 +6,8 @@ server:
 spring:
   application:
     name: demo
+  profiles:
+    active: dev
   datasource:
     url: jdbc:mysql://127.0.0.1:3306/zero?useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&allowMultiQueries=true&serverTimezone=Asia/Shanghai
 #    url: jdbc:mysql://192.168.252.128:3306/zero?useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&allowMultiQueries=true&serverTimezone=Asia/Shanghai
