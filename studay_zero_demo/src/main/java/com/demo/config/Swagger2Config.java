@@ -1,5 +1,6 @@
 package com.demo.config;
 
+import com.google.common.collect.Lists;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -12,6 +13,7 @@ import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.schema.ModelRef;
 import springfox.documentation.service.*;
 import springfox.documentation.spi.DocumentationType;
+import springfox.documentation.spi.service.contexts.SecurityContext;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
@@ -31,6 +33,8 @@ import java.util.List;
 @PropertySource({"classpath:application-dev.yml"})
 public class Swagger2Config {
 
+    public static final String TOKEN_NAME = "token";
+
     //是否开启swagger，正式环境一般是需要关闭的，可根据springboot的多环境配置进行设置
     @Value("${swagger.enable}")
     private Boolean enable;
@@ -40,7 +44,7 @@ public class Swagger2Config {
         List<Parameter> parameters = new ArrayList<>();
 
         parameters.add(new ParameterBuilder()
-                .name("token")  //Token 以及Authorization 为自定义的参数，session保存的名字是哪个就可以写成那个
+                .name("TOKEN_NAME")  //Token 以及Authorization 为自定义的参数，session保存的名字是哪个就可以写成那个
                 .description("token")
                 .modelRef(new ModelRef("string"))
                 .parameterType("header")
@@ -56,7 +60,9 @@ public class Swagger2Config {
                 // 对所有路径进行扫描
                 .paths(PathSelectors.any())
                 .build()
-                .globalOperationParameters(parameters);
+//                .globalOperationParameters(parameters);
+                .securityContexts(Lists.newArrayList(securityContext()))
+                .securitySchemes(Lists.newArrayList(apiKey()));
     }
 
     private ApiInfo apiInfo() {
@@ -67,6 +73,28 @@ public class Swagger2Config {
                 .contact("itguang")  // 联系方式
                 .version("1.0") //版本号
                 .build();
+    }
+
+    private ApiKey apiKey() {
+        return new ApiKey(TOKEN_NAME , TOKEN_NAME, "header");
+    }
+
+    private SecurityContext securityContext() {
+        return SecurityContext.builder()
+                .securityReferences(defaultAuth())
+                //.forPaths(PathSelectors.regex(DEFAULT_INCLUDE_PATTERN))
+                .forPaths(PathSelectors.regex("^(?!auth).*$"))
+                .build();
+    }
+
+
+    List<SecurityReference> defaultAuth() {
+        AuthorizationScope authorizationScope
+                = new AuthorizationScope("global", "accessEverything");
+        AuthorizationScope[] authorizationScopes = new AuthorizationScope[1];
+        authorizationScopes[0] = authorizationScope;
+        return Lists.newArrayList(
+                new SecurityReference("token", authorizationScopes));
     }
 
 
