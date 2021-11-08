@@ -12,6 +12,7 @@
   <modules>
     <module>studay_zero_demo</module>
     <module>studay_zero_jwt</module>
+      <module>studay_zero_security</module>
   </modules>
 
 <!-- spring-boot-starter-parent      spring-boot-dependencies  版本不一致出现过的问题
