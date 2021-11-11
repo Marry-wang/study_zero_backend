@@ -28,4 +28,12 @@ public class BasePersonServiceImpl implements BasePersonService {
         );
         return basePerson1;
     }
+
+    @Override
+    public BasePerson getPersonByName(String UserName) {
+        BasePerson basePerson = basePersonMapper.selectOne(new QueryWrapper<BasePerson>().lambda()
+                .eq(BasePerson::getName,UserName)
+        );
+        return basePerson;
+    }
 }

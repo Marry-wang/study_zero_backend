@@ -11,18 +11,37 @@
 
     <artifactId>studay_zero_demo</artifactId>
     <dependencies>
+<!--        <dependency>-->
+<!--            <groupId>com.demo</groupId>-->
+<!--            <artifactId>studay_zero_jwt</artifactId>-->
+<!--            <version>1.0-SNAPSHOT</version>-->
+<!--            <exclusions>-->
+<!--                <exclusion>-->
+<!--                    <groupId>org.springframework.boot</groupId>-->
+<!--                    <artifactId>spring-boot-starter-web</artifactId>-->
+<!--                </exclusion>-->
+<!--                <exclusion>-->
+<!--                    <groupId>org.projectlombok</groupId>-->
+<!--                    <artifactId>lombok</artifactId>-->
+<!--                </exclusion>-->
+<!--            </exclusions>-->
+<!--        </dependency>-->
         <dependency>
             <groupId>com.demo</groupId>
-            <artifactId>studay_zero_jwt</artifactId>
+            <artifactId>studay_zero_security</artifactId>
             <version>1.0-SNAPSHOT</version>
             <exclusions>
                 <exclusion>
+                    <groupId>org.springframework</groupId>
+                    <artifactId>spring-aop</artifactId>
+                </exclusion>
+<!--                <exclusion>-->
+<!--                    <groupId>org.springframework.boot</groupId>-->
+<!--                    <artifactId>spring-boot-starter</artifactId>-->
+<!--                </exclusion>-->
+                <exclusion>
                     <groupId>org.springframework.boot</groupId>
                     <artifactId>spring-boot-starter-web</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>org.projectlombok</groupId>
-                    <artifactId>lombok</artifactId>
                 </exclusion>
             </exclusions>
         </dependency>
@@ -69,7 +88,7 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-web</artifactId>
-            <version>5.1.2.RELEASE</version>
+            <version>5.1.3.RELEASE</version>
         </dependency>
 <!--        <dependency>-->
 <!--            &lt;!&ndash;  启动类   SpringBootApplication注解所需要        &ndash;&gt;-->

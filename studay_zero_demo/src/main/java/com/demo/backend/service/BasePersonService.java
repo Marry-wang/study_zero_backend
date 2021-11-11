@@ -6,4 +6,6 @@ public interface BasePersonService {
 
     BasePerson getBasePerson(BasePerson basePerson);
 
+    BasePerson getPersonByName(String UserName);
+
 }
