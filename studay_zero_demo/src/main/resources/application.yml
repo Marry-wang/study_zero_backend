@@ -83,9 +83,9 @@ mybatis-plus:
     #配置JdbcTypeForNull, oracle数据库必须配置
     jdbc-type-for-null: 'null'
 
-logging:
-  #目前只用于日志滚动
-  config: classpath:logback-spring.xml
+#logging:
+#  #目前只用于日志滚动
+#  config: classpath:logback-spring.xml
 
 
 config:
@@ -95,7 +95,7 @@ config:
     # token有效时长
     expire: 3600
     #header 名称
-    header: token
+    header: accessToken
 
 
 

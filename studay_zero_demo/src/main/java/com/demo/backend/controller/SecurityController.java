@@ -6,6 +6,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -22,15 +23,15 @@ import javax.servlet.http.HttpServletRequest;
 @Api(value = "security验证", tags = {"security验证"})
 public class SecurityController {
 
-    @RequestMapping("/hello")
+    @GetMapping("/hello")
     @ApiOperation(value = "helloworld", notes = "helloworld")
     public Result getUserInfo(HttpServletRequest request){
 
         return ResultFactory.buildSuccess("Hello Security");
     }
 
-    @RequestMapping("/info")
-    public String productInfo(){
+    @GetMapping("/info")
+    public Result productInfo(){
         String currentUser = "";
         Object principl = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         if(principl instanceof UserDetails) {
@@ -38,6 +39,6 @@ public class SecurityController {
         }else {
             currentUser = principl.toString();
         }
-        return " some product info,currentUser is: "+currentUser;
+        return ResultFactory.buildSuccess(" some product info,currentUser is: "+currentUser);
     }
 }
