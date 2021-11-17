@@ -45,6 +45,18 @@ public class JwtController {
         return ResultFactory.buildSuccess(token);
     }
 
+    @PostMapping("/loginTo")
+    @ApiOperation(value = "登录", notes = "登录信息")
+//    public Result login (@ApiParam(value="用户姓名",type = "query")@RequestParam(name = "userName",required = false) String userName,
+//                         @ApiParam(value="用户密码",type = "query")@RequestParam(name = "passWord",required = false) String passWord) {
+    public Result loginTo (@RequestBody BasePerson basePerson) {
+
+        String userId = 5+"";
+        String token = jwtConfig.createToken(userId);
+
+        return ResultFactory.buildSuccess(token);
+    }
+
     @RequestMapping("/getUserInfo")
     @ApiOperation(value = "获取用户信息", notes = "获取用户信息")
     public Result getUserInfo(HttpServletRequest request){
