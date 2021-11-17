@@ -3,6 +3,7 @@ package com.demo.backend.securityService;
 import com.demo.backend.dto.Result;
 import com.demo.backend.dto.ResultCode;
 import com.demo.backend.dto.ResultFactory;
+import com.demo.backend.securityService.SecurityHandler.LoginSuccessHandler;
 import com.demo.config.CorssFilter;
 import com.demo.filter.SecurityTokenFilter;
 import com.demo.jwt.Interceptor.TokenInterceptor;
@@ -46,6 +47,8 @@ import java.io.PrintWriter;
 //https://blog.csdn.net/qwe86314/article/details/89509765
 //    https://blog.csdn.net/larger5/article/details/81063438
 //https://www.cnblogs.com/demingblog/p/10874753.html  入门原理及实践
+//    https://blog.csdn.net/DX_dixi/article/details/108344849
+//    https://blog.csdn.net/qq_42033495/article/details/106617448  handler
 @Configuration
 //开启spring Security 功能
 @EnableWebSecurity
@@ -73,6 +76,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private SecurityTokenFilter securityTokenFilter;
 
+    @Autowired
+    private LoginSuccessHandler loginSuccessHandler;
+
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception{
 
@@ -98,6 +104,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                     @Override
                     public void onAuthenticationSuccess(HttpServletRequest req, HttpServletResponse resp, Authentication authentication) throws IOException, ServletException {
                         Result ok = ResultFactory.buildSuccess(jwtConfig.createToken(((User)authentication.getPrincipal()).getUsername()));
+                        System.out.println(authentication.getName());
                         resp.setContentType("application/json;charset=utf-8");
                         PrintWriter out = resp.getWriter();
                         out.write(new ObjectMapper().writeValueAsString(ok));
@@ -151,10 +158,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override  //设置登录用户，不知道为什么 withUser 就报错 springSecurityFilterChain
     protected void configure(AuthenticationManagerBuilder auth)throws Exception{
-        auth.inMemoryAuthentication().withUser("user").password("1111")
-                .roles("ADMIN").and();
-//        auth.userDetailsService(userDetailsService)
-//                .passwordEncoder(passwordEncoder());
+//        auth.inMemoryAuthentication().withUser("user").password("1111")
+//                .roles("ADMIN").and();
+        auth.userDetailsService(userDetailsService)
+                .passwordEncoder(passwordEncoder());
 //        auth.inMemoryAuthentication()
 //                .withUser("admin")
 //                .password("{noop}123456");
