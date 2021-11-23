@@ -39,30 +39,38 @@ public class SecurityTokenFilter extends OncePerRequestFilter {
         String url = request.getRequestURI();
         String token = request.getHeader(jwtConfig.getHeader());
         String userNameFromToken ="";
-        if(!url.contains("/login")){
-            /**
-             * token 验证
-             */
+        if((!url.equals("/demo/login")) ){
+            if((!url.equals("/demo/csrf")) ){
+                if((!url.equals("/demo/"))){
+                    if((!url.equals("/demo/v2/api-docs"))){
+                        /**
+                         * token 验证
+                         */
+                        if(!url.contains("/swagger") ){
 
-            if(StringUtils.isEmpty(token)){
-                token = request.getParameter(jwtConfig.getHeader());
-            }
-            if(StringUtils.isEmpty(token)){
-                throw new SignatureException(jwtConfig.getHeader()+"不能为空");
-            }
-            Claims claims = null;
-            try {
-                claims = jwtConfig.getTokenClaim(token);
-                if(claims == null || jwtConfig.isTokenExpired(claims.getExpiration())){
-                    throw new SignatureException(jwtConfig.getHeader()+"失效,请重新登录");
+                            System.out.println(url);
+
+                            if(StringUtils.isEmpty(token)){
+                                token = request.getParameter(jwtConfig.getHeader());
+                            }
+                            if(StringUtils.isEmpty(token)){
+                                throw new SignatureException(jwtConfig.getHeader()+"不能为空");
+                            }
+                            Claims claims = null;
+                            try {
+                                claims = jwtConfig.getTokenClaim(token);
+                                if(claims == null || jwtConfig.isTokenExpired(claims.getExpiration())){
+                                    throw new SignatureException(jwtConfig.getHeader()+"失效,请重新登录");
+                                }
+                            }catch (Exception e){
+                                throw new SignatureException(jwtConfig.getHeader()+"失效,请重新登录");
+                            }
+                            userNameFromToken = jwtConfig.getUsernameFromToken(token);
+                        }
+                    }
                 }
-            }catch (Exception e){
-                throw new SignatureException(jwtConfig.getHeader()+"失效,请重新登录");
             }
-            userNameFromToken = jwtConfig.getUsernameFromToken(token);
         }
-
-
         //设置角色
         List<GrantedAuthority> grantedAuthorities = new ArrayList<>();
         GrantedAuthority grantedAuthority =new GrantedAuthority() {

@@ -91,6 +91,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 //authenticated()  需要登陆后进行访问
                 .antMatchers("/login").permitAll()
                 .antMatchers("/static/**").permitAll()
+                .antMatchers("/csrf").permitAll()
+                .antMatchers("/swagger-resources/**", "/webjars/**", "/v2/**", "/swagger-ui.html/**").permitAll()
                 .antMatchers(HttpMethod.OPTIONS).permitAll()
                 .anyRequest()//任何其他请求
                 .authenticated()//都需要身份认证
@@ -147,8 +149,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     public void configure(WebSecurity webSecurity) throws Exception{
         webSecurity.ignoring()
 //                .antMatchers("/")
-//                .antMatchers("/swagger-resources/**", "/webjars/**", "/v2/**", "/swagger-ui.html/**")
-//                .antMatchers("/login")
+                .antMatchers("/swagger-resources/**", "/webjars/**", "/v2/**", "/swagger-ui.html/**")
+                .antMatchers("/login")
 //                .antMatchers("/jwt/getUserInfo")
 //                .antMatchers("/security/info")
 //                .antMatchers("/security/hello")
