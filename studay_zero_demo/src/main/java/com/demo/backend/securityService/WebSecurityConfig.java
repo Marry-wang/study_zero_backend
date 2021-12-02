@@ -89,7 +89,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .csrf().disable()//关闭跨站请求伪造保护
                 .authorizeRequests()
                 //authenticated()  需要登陆后进行访问
-                .antMatchers("/login").permitAll()
+//                .antMatchers("/login").permitAll()
                 .antMatchers("/static/**").permitAll()
                 .antMatchers("/csrf").permitAll()
                 .antMatchers("/swagger-resources/**", "/webjars/**", "/v2/**", "/swagger-ui.html/**").permitAll()
@@ -150,7 +150,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         webSecurity.ignoring()
 //                .antMatchers("/")
                 .antMatchers("/swagger-resources/**", "/webjars/**", "/v2/**", "/swagger-ui.html/**")
-                .antMatchers("/login")
+//                .antMatchers("/login")
 //                .antMatchers("/jwt/getUserInfo")
 //                .antMatchers("/security/info")
 //                .antMatchers("/security/hello")
