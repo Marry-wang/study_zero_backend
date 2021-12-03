@@ -19,7 +19,7 @@ import javax.servlet.http.HttpServletRequest;
  * @Version 1.0
  */
 @RestController
-//@RequestMapping("/jwt")
+@RequestMapping("/jwt")
 @Api(value = "jwt验证", tags = {"jwt验证"})
 public class JwtController {
     /**
@@ -31,19 +31,6 @@ public class JwtController {
 
     @Autowired
     private JwtConfig jwtConfig;
-
-
-    @PostMapping("/login")
-    @ApiOperation(value = "登录", notes = "登录信息")
-//    public Result login (@ApiParam(value="用户姓名",type = "query")@RequestParam(name = "userName",required = false) String userName,
-//                         @ApiParam(value="用户密码",type = "query")@RequestParam(name = "passWord",required = false) String passWord) {
-    public Result login (@RequestBody BasePerson basePerson) {
-
-        String userId = 5+"";
-        String token = jwtConfig.createToken(userId);
-
-        return ResultFactory.buildSuccess(token);
-    }
 
     @PostMapping("/loginTo")
     @ApiOperation(value = "登录", notes = "登录信息")

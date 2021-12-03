@@ -12,6 +12,10 @@ public class ResultFactory {
         return buidResult(ResultCode.SUCCESS,"成功",data);
     }
 
+    public static Result buildFail(String msg){
+        return buidResult(ResultCode.FAIL,msg,"");
+    }
+
     public static Result buidResult(ResultCode resultCode, String message, Object data) {
         return buildResult(resultCode.code, message, data);
     }
