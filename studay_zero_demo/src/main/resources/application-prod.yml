@@ -65,3 +65,9 @@ spring:
 #    password: demo1
 #    # 连接超时时间（毫秒）
 #    timeout: 5000
+
+minio:
+  endpoint: http://localhost:9000
+  bucketName: zero1
+  accessKey: minioadmin
+  secretKey: minioadmin

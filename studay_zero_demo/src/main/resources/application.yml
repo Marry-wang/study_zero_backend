@@ -8,6 +8,9 @@ spring:
     name: demo
   profiles:
     active: prod
+  servlet:
+    multipart:
+      max-file-size: 10MB
 #  security:
 #    user:
 #      name: admin
