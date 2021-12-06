@@ -39,3 +39,8 @@ spring:
         min-idle: 0
     lettuce:
       shutdown-timeout: 0
+minio:
+  endpoint: http://localhost:9000
+  bucketName: zero1
+  accessKey: minioadmin
+  secretKey: minioadmin

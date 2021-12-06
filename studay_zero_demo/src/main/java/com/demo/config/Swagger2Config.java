@@ -30,7 +30,7 @@ import java.util.List;
  */
 @Configuration
 @EnableSwagger2
-@PropertySource({"classpath:application-dev.yml"})
+//@PropertySource({"classpath:application-dev.yml"})
 public class Swagger2Config {
 
     public static final String TOKEN_NAME = "token";
