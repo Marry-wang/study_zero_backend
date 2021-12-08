@@ -16,6 +16,8 @@
     <module>studay_zero_jwt</module>
     <module>studay_zero_security</module>
     <module>studay_zero_es</module>
+    <module>studay-zero_common</module>
+    <module>studay_zero_rocketmq</module>
   </modules>
 
 <!-- spring-boot-starter-parent      spring-boot-dependencies  版本不一致出现过的问题
