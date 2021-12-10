@@ -4,10 +4,11 @@ server:
     context-path: /nacos
 
 
-nacos:
-  config:
-    server-addr: 192.168.11.1:8801,192.168.11.1:8803,192.168.11.1:8805
-#  discovery:
-#    server-addr: 192.168.11.1:8801
-#    enabled: true
+spring:
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 192.168.11.1:8801,192.168.11.1:88013,192.168.11.1:8805
+  application:
+    name: service-provider
 

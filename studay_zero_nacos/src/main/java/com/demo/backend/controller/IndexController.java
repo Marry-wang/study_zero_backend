@@ -1,7 +1,6 @@
 package com.demo.backend.controller;
 
 import com.alibaba.nacos.api.config.annotation.NacosValue;
-import com.alibaba.nacos.spring.context.annotation.config.NacosPropertySource;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -12,7 +11,6 @@ import org.springframework.web.bind.annotation.RestController;
  * @Version 1.0
  */
 @RestController
-@NacosPropertySource(dataId = "zero", autoRefreshed = true)
 public class IndexController {
 
     @NacosValue(value = "${name}", autoRefreshed = true)
