@@ -1,6 +1,9 @@
 package com.demo.backend.controller;
 
 import com.alibaba.nacos.api.config.annotation.NacosValue;
+import com.demo.backend.service.IndexService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -13,12 +16,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class IndexController {
 
-    @NacosValue(value = "${name}", autoRefreshed = true)
-    private String testProperties;
+    @Autowired
+    private IndexService indexService;
 
     @RequestMapping("/")
     public String index(){
-        return "hi dalaoyang-->"+testProperties;
+        return indexService.index();
     }
 
 }
