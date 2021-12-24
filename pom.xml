@@ -18,6 +18,7 @@
     <module>studay_zero_es</module>
     <module>studay_zero_rocketmq</module>
     <module>studay_zero_nacos</module>
+    <module>studay_zero_mybatis</module>
   </modules>
 
 <!-- spring-boot-starter-parent      spring-boot-dependencies  版本不一致出现过的问题
