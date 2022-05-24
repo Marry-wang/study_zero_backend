@@ -13,12 +13,7 @@
   <version>1.0-SNAPSHOT</version>
   <modules>
     <module>studay_zero_demo</module>
-    <module>studay_zero_jwt</module>
-    <module>studay_zero_security</module>
-    <module>studay_zero_es</module>
-    <module>studay_zero_rocketmq</module>
-    <module>studay_zero_nacos</module>
-    <module>studay_zero_mybatis</module>
+    <module>studay_zero_common</module>
   </modules>
 
 <!-- spring-boot-starter-parent      spring-boot-dependencies  版本不一致出现过的问题
