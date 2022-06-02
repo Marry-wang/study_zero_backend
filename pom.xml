@@ -14,6 +14,7 @@
   <modules>
     <module>studay_zero_demo</module>
     <module>studay_zero_common</module>
+    <module>studay_zero_module</module>
   </modules>
 
 <!-- spring-boot-starter-parent      spring-boot-dependencies  版本不一致出现过的问题

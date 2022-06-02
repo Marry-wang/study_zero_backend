@@ -24,22 +24,7 @@
   </properties>
 
   <dependencies>
-    <!--springboot-->
-    <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter-web</artifactId>
-    </dependency>
 
-    <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter-test</artifactId>
-      <scope>test</scope>
-    </dependency>
-    <!--lombok-->
-    <dependency>
-      <groupId>org.projectlombok</groupId>
-      <artifactId>lombok</artifactId>
-    </dependency>
     <!-- Nacos 组件依赖 -->
 <!--    <dependency>-->
 <!--      <groupId>com.alibaba.boot</groupId>-->
