@@ -22,7 +22,11 @@
     </properties>
 
     <dependencies>
-
+        <dependency>
+            <groupId>com.demo</groupId>
+            <artifactId>studay_zero_api_system</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
     </dependencies>
 
 </project>
