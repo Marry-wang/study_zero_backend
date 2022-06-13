@@ -23,6 +23,7 @@
         <module>studay_zero_system</module>
         <module>studay_zero_user</module>
         <module>studay_zero_flink</module>
+        <module>studay_zero_pay</module>
     </modules>
 
     <dependencies>

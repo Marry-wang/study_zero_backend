@@ -1,0 +1,6 @@
+server:
+  port: 7003
+
+spring:
+  application:
+    name: studay_zero_pay
