@@ -4,6 +4,9 @@ server:
     context-path: /demo
 
 spring:
+  mvc:
+    pathmatch:
+      matching-strategy: ANT_PATH_MATCHER
   application:
     name: demo
   profiles:
