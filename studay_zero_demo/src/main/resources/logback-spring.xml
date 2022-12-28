@@ -6,7 +6,7 @@
 <configuration scan="true" scanPeriod="120 seconds" debug="false">
 
 	<!-- 定义日志文件所在目录 -->
-	<property name="LOG_HOME" value="e:/log/StudayZerologs/" />
+	<property name="LOG_HOME" value="c:/log/StudayZerologs/" />
 
 	<!--控制台输出 -->
 	<appender name="stdout" class="ch.qos.logback.core.ConsoleAppender">
