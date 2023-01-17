@@ -1,6 +1,9 @@
 package com.demo.domain.service;
 
+import com.demo.domain.entry.po.SysMenuPo;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * @Author: 王孟伟
@@ -9,4 +12,9 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public interface SysMenuService {
+    /**
+     * 查询菜单列表
+     * @return
+     */
+    List<SysMenuPo> queryMenuList();
 }
