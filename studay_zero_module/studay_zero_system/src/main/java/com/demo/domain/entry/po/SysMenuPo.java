@@ -7,6 +7,7 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * @Author: 王孟伟
@@ -19,6 +20,9 @@ public class SysMenuPo {
 
     @TableId(value = "id",type = IdType.AUTO)
     private Integer id;
+
+    @TableField(value = "parent_id")
+    private Integer parentId;
 
     @TableField(value = "menu_path")
     private String menuPath;
@@ -37,4 +41,7 @@ public class SysMenuPo {
 
     @TableField(value = "dele_flag")
     private Boolean deleFlag;
+
+    @TableField(exist = false)
+    private List<SysMenuPo> menuChrldrenList;
 }

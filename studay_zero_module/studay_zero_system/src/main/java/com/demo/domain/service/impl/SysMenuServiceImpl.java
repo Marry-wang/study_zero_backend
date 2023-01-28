@@ -7,7 +7,9 @@ import com.demo.domain.service.SysMenuService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * @Author: 王孟伟
@@ -15,7 +17,7 @@ import java.util.List;
  * @Description:
  */
 @Service
-public class SysMenuServiceImpl  implements SysMenuService {
+public class SysMenuServiceImpl implements SysMenuService {
 
     @Autowired
     SysMenuMapper sysMenuMapper;
@@ -23,6 +25,29 @@ public class SysMenuServiceImpl  implements SysMenuService {
     @Override
     public List<SysMenuPo> queryMenuList() {
         LambdaQueryWrapper<SysMenuPo> sysMenuPoLambdaQueryWrapper = new LambdaQueryWrapper<>();
-        return sysMenuMapper.selectList(sysMenuPoLambdaQueryWrapper);
+        List<SysMenuPo> sysMenuPos = sysMenuMapper.selectList(sysMenuPoLambdaQueryWrapper);
+
+        ArrayList<SysMenuPo> menuParentList = new ArrayList<>();
+        for (SysMenuPo sysMenuPo : sysMenuPos) {
+            if(Objects.isNull(sysMenuPo.getParentId())){
+                menuParentList.add(sysMenuPo);
+            }
+        }
+        getMeuTree(menuParentList,sysMenuPos);
+        return menuParentList;
+    }
+
+    private List<SysMenuPo> getMeuTree(List<SysMenuPo>parentList,List<SysMenuPo>menuList){
+        for(SysMenuPo sysMenuPo:parentList){
+            List<SysMenuPo> chridrenMenuList = new ArrayList<>();
+            for (SysMenuPo sysMenuPo1:menuList){
+                if(Objects.equals(sysMenuPo.getId(), sysMenuPo1.getParentId())){
+                    chridrenMenuList.add(sysMenuPo1);
+                }
+            }
+            List<SysMenuPo> meuTree = getMeuTree(chridrenMenuList, menuList);
+            sysMenuPo.setMenuChrldrenList(meuTree);
+        }
+        return parentList;
     }
 }
