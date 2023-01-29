@@ -21,7 +21,7 @@ public class SysMenuController {
     @Autowired
     private SysMenuService sysMenuService;
 
-    @PostMapping(value = "/get")
+    @PostMapping(value = "/getMenu")
     public List<SysMenuPo> menuList(){
         return sysMenuService.queryMenuList();
     }
