@@ -20,7 +20,7 @@ import java.util.Objects;
 public class SysMenuServiceImpl implements SysMenuService {
 
     @Autowired
-    SysMenuMapper sysMenuMapper;
+    private SysMenuMapper sysMenuMapper;
 
     @Override
     public List<SysMenuPo> queryMenuList() {

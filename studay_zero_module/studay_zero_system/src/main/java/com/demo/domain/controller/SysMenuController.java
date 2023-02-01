@@ -22,7 +22,7 @@ public class SysMenuController {
     private SysMenuService sysMenuService;
 
     @PostMapping(value = "/getMenu")
-    public List<SysMenuPo> menuList(){
+    public List<SysMenuPo> menuList() {
         return sysMenuService.queryMenuList();
     }
 }

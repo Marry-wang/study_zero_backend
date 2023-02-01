@@ -16,7 +16,7 @@ public class ManageSystemController implements RemoteSystemService {
     @Override
     public HashMap<String, String> send() {
         HashMap<String, String> map = new HashMap<>();
-        map.put("system","1");
+        map.put("system", "1");
         return map;
     }
 
