@@ -2,6 +2,7 @@ package com.demo.domain.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.demo.domain.entry.po.SysMenuPo;
+import com.demo.domain.entry.vo.SysMenuVo;
 import com.demo.domain.mapper.SysMenuMapper;
 import com.demo.domain.service.SysMenuService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,11 +38,15 @@ public class SysMenuServiceImpl implements SysMenuService {
         return menuParentList;
     }
 
-    private List<SysMenuPo> getMeuTree(List<SysMenuPo>parentList,List<SysMenuPo>menuList){
+    private List<SysMenuPo> getMeuTree(List<SysMenuPo>parentList, List<SysMenuPo>menuList){
         for(SysMenuPo sysMenuPo:parentList){
             List<SysMenuPo> chridrenMenuList = new ArrayList<>();
             for (SysMenuPo sysMenuPo1:menuList){
                 if(Objects.equals(sysMenuPo.getId(), sysMenuPo1.getParentId())){
+                    SysMenuVo sysMenuVo = new SysMenuVo();
+                    sysMenuVo.setMenuName(sysMenuPo1.getMenuName());
+                    sysMenuVo.setIcon(sysMenuPo1.getMenuIcon());
+                    sysMenuVo.setPath(sysMenuPo1.getMenuPath());
                     chridrenMenuList.add(sysMenuPo1);
                 }
             }
