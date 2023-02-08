@@ -25,13 +25,13 @@ public class SysMenuPo {
     private Integer parentId;
 
     @TableField(value = "menu_path")
-    private String menuPath;
+    private String path;
 
     @TableField(value = "menu_name")
-    private String menuName;
+    private String name;
 
     @TableField(value = "menu_icon")
-    private String menuIcon;
+    private String icon;
 
     @TableField(value = "create_time")
     private Date createTime;
@@ -43,5 +43,5 @@ public class SysMenuPo {
     private Boolean deleFlag;
 
     @TableField(exist = false)
-    private List<SysMenuPo> menuChrldrenList;
+    private List<SysMenuPo> chrldren;
 }

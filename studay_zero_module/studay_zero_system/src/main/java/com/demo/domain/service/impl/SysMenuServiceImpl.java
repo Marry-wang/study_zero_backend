@@ -43,15 +43,12 @@ public class SysMenuServiceImpl implements SysMenuService {
             List<SysMenuPo> chridrenMenuList = new ArrayList<>();
             for (SysMenuPo sysMenuPo1:menuList){
                 if(Objects.equals(sysMenuPo.getId(), sysMenuPo1.getParentId())){
-                    SysMenuVo sysMenuVo = new SysMenuVo();
-                    sysMenuVo.setMenuName(sysMenuPo1.getMenuName());
-                    sysMenuVo.setIcon(sysMenuPo1.getMenuIcon());
-                    sysMenuVo.setPath(sysMenuPo1.getMenuPath());
+
                     chridrenMenuList.add(sysMenuPo1);
                 }
             }
             List<SysMenuPo> meuTree = getMeuTree(chridrenMenuList, menuList);
-            sysMenuPo.setMenuChrldrenList(meuTree);
+            sysMenuPo.setChrldren(meuTree);
         }
         return parentList;
     }
