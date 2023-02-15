@@ -1,6 +1,7 @@
 package com.demo.domain.service;
 
 import com.demo.domain.entry.po.SysMenuPo;
+import com.demo.domain.entry.po.SysUserPo;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,4 +18,10 @@ public interface SysMenuService {
      * @return
      */
     List<SysMenuPo> queryMenuList();
+
+    /**
+     * 查询橘色列表
+     * @return
+     */
+    List<SysUserPo> queryUserList();
 }

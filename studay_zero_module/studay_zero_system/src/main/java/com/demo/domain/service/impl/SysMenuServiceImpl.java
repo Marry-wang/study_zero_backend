@@ -2,8 +2,9 @@ package com.demo.domain.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.demo.domain.entry.po.SysMenuPo;
-import com.demo.domain.entry.vo.SysMenuVo;
+import com.demo.domain.entry.po.SysUserPo;
 import com.demo.domain.mapper.SysMenuMapper;
+import com.demo.domain.mapper.SysUserMapper;
 import com.demo.domain.service.SysMenuService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,6 +24,9 @@ public class SysMenuServiceImpl implements SysMenuService {
     @Autowired
     private SysMenuMapper sysMenuMapper;
 
+    @Autowired
+    private SysUserMapper sysUserMapper;
+
     @Override
     public List<SysMenuPo> queryMenuList() {
         LambdaQueryWrapper<SysMenuPo> sysMenuPoLambdaQueryWrapper = new LambdaQueryWrapper<>();
@@ -36,6 +40,13 @@ public class SysMenuServiceImpl implements SysMenuService {
         }
         getMeuTree(menuParentList,sysMenuPos);
         return menuParentList;
+    }
+
+    @Override
+    public List<SysUserPo> queryUserList() {
+        LambdaQueryWrapper<SysUserPo> sysUserPoLambdaQueryWrapper = new LambdaQueryWrapper<>();
+        List<SysUserPo> sysUserPoList = sysUserMapper.selectList(sysUserPoLambdaQueryWrapper);
+        return sysUserPoList;
     }
 
     private List<SysMenuPo> getMeuTree(List<SysMenuPo>parentList, List<SysMenuPo>menuList){

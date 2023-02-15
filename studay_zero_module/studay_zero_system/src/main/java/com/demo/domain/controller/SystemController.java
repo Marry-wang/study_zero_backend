@@ -1,6 +1,7 @@
 package com.demo.domain.controller;
 
 import com.demo.domain.entry.po.SysMenuPo;
+import com.demo.domain.entry.po.SysUserPo;
 import com.demo.domain.service.SysMenuService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,7 +17,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping(value = "/system")
-public class SysMenuController {
+public class SystemController {
 
     @Autowired
     private SysMenuService sysMenuService;
@@ -24,5 +25,10 @@ public class SysMenuController {
     @PostMapping(value = "/getMenu")
     public List<SysMenuPo> menuList() {
         return sysMenuService.queryMenuList();
+    }
+
+    @PostMapping(value = "/getUser")
+    public List<SysUserPo> userList() {
+        return sysMenuService.queryUserList();
     }
 }

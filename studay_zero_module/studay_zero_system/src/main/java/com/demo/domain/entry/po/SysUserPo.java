@@ -15,23 +15,14 @@ import java.util.List;
  * @Description:
  */
 @Data
-@TableName(value = "sys_menu")
-public class SysMenuPo {
+@TableName(value = "sys_user")
+public class SysUserPo {
 
     @TableId(value = "id",type = IdType.AUTO)
     private Integer id;
 
-    @TableField(value = "parent_id")
-    private Integer parentId;
-
-    @TableField(value = "menu_path")
-    private String path;
-
-    @TableField(value = "menu_name")
-    private String name;
-
-    @TableField(value = "menu_icon")
-    private String icon;
+    @TableField(value = "user_name")
+    private String userName;
 
     @TableField(value = "create_time")
     private Date createTime;
@@ -48,6 +39,4 @@ public class SysMenuPo {
     @TableField(value = "dele_flag")
     private Boolean deleFlag;
 
-    @TableField(exist = false)
-    private List<SysMenuPo> chrldren;
 }
