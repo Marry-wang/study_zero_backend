@@ -24,9 +24,6 @@ public class SysMenuServiceImpl implements SysMenuService {
     @Autowired
     private SysMenuMapper sysMenuMapper;
 
-    @Autowired
-    private SysUserMapper sysUserMapper;
-
     @Override
     public List<SysMenuPo> queryMenuList() {
         LambdaQueryWrapper<SysMenuPo> sysMenuPoLambdaQueryWrapper = new LambdaQueryWrapper<>();
@@ -40,13 +37,6 @@ public class SysMenuServiceImpl implements SysMenuService {
         }
         getMeuTree(menuParentList,sysMenuPos);
         return menuParentList;
-    }
-
-    @Override
-    public List<SysUserPo> queryUserList() {
-        LambdaQueryWrapper<SysUserPo> sysUserPoLambdaQueryWrapper = new LambdaQueryWrapper<>();
-        List<SysUserPo> sysUserPoList = sysUserMapper.selectList(sysUserPoLambdaQueryWrapper);
-        return sysUserPoList;
     }
 
     private List<SysMenuPo> getMeuTree(List<SysMenuPo>parentList, List<SysMenuPo>menuList){

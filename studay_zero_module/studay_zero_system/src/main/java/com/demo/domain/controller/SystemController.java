@@ -3,6 +3,7 @@ package com.demo.domain.controller;
 import com.demo.domain.entry.po.SysMenuPo;
 import com.demo.domain.entry.po.SysUserPo;
 import com.demo.domain.service.SysMenuService;
+import com.demo.domain.service.SysUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,6 +23,9 @@ public class SystemController {
     @Autowired
     private SysMenuService sysMenuService;
 
+    @Autowired
+    private SysUserService sysUserService;
+
     @PostMapping(value = "/getMenu")
     public List<SysMenuPo> menuList() {
         return sysMenuService.queryMenuList();
@@ -29,6 +33,6 @@ public class SystemController {
 
     @PostMapping(value = "/getUser")
     public List<SysUserPo> userList() {
-        return sysMenuService.queryUserList();
+        return sysUserService.queryUserList();
     }
 }
