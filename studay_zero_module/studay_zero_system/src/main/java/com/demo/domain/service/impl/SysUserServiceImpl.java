@@ -5,6 +5,7 @@ import com.demo.domain.entry.po.SysUserPo;
 import com.demo.domain.mapper.SysUserMapper;
 import com.demo.domain.service.SysUserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
@@ -13,6 +14,7 @@ import java.util.List;
  * @Date: 2023/2/21 21:51
  * @Description:
  */
+@Service
 public class SysUserServiceImpl implements SysUserService {
 
     @Autowired

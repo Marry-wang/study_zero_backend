@@ -7,5 +7,5 @@ import com.demo.domain.service.SysRoleService;
  * @Date: 2023/2/21 21:52
  * @Description:
  */
-public class SysRoleServiceImpl implements SysRoleService {
+public class SysRoleServiceImpl {
 }

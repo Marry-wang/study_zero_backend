@@ -7,6 +7,6 @@ import org.springframework.stereotype.Service;
  * @Date: 2023/2/21 21:52
  * @Description:
  */
-@Service
+
 public class SysRoleService {
 }
