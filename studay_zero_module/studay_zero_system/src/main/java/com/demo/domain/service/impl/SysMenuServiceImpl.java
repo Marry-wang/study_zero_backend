@@ -53,4 +53,26 @@ public class SysMenuServiceImpl implements SysMenuService {
         }
         return parentList;
     }
+
+    @Override
+    public SysMenuPo selectMenu(SysMenuPo sysMenuPo) {
+        return sysMenuMapper.selectById(sysMenuPo.getId());
+    }
+
+    @Override
+    public Integer addMenu(SysMenuPo sysMenuPo) {
+        return sysMenuMapper.insert(sysMenuPo);
+    }
+
+    @Override
+    public Integer updateMenu(SysMenuPo sysMenuPo) {
+        return sysMenuMapper.updateById(sysMenuPo);
+    }
+
+    @Override
+    public Integer delMenu(SysMenuPo sysMenuPo) {
+        return sysMenuMapper.deleteById(sysMenuPo.getId());
+    }
+
+
 }

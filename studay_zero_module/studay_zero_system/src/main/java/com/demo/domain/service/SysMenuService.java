@@ -15,8 +15,41 @@ import java.util.List;
 public interface SysMenuService {
     /**
      * 查询菜单列表
+     *
      * @return
      */
     List<SysMenuPo> queryMenuList();
+
+    /**
+     * 查询菜单详情
+     *
+     * @param sysMenuPo
+     * @return
+     */
+    SysMenuPo selectMenu(SysMenuPo sysMenuPo);
+
+    /**
+     * 新增菜单
+     *
+     * @param sysMenuPo
+     * @return
+     */
+    Integer addMenu(SysMenuPo sysMenuPo);
+
+    /**
+     * 更新菜单
+     *
+     * @param sysMenuPo
+     * @return
+     */
+    Integer updateMenu(SysMenuPo sysMenuPo);
+
+    /**
+     * 删除菜单
+     *
+     * @param sysMenuPo
+     * @return
+     */
+    Integer delMenu(SysMenuPo sysMenuPo);
 
 }

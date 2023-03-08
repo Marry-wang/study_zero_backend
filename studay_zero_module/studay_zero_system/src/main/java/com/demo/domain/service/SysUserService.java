@@ -14,8 +14,42 @@ import java.util.List;
 public interface SysUserService {
 
     /**
-     * 查询橘色列表
+     * 查询用户列表
+     *
      * @return
      */
     List<SysUserPo> queryUserList();
+
+
+    /**
+     * 新增用户
+     *
+     * @param sysUserPo
+     * @return
+     */
+    Integer addUser(SysUserPo sysUserPo);
+
+    /**
+     * 更新用户
+     *
+     * @param sysUserPo
+     * @return
+     */
+    Integer updateUser(SysUserPo sysUserPo);
+
+    /**
+     * 查询用户
+     *
+     * @param sysUserPo
+     * @return
+     */
+    SysUserPo selectUser(SysUserPo sysUserPo);
+
+    /**
+     * 删除用户
+     *
+     * @param sysUserPo
+     * @return
+     */
+    Integer delUser(SysUserPo sysUserPo);
 }

@@ -26,4 +26,24 @@ public class SysUserServiceImpl implements SysUserService {
         List<SysUserPo> sysUserPoList = sysUserMapper.selectList(sysUserPoLambdaQueryWrapper);
         return sysUserPoList;
     }
+
+    @Override
+    public Integer addUser(SysUserPo sysUserPo) {
+        return sysUserMapper.insert(sysUserPo);
+    }
+
+    @Override
+    public Integer updateUser(SysUserPo sysUserPo) {
+        return sysUserMapper.updateById(sysUserPo);
+    }
+
+    @Override
+    public SysUserPo selectUser(SysUserPo sysUserPo) {
+        return sysUserMapper.selectById(sysUserPo.getId());
+    }
+
+    @Override
+    public Integer delUser(SysUserPo sysUserPo) {
+        return sysUserMapper.deleteById(sysUserPo.getId());
+    }
 }
