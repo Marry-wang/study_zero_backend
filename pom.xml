@@ -16,6 +16,7 @@
       <module>studay_zero_common</module>
       <module>studay_zero_module</module>
       <module>studay_zero_api</module>
+    <module>studay_zero_gateway</module>
   </modules>
 
 <!-- spring-boot-starter-parent      spring-boot-dependencies  版本不一致出现过的问题
