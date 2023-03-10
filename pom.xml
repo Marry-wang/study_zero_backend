@@ -40,6 +40,7 @@
     <maven.compiler.target>1.8</maven.compiler.target>
   </properties>
 
+<!-- dependencyManagement 项目依赖管理   没有则全部项目都引入下边的依赖，有则需要子项目自己引入依赖 -->
   <dependencyManagement>
     <dependencies>
       <dependency>
