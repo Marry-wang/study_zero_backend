@@ -10,7 +10,7 @@ import java.util.HashMap;
  * @author wangmengwei
  * @date 2022年06月09日 10:50
  */
-@FeignClient( fallbackFactory = RemoteSystemFallBackFactory.class,url = "localhost:7002",name = "studay_zero_system")
+@FeignClient( fallbackFactory = RemoteSystemFallBackFactory.class,url = "localhost:7002",name = "studay-zero-system")
 public interface RemoteSystemService {
 
     /**
