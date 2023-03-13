@@ -1,7 +1,7 @@
 package com.demo.controller.fein;
 
-import com.demo.service.RemoteSystemService;
-import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.HashMap;
@@ -11,9 +11,10 @@ import java.util.HashMap;
  * @date 2022年06月08日 17:12
  */
 @RestController
-public class ManageSystemController implements RemoteSystemService {
+@RequestMapping(value = "/system")
+public class ManageSystemController  {
 
-    @Override
+    @PostMapping(value = "/send")
     public HashMap<String, String> send() {
         HashMap<String, String> map = new HashMap<>();
         map.put("system", "1");
