@@ -1,0 +1,16 @@
+server:
+  port: 9999
+
+spring:
+  application:
+    name: studay-zero-gateway
+  cloud:
+    gateway:
+      routes:
+#        id唯一
+        - id: studay-zero-user
+#          uri  匹配后要访问的地址
+          uri: http://127.0.0.1:7001
+#          需要匹配的规则
+          predicates:
+            - Path=/userFein/**
