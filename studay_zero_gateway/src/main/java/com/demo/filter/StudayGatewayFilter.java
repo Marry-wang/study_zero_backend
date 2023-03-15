@@ -16,7 +16,12 @@ import reactor.core.publisher.Mono;
 public class StudayGatewayFilter implements GlobalFilter, Ordered {
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
-        System.out.println(exchange);
+        System.out.println(exchange.getLogPrefix());
+        System.out.println(exchange.getApplicationContext().getApplicationName());
+        System.out.println(exchange.getFormData());
+        System.out.println(exchange.getLocaleContext());
+        System.out.println(exchange.getMultipartData());
+        System.out.println(exchange.getRequest().getPath());
         System.out.println(chain);
         return chain.filter(exchange);
     }
