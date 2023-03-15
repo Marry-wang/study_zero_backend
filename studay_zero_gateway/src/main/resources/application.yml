@@ -13,4 +13,8 @@ spring:
           uri: http://127.0.0.1:7001
 #          需要匹配的规则
           predicates:
-            - Path=/userFein/**
+            - Path=/user/**
+#          https://blog.csdn.net/qq_61603262/article/details/127384412   翻译文
+#          过滤器数组，在请求传递过程中，去除请求路径中的1级路径
+          filters:
+            - StripPrefix=1
