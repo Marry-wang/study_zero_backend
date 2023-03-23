@@ -9,9 +9,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @Date 2021/11/22 14:28
  * @Version 1.0
  */
-@SpringBootApplication
-public class EsApplication {
-    public static void main(String[] args) {
-        SpringApplication.run(EsApplication.class, args);
-    }
-}
+//@SpringBootApplication
+//public class EsApplication {
+//    public static void main(String[] args) {
+//        SpringApplication.run(EsApplication.class, args);
+//    }
+//}

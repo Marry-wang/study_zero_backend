@@ -8,9 +8,9 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>studay_zero_es</artifactId>
+    <artifactId>studay_zero_common_es</artifactId>
 
-    <name>studay_zero_es</name>
+    <name>studay_zero_common_es</name>
     <!-- FIXME change it to the project's website -->
     <url>http://www.example.com</url>
 
