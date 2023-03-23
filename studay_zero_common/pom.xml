@@ -28,13 +28,13 @@
     <module>studay_zero_common_es</module>
     <module>studay_zero_common_jwt</module>
     <module>studay_zero_common_mail</module>
-    <module>studay_zero_mybatis</module>
-    <module>studay_zero_nacos</module>
-    <module>studay_zero_rocketmq</module>
+    <module>studay_zero_common_mybatis</module>
+    <module>studay_zero_common_nacos</module>
+    <module>studay_zero_common_rocketmq</module>
     <module>studay_zero_common_security</module>
-    <module>studay_zero_shardingSphere</module>
-    <module>studay_zero_task</module>
-    <module>studay_zero_task_quartz_web</module>
+    <module>studay_zero_common_shardingSphere</module>
+    <module>studay_zero_common_task</module>
+    <module>studay_zero_common_task_quartz_web</module>
     <module>studay_zero_common_core</module>
   </modules>
 

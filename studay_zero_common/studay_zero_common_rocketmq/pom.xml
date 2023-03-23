@@ -10,10 +10,10 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>com.demo</groupId>
-  <artifactId>studay_zero_task_quartz_web</artifactId>
+  <artifactId>studay_zero_common_rocketmq</artifactId>
   <version>1.0-SNAPSHOT</version>
 
-  <name>studay_zero_task_quartz_web</name>
+  <name>studay_zero_common_rocketmq</name>
   <!-- FIXME change it to the project's website -->
   <url>http://www.example.com</url>
 
@@ -24,38 +24,13 @@
   </properties>
 
   <dependencies>
-    <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter-quartz</artifactId>
-    </dependency>
 
-    <!-- mubatis-plus     -->
+    <!--rocketmq-->
     <dependency>
-      <groupId>com.baomidou</groupId>
-      <artifactId>mybatis-plus-boot-starter</artifactId>
-      <version>3.0.5</version>
+      <groupId>org.apache.rocketmq</groupId>
+      <artifactId>rocketmq-spring-boot-starter</artifactId>
+      <version>2.0.2</version>
     </dependency>
-
-    <dependency>
-      <groupId>org.projectlombok</groupId>
-      <artifactId>lombok</artifactId>
-    </dependency>
-
-    <!-- mysql     -->
-    <dependency>
-      <groupId>mysql</groupId>
-      <artifactId>mysql-connector-java</artifactId>
-      <version>8.0.16</version>
-    </dependency>
-
-    <!-- alibaba的druid数据库连接池 -->
-    <dependency>
-      <groupId>com.alibaba</groupId>
-      <artifactId>druid-spring-boot-starter</artifactId>
-      <version>1.1.13</version>
-    </dependency>
-
-    <!--springboot-->
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-web</artifactId>

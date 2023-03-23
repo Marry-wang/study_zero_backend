@@ -10,10 +10,10 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>com.demo</groupId>
-  <artifactId>studay_zero_nacos</artifactId>
+  <artifactId>studay_zero_common_nacos</artifactId>
   <version>1.0-SNAPSHOT</version>
 
-  <name>studay_zero_nacos</name>
+  <name>studay_zero_common_nacos</name>
   <!-- FIXME change it to the project's website -->
   <url>http://www.example.com</url>
 
