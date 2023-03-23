@@ -8,7 +8,7 @@
 
 <!-- groupId  自动生成的maven工程为 org.example   需要修改为自己的包工程 -->
   <groupId>com.demo</groupId>
-  <artifactId>studay_zero</artifactId>
+  <artifactId>studay_zero_backend</artifactId>
   <packaging>pom</packaging>
   <version>1.0-SNAPSHOT</version>
   <modules>
@@ -30,7 +30,7 @@
     <relativePath/> <!-- lookup parent from repository -->
   </parent>
 
-  <name>studay_zero</name>
+  <name>studay_zero_backend</name>
   <!-- FIXME change it to the project's website -->
   <url>http://www.example.com</url>
 
