@@ -1,5 +1,6 @@
 package com.demo.controller.fein;
 
+import com.demo.api.ZeroResult;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -15,10 +16,10 @@ import java.util.HashMap;
 public class ManageSystemController  {
 
     @PostMapping(value = "/send")
-    public HashMap<String, String> send() {
+    public ZeroResult send() {
         HashMap<String, String> map = new HashMap<>();
         map.put("system", "1");
-        return map;
+        return ZeroResult.success(map);
     }
 
 }

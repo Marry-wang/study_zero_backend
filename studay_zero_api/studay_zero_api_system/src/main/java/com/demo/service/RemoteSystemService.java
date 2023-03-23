@@ -1,5 +1,6 @@
 package com.demo.service;
 
+import com.demo.api.ZeroResult;
 import com.demo.factory.RemoteSystemFallBackFactory;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -24,6 +25,6 @@ public interface RemoteSystemService {
      * @return
      */
     @PostMapping("/system/send")
-    HashMap<String,String> send();
+    ZeroResult send();
 
 }

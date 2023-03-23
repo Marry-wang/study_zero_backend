@@ -35,6 +35,7 @@
     <module>studay_zero_shardingSphere</module>
     <module>studay_zero_task</module>
     <module>studay_zero_task_quartz_web</module>
+    <module>studay_zero_common_core</module>
   </modules>
 
   <dependencies>

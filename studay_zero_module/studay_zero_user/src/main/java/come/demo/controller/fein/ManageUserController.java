@@ -1,5 +1,6 @@
 package come.demo.controller.fein;
 
+import com.demo.api.ZeroResult;
 import com.demo.service.RemoteSystemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -20,7 +21,7 @@ public class ManageUserController {
     private RemoteSystemService remoteSystemService;
 
     @PostMapping("/testFein")
-    public HashMap<String, String> send(){
+    public ZeroResult send(){
         return remoteSystemService.send();
     }
 }

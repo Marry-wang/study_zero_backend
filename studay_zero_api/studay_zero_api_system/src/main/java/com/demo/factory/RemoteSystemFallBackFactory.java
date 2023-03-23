@@ -1,10 +1,11 @@
 package com.demo.factory;
 
+import com.demo.api.ZeroResult;
+import com.demo.enums.ZeroResultEnum;
 import com.demo.service.RemoteSystemService;
 import org.springframework.cloud.openfeign.FallbackFactory;
 import org.springframework.stereotype.Component;
 
-import java.util.HashMap;
 
 /**
  * @author wangmengwei
@@ -17,10 +18,8 @@ public class RemoteSystemFallBackFactory implements FallbackFactory<RemoteSystem
     public RemoteSystemService create(Throwable cause) {
         return new RemoteSystemService() {
             @Override
-            public HashMap<String, String> send() {
-                HashMap<String , String > hashMap = new HashMap<>(6);
-                hashMap.put("error","error");
-                return hashMap;
+            public ZeroResult send() {
+                return ZeroResult.error();
             }
 
         };
