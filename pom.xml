@@ -12,7 +12,7 @@
   <packaging>pom</packaging>
   <version>1.0-SNAPSHOT</version>
   <modules>
-<!--    <module>studay_zero_demo</module>-->
+    <module>studay_zero_demo</module>
     <module>studay_zero_common</module>
     <module>studay_zero_module</module>
     <module>studay_zero_api</module>
