@@ -9,10 +9,10 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>com.demo</groupId>
-  <artifactId>studay_zero_mail</artifactId>
+  <artifactId>studay_zero_common_mail</artifactId>
   <version>1.0-SNAPSHOT</version>
 
-  <name>studay_zero_mail</name>
+  <name>studay_zero_common_mail</name>
   <!-- FIXME change it to the project's website -->
   <url>http://www.example.com</url>
 

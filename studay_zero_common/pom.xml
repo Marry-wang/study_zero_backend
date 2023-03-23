@@ -27,7 +27,7 @@
   <modules>
     <module>studay_zero_common_es</module>
     <module>studay_zero_jwt</module>
-    <module>studay_zero_mail</module>
+    <module>studay_zero_common_mail</module>
     <module>studay_zero_mybatis</module>
     <module>studay_zero_nacos</module>
     <module>studay_zero_rocketmq</module>
