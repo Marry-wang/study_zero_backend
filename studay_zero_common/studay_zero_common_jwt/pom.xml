@@ -10,9 +10,9 @@
   <modelVersion>4.0.0</modelVersion>
 
 
-  <artifactId>studay_zero_jwt</artifactId>
+  <artifactId>studay_zero_common_jwt</artifactId>
 
-  <name>studay_zero_jwt</name>
+  <name>studay_zero_common_jwt</name>
   <!-- FIXME change it to the project's website -->
   <url>http://www.example.com</url>
 
