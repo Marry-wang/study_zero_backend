@@ -23,3 +23,12 @@ spring:
     testOnReturn: false
     poolPreparedStatements: true
     maxOpenPreparedStatements: 20
+
+
+# mybatis-plus相关配置
+mybatis-plus:
+  # mybatis-plus相关配置
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+

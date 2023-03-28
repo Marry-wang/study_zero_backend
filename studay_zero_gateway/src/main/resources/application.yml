@@ -1,5 +1,5 @@
 server:
-  port: 10000
+  port: 9999
 
 spring:
   application:
@@ -33,7 +33,7 @@ spring:
 #        id唯一
         - id: studay-zero-user
 #          uri  匹配后要访问的地址
-          uri: http://127.0.0.1:7001
+          uri: http://127.0.0.1:10001
 #          需要匹配的规则
           predicates:
             - Path=/user/**
@@ -42,20 +42,14 @@ spring:
           filters:
             - StripPrefix=1
         - id: studay-zero-system
-          uri: http://127.0.0.1:7001
+          uri: http://127.0.0.1:10002
           predicates:
             - Path=/system/**
           filters:
             - StripPrefix=1
-        - id: studay-zero-flink
-            uri: http://127.0.0.1:7001
-            predicates:
-              - Path=/flink/**
-            filters:
-              - StripPrefix=1
         - id: studay-zero-pay
-            uri: http://127.0.0.1:7001
-            predicates:
-              - Path=/pay/**
-            filters:
-              - StripPrefix=1
+          uri: http://127.0.0.1:1003
+          predicates:
+            - Path=/pay/**
+          filters:
+            - StripPrefix=1
