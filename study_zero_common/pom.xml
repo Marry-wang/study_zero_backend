@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+  <parent>
+    <artifactId>study_zero_backend</artifactId>
+    <groupId>com.demo</groupId>
+    <version>1.0-SNAPSHOT</version>
+  </parent>
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.demo</groupId>
+  <artifactId>study_zero_common</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <packaging>pom</packaging>
+
+  <name>study_zero_common</name>
+  <!-- FIXME change it to the project's website -->
+  <url>http://www.example.com</url>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <maven.compiler.source>1.8</maven.compiler.source>
+    <maven.compiler.target>1.8</maven.compiler.target>
+  </properties>
+
+  <modules>
+    <module>study_zero_common_es</module>
+    <module>study_zero_common_jwt</module>
+    <module>study_zero_common_mail</module>
+    <module>study_zero_common_mybatis</module>
+    <module>study_zero_common_nacos</module>
+    <module>study_zero_common_rocketmq</module>
+    <module>study_zero_common_security</module>
+    <module>study_zero_common_shardingSphere</module>
+    <module>study_zero_common_task</module>
+    <module>study_zero_common_task_quartz_web</module>
+    <module>study_zero_common_core</module>
+  </modules>
+
+  <dependencies>
+<!--    &lt;!&ndash;springboot&ndash;&gt;-->
+<!--    <dependency>-->
+<!--      <groupId>org.springframework.boot</groupId>-->
+<!--      <artifactId>spring-boot-starter-web</artifactId>-->
+<!--    </dependency>-->
+<!--    <dependency>-->
+<!--      <groupId>org.springframework.boot</groupId>-->
+<!--      <artifactId>spring-boot-starter-test</artifactId>-->
+<!--      <scope>test</scope>-->
+<!--    </dependency>-->
+<!--    &lt;!&ndash;lombok&ndash;&gt;-->
+<!--    <dependency>-->
+<!--      <groupId>org.projectlombok</groupId>-->
+<!--      <artifactId>lombok</artifactId>-->
+<!--    </dependency>-->
+<!--    &lt;!&ndash; mysql     &ndash;&gt;-->
+<!--    <dependency>-->
+<!--      <groupId>mysql</groupId>-->
+<!--      <artifactId>mysql-connector-java</artifactId>-->
+<!--      <version>8.0.16</version>-->
+<!--    </dependency>-->
+
+<!--    &lt;!&ndash; alibaba的druid数据库连接池 &ndash;&gt;-->
+<!--    <dependency>-->
+<!--      <groupId>com.alibaba</groupId>-->
+<!--      <artifactId>druid-spring-boot-starter</artifactId>-->
+<!--      <version>1.1.13</version>-->
+<!--    </dependency>-->
+<!--    <dependency>-->
+<!--      <groupId>com.alibaba</groupId>-->
+<!--      <artifactId>fastjson</artifactId>-->
+<!--      <version>1.2.47</version>-->
+<!--    </dependency>-->
+
+<!--    <dependency>-->
+<!--      <groupId>cn.hutool</groupId>-->
+<!--      <artifactId>hutool-all</artifactId>-->
+<!--      <version>5.3.3</version>-->
+<!--    </dependency>-->
+  </dependencies>
+
+
+</project>

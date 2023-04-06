@@ -8,15 +8,15 @@
 
 <!-- groupId  自动生成的maven工程为 org.example   需要修改为自己的包工程 -->
   <groupId>com.demo</groupId>
-  <artifactId>studay_zero_backend</artifactId>
+  <artifactId>study_zero_backend</artifactId>
   <packaging>pom</packaging>
   <version>1.0-SNAPSHOT</version>
   <modules>
-    <module>studay_zero_demo</module>
-    <module>studay_zero_common</module>
-    <module>studay_zero_module</module>
-    <module>studay_zero_api</module>
-    <module>studay_zero_gateway</module>
+    <module>study_zero_demo</module>
+    <module>study_zero_common</module>
+    <module>study_zero_module</module>
+    <module>study_zero_api</module>
+    <module>study_zero_gateway</module>
   </modules>
 
 <!-- spring-boot-starter-parent      spring-boot-dependencies  版本不一致出现过的问题
@@ -30,7 +30,7 @@
     <relativePath/> <!-- lookup parent from repository -->
   </parent>
 
-  <name>studay_zero_backend</name>
+  <name>study_zero_backend</name>
   <!-- FIXME change it to the project's website -->
   <url>http://www.example.com</url>
 
