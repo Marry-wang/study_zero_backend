@@ -13,7 +13,7 @@ import reactor.core.publisher.Mono;
  * @Description:
  */
 @Component
-public class StudayGatewayFilter implements GlobalFilter, Ordered {
+public class StudyGatewayFilter implements GlobalFilter, Ordered {
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
         System.out.println(exchange.getLogPrefix());

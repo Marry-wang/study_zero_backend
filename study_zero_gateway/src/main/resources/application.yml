@@ -3,7 +3,7 @@ server:
 
 spring:
   application:
-    name: studay-zero-gateway
+    name: study-zero-gateway
   cloud:
     gateway:
       # 全局的跨域处理
@@ -31,7 +31,7 @@ spring:
             maxAge: 360000
       routes:
 #        id唯一
-        - id: studay-zero-user
+        - id: study-zero-user
 #          uri  匹配后要访问的地址
           uri: http://127.0.0.1:10001
 #          需要匹配的规则
@@ -41,13 +41,13 @@ spring:
 #          过滤器数组，在请求传递过程中，去除请求路径中的1级路径
           filters:
             - StripPrefix=1
-        - id: studay-zero-system
+        - id: study-zero-system
           uri: http://127.0.0.1:10002
           predicates:
             - Path=/system/**
           filters:
             - StripPrefix=1
-        - id: studay-zero-pay
+        - id: study-zero-pay
           uri: http://127.0.0.1:1003
           predicates:
             - Path=/pay/**

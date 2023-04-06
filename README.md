@@ -1,4 +1,4 @@
-# studay_zero_backend
+# study_zero_backend
 #2021后端技术学习  
 
 | 目标              | 完成度 | 

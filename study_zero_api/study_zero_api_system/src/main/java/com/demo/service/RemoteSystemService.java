@@ -17,7 +17,7 @@ import java.util.HashMap;
  * https://blog.51cto.com/Tlog4J/5148220
  * https://www.cnblogs.com/lifacheng/p/11183549.html
  */
-@FeignClient( fallbackFactory = RemoteSystemFallBackFactory.class,url = "localhost:10002",name = "studay-zero-system")
+@FeignClient( fallbackFactory = RemoteSystemFallBackFactory.class,url = "localhost:10002",name = "study-zero-system")
 public interface RemoteSystemService {
 
     /**

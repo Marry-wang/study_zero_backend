@@ -3,4 +3,4 @@ server:
 
 spring:
   application:
-    name: studay_zero_pay
+    name: study_zero_pay

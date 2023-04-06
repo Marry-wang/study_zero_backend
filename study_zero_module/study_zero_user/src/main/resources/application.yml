@@ -3,4 +3,4 @@ server:
 
 spring:
   application:
-    name: studay-zero-user
+    name: study-zero-user
