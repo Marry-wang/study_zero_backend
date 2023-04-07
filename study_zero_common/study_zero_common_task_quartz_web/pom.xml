@@ -64,16 +64,11 @@
   </dependencies>
 
   <build>
-    <!--自定义打包方式-->
-    <!--    https://blog.csdn.net/u011066470/article/details/98775785?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522163514019916780255224655%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&request_id=163514019916780255224655&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~all~sobaiduend~default-1-98775785.first_rank_v2_pc_rank_v29&utm_term=maven%E6%89%93%E5%8C%85&spm=1018.2226.3001.4187-->
+    <finalName>${project.artifactId}</finalName>
     <plugins>
       <plugin>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-maven-plugin</artifactId>
-        <version>1.5.13.RELEASE</version>
-        <configuration>
-          <mainClass>com.demo.RocketMqApplication</mainClass>
-        </configuration>
         <executions>
           <execution>
             <goals>
@@ -83,6 +78,29 @@
         </executions>
       </plugin>
     </plugins>
-
   </build>
+
+
+<!--  <build>-->
+<!--    &lt;!&ndash;自定义打包方式&ndash;&gt;-->
+<!--    &lt;!&ndash;    https://blog.csdn.net/u011066470/article/details/98775785?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522163514019916780255224655%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&request_id=163514019916780255224655&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~all~sobaiduend~default-1-98775785.first_rank_v2_pc_rank_v29&utm_term=maven%E6%89%93%E5%8C%85&spm=1018.2226.3001.4187&ndash;&gt;-->
+<!--    <plugins>-->
+<!--      <plugin>-->
+<!--        <groupId>org.springframework.boot</groupId>-->
+<!--        <artifactId>spring-boot-maven-plugin</artifactId>-->
+<!--        <version>1.5.13.RELEASE</version>-->
+<!--        <configuration>-->
+<!--          <mainClass>com.demo.RocketMqApplication</mainClass>-->
+<!--        </configuration>-->
+<!--        <executions>-->
+<!--          <execution>-->
+<!--            <goals>-->
+<!--              <goal>repackage</goal>-->
+<!--            </goals>-->
+<!--          </execution>-->
+<!--        </executions>-->
+<!--      </plugin>-->
+<!--    </plugins>-->
+
+<!--  </build>-->
 </project>
