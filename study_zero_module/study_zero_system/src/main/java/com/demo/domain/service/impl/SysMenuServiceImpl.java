@@ -25,8 +25,11 @@ public class SysMenuServiceImpl implements SysMenuService {
     private SysMenuMapper sysMenuMapper;
 
     @Override
-    public List<SysMenuPo> queryMenuList() {
+    public List<SysMenuPo> queryMenuList(Integer menuId) {
         LambdaQueryWrapper<SysMenuPo> sysMenuPoLambdaQueryWrapper = new LambdaQueryWrapper<>();
+        if(!Objects.isNull(menuId)){
+            sysMenuPoLambdaQueryWrapper.eq(SysMenuPo::getId,menuId);
+        }
         List<SysMenuPo> sysMenuPos = sysMenuMapper.selectList(sysMenuPoLambdaQueryWrapper);
 
         ArrayList<SysMenuPo> menuParentList = new ArrayList<>();

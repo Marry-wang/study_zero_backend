@@ -18,7 +18,7 @@ public interface SysMenuService {
      *
      * @return
      */
-    List<SysMenuPo> queryMenuList();
+    List<SysMenuPo> queryMenuList(Integer menuId);
 
     /**
      * 查询菜单详情
