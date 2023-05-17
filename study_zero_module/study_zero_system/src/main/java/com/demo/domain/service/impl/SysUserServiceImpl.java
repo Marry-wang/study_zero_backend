@@ -1,13 +1,16 @@
 package com.demo.domain.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.demo.domain.entry.dto.SysUserDto;
 import com.demo.domain.entry.po.SysUserPo;
 import com.demo.domain.mapper.SysUserMapper;
 import com.demo.domain.service.SysUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * @Author: 王孟伟
@@ -21,10 +24,12 @@ public class SysUserServiceImpl implements SysUserService {
     private SysUserMapper sysUserMapper;
 
     @Override
-    public List<SysUserPo> queryUserList() {
+    public List<SysUserPo> queryUserList(SysUserDto dto) {
         LambdaQueryWrapper<SysUserPo> sysUserPoLambdaQueryWrapper = new LambdaQueryWrapper<>();
-        List<SysUserPo> sysUserPoList = sysUserMapper.selectList(sysUserPoLambdaQueryWrapper);
-        return sysUserPoList;
+        if(!Objects.isNull(dto.getUserId())){
+            sysUserPoLambdaQueryWrapper.eq(SysUserPo::getId,dto.getUserId());
+        }
+        return sysUserMapper.selectList(sysUserPoLambdaQueryWrapper);
     }
 
     @Override

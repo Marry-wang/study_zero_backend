@@ -1,5 +1,7 @@
 package com.demo.domain.controller;
 
+import com.demo.domain.entry.dto.SysMenuDto;
+import com.demo.domain.entry.dto.SysUserDto;
 import com.demo.domain.entry.po.SysMenuPo;
 import com.demo.domain.entry.po.SysUserPo;
 import com.demo.domain.service.SysMenuService;
@@ -24,13 +26,13 @@ public class SystemController {
     @Autowired
     private SysUserService sysUserService;
 
-    @GetMapping (value = "/getMenu")
-    public List<SysMenuPo> menuList(@RequestParam(required = false) Integer menuId) {
-        return sysMenuService.queryMenuList(menuId);
+    @PostMapping (value = "/getMenu")
+    public List<SysMenuPo> menuList(@RequestBody SysMenuDto dto) {
+        return sysMenuService.queryMenuList(dto);
     }
 
     @PostMapping(value = "/getUser")
-    public List<SysUserPo> userList() {
-        return sysUserService.queryUserList();
+    public List<SysUserPo> userList(@RequestBody SysUserDto dto) {
+        return sysUserService.queryUserList(dto);
     }
 }

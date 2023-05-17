@@ -1,6 +1,7 @@
 package com.demo.domain.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.demo.domain.entry.dto.SysMenuDto;
 import com.demo.domain.entry.po.SysMenuPo;
 import com.demo.domain.entry.po.SysUserPo;
 import com.demo.domain.mapper.SysMenuMapper;
@@ -25,10 +26,10 @@ public class SysMenuServiceImpl implements SysMenuService {
     private SysMenuMapper sysMenuMapper;
 
     @Override
-    public List<SysMenuPo> queryMenuList(Integer menuId) {
+    public List<SysMenuPo> queryMenuList(SysMenuDto dto) {
         LambdaQueryWrapper<SysMenuPo> sysMenuPoLambdaQueryWrapper = new LambdaQueryWrapper<>();
-        if(!Objects.isNull(menuId)){
-            sysMenuPoLambdaQueryWrapper.eq(SysMenuPo::getId,menuId);
+        if(!Objects.isNull(dto.getMenuId())){
+            sysMenuPoLambdaQueryWrapper.eq(SysMenuPo::getId,dto.getMenuId());
         }
         List<SysMenuPo> sysMenuPos = sysMenuMapper.selectList(sysMenuPoLambdaQueryWrapper);
 

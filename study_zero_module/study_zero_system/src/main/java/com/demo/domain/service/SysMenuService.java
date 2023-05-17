@@ -1,5 +1,6 @@
 package com.demo.domain.service;
 
+import com.demo.domain.entry.dto.SysMenuDto;
 import com.demo.domain.entry.po.SysMenuPo;
 import com.demo.domain.entry.po.SysUserPo;
 import org.springframework.stereotype.Service;
@@ -18,7 +19,7 @@ public interface SysMenuService {
      *
      * @return
      */
-    List<SysMenuPo> queryMenuList(Integer menuId);
+    List<SysMenuPo> queryMenuList(SysMenuDto dto);
 
     /**
      * 查询菜单详情

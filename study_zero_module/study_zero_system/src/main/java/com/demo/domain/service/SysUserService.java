@@ -1,5 +1,6 @@
 package com.demo.domain.service;
 
+import com.demo.domain.entry.dto.SysUserDto;
 import com.demo.domain.entry.po.SysUserPo;
 import org.springframework.stereotype.Service;
 
@@ -18,7 +19,7 @@ public interface SysUserService {
      *
      * @return
      */
-    List<SysUserPo> queryUserList();
+    List<SysUserPo> queryUserList(SysUserDto dto);
 
 
     /**
