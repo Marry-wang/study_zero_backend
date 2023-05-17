@@ -1,5 +1,6 @@
 package com.demo.domain.service;
 
+import com.demo.domain.entry.dto.SysRoleDto;
 import com.demo.domain.entry.po.SysRolePo;
 import com.demo.domain.entry.po.SysUserRolePo;
 import org.springframework.stereotype.Service;
@@ -19,7 +20,7 @@ public interface SysRoleService {
      *
      * @return
      */
-    List<SysRolePo> queryRoleList();
+    List<SysRolePo> queryRoleList(SysRoleDto dto);
 
     /**
      * 查看角色详情

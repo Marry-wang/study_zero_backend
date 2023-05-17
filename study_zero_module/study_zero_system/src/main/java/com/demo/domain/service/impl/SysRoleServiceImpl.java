@@ -1,6 +1,8 @@
 package com.demo.domain.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.demo.domain.entry.dto.SysRoleDto;
 import com.demo.domain.entry.po.SysRolePo;
 import com.demo.domain.entry.po.SysUserRolePo;
 import com.demo.domain.mapper.SysRoleMapper;
@@ -9,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 
 /**
  * @Author: 王孟伟
@@ -22,9 +25,12 @@ public class SysRoleServiceImpl implements SysRoleService{
     private SysRoleMapper sysRoleMapper;
 
     @Override
-    public List<SysRolePo> queryRoleList() {
-        QueryWrapper<SysRolePo> queryWrapper = new QueryWrapper<>();
-        return  sysRoleMapper.selectList(queryWrapper.lambda());
+    public List<SysRolePo> queryRoleList(SysRoleDto dto) {
+        LambdaQueryWrapper<SysRolePo> queryWrapper = new QueryWrapper<SysRolePo>().lambda();
+        if(!Objects.isNull(dto.getRoleId())){
+            queryWrapper.eq(SysRolePo::getId,dto.getRoleId());
+        }
+        return  sysRoleMapper.selectList(queryWrapper);
     }
 
     @Override
