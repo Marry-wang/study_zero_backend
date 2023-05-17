@@ -1,6 +1,7 @@
 package com.demo.domain.entry.po;
 
 import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableLogic;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
@@ -33,6 +34,7 @@ public class SysRoleMenuPo {
     @TableField(value = "update_by")
     private Integer updateBy;
 
+    @TableLogic
     @TableField(value = "del_flag")
     private Boolean delFlag;
 }

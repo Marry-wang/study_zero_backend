@@ -1,9 +1,6 @@
 package com.demo.domain.entry.po;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.annotation.*;
 import lombok.Data;
 
 import java.util.Date;
@@ -45,6 +42,7 @@ public class SysMenuPo {
     @TableField(value = "update_by")
     private Date updateBy;
 
+    @TableLogic
     @TableField(value = "dele_flag")
     private Boolean deleFlag;
 
