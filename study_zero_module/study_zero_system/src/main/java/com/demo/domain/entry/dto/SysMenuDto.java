@@ -5,5 +5,5 @@ import lombok.Data;
 @Data
 public class SysMenuDto {
 
-    private Integer MenuId;
+    private Integer menuId;
 }
