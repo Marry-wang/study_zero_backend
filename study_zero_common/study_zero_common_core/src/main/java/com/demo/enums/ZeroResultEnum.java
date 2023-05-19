@@ -20,6 +20,11 @@ public enum ZeroResultEnum {
      * 失败
      */
     FAIL(900, "fail"),
+
+    /**
+     * system
+     */
+    SYSTEM_ROLE_IS_USER(4001,"此权限正在使用中")
     ;
 
     private final Integer code;
