@@ -28,7 +28,7 @@ public interface SysUserService {
      * @param sysUserPo
      * @return
      */
-    Integer addUser(SysUserPo sysUserPo);
+    Boolean addUser(SysUserPo sysUserPo);
 
     /**
      * 更新用户
@@ -36,7 +36,7 @@ public interface SysUserService {
      * @param sysUserPo
      * @return
      */
-    Integer updateUser(SysUserPo sysUserPo);
+    Boolean updateUser(SysUserPo sysUserPo);
 
     /**
      * 查询用户
@@ -52,5 +52,5 @@ public interface SysUserService {
      * @param sysUserPo
      * @return
      */
-    Integer delUser(SysUserPo sysUserPo);
+    Boolean delUser(SysUserPo sysUserPo);
 }

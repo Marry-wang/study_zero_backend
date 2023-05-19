@@ -35,7 +35,7 @@ public interface SysRoleService {
      * @param sysRolePo
      * @return
      */
-    Integer addRole(SysRolePo sysRolePo);
+    Boolean addRole(SysRolePo sysRolePo);
 
     /**
      * 更新角色
@@ -43,7 +43,7 @@ public interface SysRoleService {
      * @param sysRolePo
      * @return
      */
-    Integer updateRole(SysRolePo sysRolePo);
+    Boolean updateRole(SysRolePo sysRolePo);
 
     /**
      * 删除角色
@@ -51,7 +51,7 @@ public interface SysRoleService {
      * @param sysRolePo
      * @return
      */
-    Integer delRole(SysRolePo sysRolePo);
+    Boolean delRole(SysRolePo sysRolePo);
 
 
 }

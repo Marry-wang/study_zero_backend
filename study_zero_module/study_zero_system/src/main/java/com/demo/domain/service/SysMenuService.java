@@ -35,7 +35,7 @@ public interface SysMenuService {
      * @param sysMenuPo
      * @return
      */
-    Integer addMenu(SysMenuPo sysMenuPo);
+    Boolean addMenu(SysMenuPo sysMenuPo);
 
     /**
      * 更新菜单
@@ -43,7 +43,7 @@ public interface SysMenuService {
      * @param sysMenuPo
      * @return
      */
-    Integer updateMenu(SysMenuPo sysMenuPo);
+    Boolean updateMenu(SysMenuPo sysMenuPo);
 
     /**
      * 删除菜单
@@ -51,6 +51,6 @@ public interface SysMenuService {
      * @param sysMenuPo
      * @return
      */
-    Integer delMenu(SysMenuPo sysMenuPo);
+    Boolean delMenu(SysMenuPo sysMenuPo);
 
 }

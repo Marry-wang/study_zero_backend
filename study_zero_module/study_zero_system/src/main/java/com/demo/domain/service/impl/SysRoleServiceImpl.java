@@ -2,6 +2,7 @@ package com.demo.domain.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.toolkit.sql.SqlHelper;
 import com.demo.domain.entry.dto.SysRoleDto;
 import com.demo.domain.entry.po.SysRolePo;
 import com.demo.domain.entry.po.SysUserRolePo;
@@ -39,17 +40,17 @@ public class SysRoleServiceImpl implements SysRoleService{
     }
 
     @Override
-    public Integer addRole(SysRolePo sysRolePo) {
-        return sysRoleMapper.insert(sysRolePo);
+    public Boolean addRole(SysRolePo sysRolePo) {
+        return SqlHelper.retBool(sysRoleMapper.insert(sysRolePo));
     }
 
     @Override
-    public Integer updateRole(SysRolePo sysRolePo) {
-        return sysRoleMapper.updateById(sysRolePo);
+    public Boolean updateRole(SysRolePo sysRolePo) {
+        return SqlHelper.retBool(sysRoleMapper.updateById(sysRolePo));
     }
 
     @Override
-    public Integer delRole(SysRolePo sysRolePo) {
-        return sysRoleMapper.deleteById(sysRolePo.getId());
+    public Boolean delRole(SysRolePo sysRolePo) {
+        return SqlHelper.retBool(sysRoleMapper.deleteById(sysRolePo.getId()));
     }
 }

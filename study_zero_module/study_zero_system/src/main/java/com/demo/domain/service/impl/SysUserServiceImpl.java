@@ -1,6 +1,7 @@
 package com.demo.domain.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.toolkit.sql.SqlHelper;
 import com.demo.domain.entry.dto.SysUserDto;
 import com.demo.domain.entry.po.SysUserPo;
 import com.demo.domain.mapper.SysUserMapper;
@@ -33,13 +34,13 @@ public class SysUserServiceImpl implements SysUserService {
     }
 
     @Override
-    public Integer addUser(SysUserPo sysUserPo) {
-        return sysUserMapper.insert(sysUserPo);
+    public Boolean addUser(SysUserPo sysUserPo) {
+        return SqlHelper.retBool(sysUserMapper.insert(sysUserPo));
     }
 
     @Override
-    public Integer updateUser(SysUserPo sysUserPo) {
-        return sysUserMapper.updateById(sysUserPo);
+    public Boolean updateUser(SysUserPo sysUserPo) {
+        return SqlHelper.retBool(sysUserMapper.updateById(sysUserPo));
     }
 
     @Override
@@ -48,7 +49,7 @@ public class SysUserServiceImpl implements SysUserService {
     }
 
     @Override
-    public Integer delUser(SysUserPo sysUserPo) {
-        return sysUserMapper.deleteById(sysUserPo.getId());
+    public Boolean delUser(SysUserPo sysUserPo) {
+        return SqlHelper.retBool(sysUserMapper.deleteById(sysUserPo.getId()));
     }
 }

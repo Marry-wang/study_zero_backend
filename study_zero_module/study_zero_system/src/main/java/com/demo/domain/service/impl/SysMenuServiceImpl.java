@@ -1,14 +1,19 @@
 package com.demo.domain.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.toolkit.sql.SqlHelper;
 import com.demo.domain.entry.dto.SysMenuDto;
 import com.demo.domain.entry.po.SysMenuPo;
+import com.demo.domain.entry.po.SysRoleMenuPo;
 import com.demo.domain.entry.po.SysUserPo;
 import com.demo.domain.mapper.SysMenuMapper;
+import com.demo.domain.mapper.SysRoleMenuMapper;
 import com.demo.domain.mapper.SysUserMapper;
 import com.demo.domain.service.SysMenuService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,6 +29,9 @@ public class SysMenuServiceImpl implements SysMenuService {
 
     @Autowired
     private SysMenuMapper sysMenuMapper;
+
+    @Autowired
+    private SysRoleMenuMapper sysRoleMenuMapper;
 
     @Override
     public List<SysMenuPo> queryMenuList(SysMenuDto dto) {
@@ -64,18 +72,23 @@ public class SysMenuServiceImpl implements SysMenuService {
     }
 
     @Override
-    public Integer addMenu(SysMenuPo sysMenuPo) {
-        return sysMenuMapper.insert(sysMenuPo);
+    public Boolean addMenu(SysMenuPo sysMenuPo) {
+        return SqlHelper.retBool(sysMenuMapper.insert(sysMenuPo));
     }
 
     @Override
-    public Integer updateMenu(SysMenuPo sysMenuPo) {
-        return sysMenuMapper.updateById(sysMenuPo);
+    public Boolean updateMenu(SysMenuPo sysMenuPo) {
+        return SqlHelper.retBool(sysMenuMapper.updateById(sysMenuPo));
     }
 
     @Override
-    public Integer delMenu(SysMenuPo sysMenuPo) {
-        return sysMenuMapper.deleteById(sysMenuPo.getId());
+    @Transactional(rollbackFor = Exception.class)
+    public Boolean delMenu(SysMenuPo sysMenuPo) {
+        //删除菜单  将对应的角色下的菜单进行删除
+        LambdaQueryWrapper<SysRoleMenuPo> lambda = new QueryWrapper<SysRoleMenuPo>().lambda();
+        lambda.eq(SysRoleMenuPo::getMenuId,sysMenuPo.getId());
+        sysRoleMenuMapper.delete(lambda);
+        return SqlHelper.retBool(sysMenuMapper.deleteById(sysMenuPo.getId()));
     }
 
 
