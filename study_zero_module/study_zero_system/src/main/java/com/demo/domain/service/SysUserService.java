@@ -1,7 +1,10 @@
 package com.demo.domain.service;
 
 import com.demo.domain.entry.dto.SysUserDto;
+import com.demo.domain.entry.dto.AddSysUserRoleDto;
+import com.demo.domain.entry.dto.UpdateSysUserRoleDto;
 import com.demo.domain.entry.po.SysUserPo;
+import com.demo.domain.entry.vo.SysUserRoleVo;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,24 +22,15 @@ public interface SysUserService {
      *
      * @return
      */
-    List<SysUserPo> queryUserList(SysUserDto dto);
-
-
-    /**
-     * 新增用户
-     *
-     * @param sysUserPo
-     * @return
-     */
-    Boolean addUser(SysUserPo sysUserPo);
+    List<SysUserRoleVo> queryUserList(SysUserDto dto);
 
     /**
      * 更新用户
      *
-     * @param sysUserPo
+     * @param dto
      * @return
      */
-    Boolean updateUser(SysUserPo sysUserPo);
+    Boolean updateUser(UpdateSysUserRoleDto dto);
 
     /**
      * 查询用户
@@ -44,7 +38,7 @@ public interface SysUserService {
      * @param sysUserPo
      * @return
      */
-    SysUserPo selectUser(SysUserPo sysUserPo);
+    SysUserRoleVo selectUser(SysUserPo sysUserPo);
 
     /**
      * 删除用户
@@ -53,4 +47,12 @@ public interface SysUserService {
      * @return
      */
     Boolean delUser(SysUserPo sysUserPo);
+
+    /**
+     * 添加角色权限
+     *
+     * @param dto
+     * @return
+     */
+    Boolean addUserRole(AddSysUserRoleDto dto);
 }
