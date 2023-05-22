@@ -1,9 +1,12 @@
 package com.demo.domain.controller;
 
+import com.demo.api.ZeroResult;
+import com.demo.base.BaseResult;
 import com.demo.domain.entry.dto.SysMenuDto;
 import com.demo.domain.entry.dto.SysUserDto;
 import com.demo.domain.entry.po.SysMenuPo;
 import com.demo.domain.entry.po.SysUserPo;
+import com.demo.domain.entry.vo.SysUserRoleVo;
 import com.demo.domain.service.SysMenuService;
 import com.demo.domain.service.SysUserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,12 +30,12 @@ public class SystemController {
     private SysUserService sysUserService;
 
     @PostMapping (value = "/getMenu")
-    public List<SysMenuPo> menuList() {
-        return sysMenuService.queryMenuList();
+    public ZeroResult<List<SysMenuPo>> menuList() {
+        return ZeroResult.success(sysMenuService.queryMenuList());
     }
 
     @PostMapping(value = "/getUser")
-    public List<SysUserPo> userList(@RequestBody SysUserDto dto) {
-        return sysUserService.queryUserList(dto);
+    public ZeroResult<List<SysUserRoleVo>> userList(@RequestBody SysUserDto dto) {
+        return ZeroResult.success(sysUserService.queryUserList(dto));
     }
 }
