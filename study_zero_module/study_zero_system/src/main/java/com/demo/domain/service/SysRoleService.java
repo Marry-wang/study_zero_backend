@@ -3,6 +3,7 @@ package com.demo.domain.service;
 import com.demo.domain.entry.dto.SysRoleDto;
 import com.demo.domain.entry.po.SysRolePo;
 import com.demo.domain.entry.po.SysUserRolePo;
+import com.demo.domain.entry.vo.SysRoleMenuVo;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -20,14 +21,14 @@ public interface SysRoleService {
      *
      * @return
      */
-    List<SysRolePo> queryRoleList(SysRoleDto dto);
+    List<SysRoleMenuVo> queryRoleList(SysRoleDto dto);
 
     /**
      * 查看角色详情
      *
      * @return
      */
-    SysRolePo selectRole(SysRolePo sysRolePo);
+    SysRoleMenuVo selectRole(SysRolePo sysRolePo);
 
     /**
      * 新增角色

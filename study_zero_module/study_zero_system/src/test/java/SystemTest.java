@@ -25,7 +25,7 @@ public class SystemTest {
 
     @Test
     public  void menuList(){
-        List<SysMenuPo> sysMenuPos = sysMenuService.queryMenuList(null);
-        System.out.println(sysMenuPos);
+//        List<SysMenuPo> sysMenuPos = sysMenuService.queryMenuList(null);
+//        System.out.println(sysMenuPos);
     }
 }

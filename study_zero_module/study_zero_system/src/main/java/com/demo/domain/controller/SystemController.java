@@ -27,8 +27,8 @@ public class SystemController {
     private SysUserService sysUserService;
 
     @PostMapping (value = "/getMenu")
-    public List<SysMenuPo> menuList(@RequestBody SysMenuDto dto) {
-        return sysMenuService.queryMenuList(dto);
+    public List<SysMenuPo> menuList() {
+        return sysMenuService.queryMenuList();
     }
 
     @PostMapping(value = "/getUser")

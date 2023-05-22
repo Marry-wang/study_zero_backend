@@ -7,6 +7,7 @@ import com.demo.domain.entry.dto.SysMenuDto;
 import com.demo.domain.entry.po.SysMenuPo;
 import com.demo.domain.entry.po.SysRoleMenuPo;
 import com.demo.domain.entry.po.SysUserPo;
+import com.demo.domain.entry.vo.SysMenuVo;
 import com.demo.domain.mapper.SysMenuMapper;
 import com.demo.domain.mapper.SysRoleMenuMapper;
 import com.demo.domain.mapper.SysUserMapper;
@@ -34,11 +35,33 @@ public class SysMenuServiceImpl implements SysMenuService {
     private SysRoleMenuMapper sysRoleMenuMapper;
 
     @Override
-    public List<SysMenuPo> queryMenuList(SysMenuDto dto) {
-        LambdaQueryWrapper<SysMenuPo> sysMenuPoLambdaQueryWrapper = new LambdaQueryWrapper<>();
-        if(!Objects.isNull(dto.getMenuId())){
-            sysMenuPoLambdaQueryWrapper.eq(SysMenuPo::getId,dto.getMenuId());
+    public List<SysMenuVo> queryMenuByTRoleId(Integer roleId) {
+        LambdaQueryWrapper<SysRoleMenuPo> queryWrapper = new QueryWrapper<SysRoleMenuPo>().lambda()
+                .eq(SysRoleMenuPo::getRoleId, roleId);
+        List<SysRoleMenuPo> sysRoleMenuPos = sysRoleMenuMapper.selectList(queryWrapper);
+
+        if(sysRoleMenuPos.size()>0){
+            List<SysMenuPo> sysMenuPos = new ArrayList<>();
+            sysRoleMenuPos.forEach(roleMenuPo -> {
+                SysMenuPo sysMenuPo = sysMenuMapper.selectById(roleMenuPo.getMenuId());
+                sysMenuPos.add(sysMenuPo);
+            });
+
+            ArrayList<SysMenuPo> menuParentList = new ArrayList<>();
+            for (SysMenuPo sysMenuPo : sysMenuPos) {
+                if(Objects.isNull(sysMenuPo.getParentId())){
+                    menuParentList.add(sysMenuPo);
+                }
+            }
+            List<SysMenuPo> meuTree = getMeuTree(menuParentList, sysMenuPos);
+            //TODO 数据转换
         }
+        return null;
+    }
+
+    @Override
+    public List<SysMenuPo> queryMenuList() {
+        LambdaQueryWrapper<SysMenuPo> sysMenuPoLambdaQueryWrapper = new LambdaQueryWrapper<>();
         List<SysMenuPo> sysMenuPos = sysMenuMapper.selectList(sysMenuPoLambdaQueryWrapper);
 
         ArrayList<SysMenuPo> menuParentList = new ArrayList<>();
@@ -67,8 +90,8 @@ public class SysMenuServiceImpl implements SysMenuService {
     }
 
     @Override
-    public SysMenuPo selectMenu(SysMenuPo sysMenuPo) {
-        return sysMenuMapper.selectById(sysMenuPo.getId());
+    public SysMenuPo selectMenu(SysMenuDto dto) {
+        return sysMenuMapper.selectById(dto.getMenuId());
     }
 
     @Override
@@ -83,12 +106,12 @@ public class SysMenuServiceImpl implements SysMenuService {
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public Boolean delMenu(SysMenuPo sysMenuPo) {
+    public Boolean delMenu(SysMenuDto dto) {
         //删除菜单  将对应的角色下的菜单进行删除
         LambdaQueryWrapper<SysRoleMenuPo> lambda = new QueryWrapper<SysRoleMenuPo>().lambda();
-        lambda.eq(SysRoleMenuPo::getMenuId,sysMenuPo.getId());
+        lambda.eq(SysRoleMenuPo::getMenuId,dto.getMenuId());
         sysRoleMenuMapper.delete(lambda);
-        return SqlHelper.retBool(sysMenuMapper.deleteById(sysMenuPo.getId()));
+        return SqlHelper.retBool(sysMenuMapper.deleteById(dto.getMenuId()));
     }
 
 

@@ -4,15 +4,24 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.sql.SqlHelper;
 import com.demo.domain.entry.dto.SysRoleDto;
+import com.demo.domain.entry.po.SysMenuPo;
+import com.demo.domain.entry.po.SysRoleMenuPo;
 import com.demo.domain.entry.po.SysRolePo;
 import com.demo.domain.entry.po.SysUserRolePo;
+import com.demo.domain.entry.vo.SysMenuVo;
+import com.demo.domain.entry.vo.SysRoleMenuVo;
+import com.demo.domain.entry.vo.SysRoleVo;
+import com.demo.domain.entry.vo.SysUserRoleVo;
+import com.demo.domain.mapper.SysMenuMapper;
 import com.demo.domain.mapper.SysRoleMapper;
+import com.demo.domain.mapper.SysRoleMenuMapper;
 import com.demo.domain.mapper.SysUserRoleMapper;
 import com.demo.domain.service.SysRoleService;
 import com.demo.enums.ZeroResultEnum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -31,17 +40,30 @@ public class SysRoleServiceImpl implements SysRoleService{
     private SysUserRoleMapper sysUserRoleMapper;
 
     @Override
-    public List<SysRolePo> queryRoleList(SysRoleDto dto) {
+    public List<SysRoleMenuVo> queryRoleList(SysRoleDto dto) {
         LambdaQueryWrapper<SysRolePo> queryWrapper = new QueryWrapper<SysRolePo>().lambda();
         if(!Objects.isNull(dto.getRoleId())){
             queryWrapper.eq(SysRolePo::getId,dto.getRoleId());
         }
-        return  sysRoleMapper.selectList(queryWrapper);
+        List<SysRolePo> sysRolePos = sysRoleMapper.selectList(queryWrapper);
+        List<SysRoleMenuVo> sysRoleMenuVos = new ArrayList<>();
+        if(sysRolePos.size()>0){
+            sysRolePos.forEach(sysRolePo -> {
+                SysRoleMenuVo sysRoleMenuVo = new SysRoleMenuVo();
+                sysRoleMenuVo.setRoleId(sysRolePo.getId());
+                sysRoleMenuVo.setRoleName(sysRolePo.getRoleName());
+            });
+        }
+        return  sysRoleMenuVos;
     }
 
     @Override
-    public SysRolePo selectRole(SysRolePo sysRolePo) {
-        return sysRoleMapper.selectById(sysRolePo.getId());
+    public SysRoleMenuVo selectRole(SysRolePo sysRolePo) {
+        SysRolePo rolePo = sysRoleMapper.selectById(sysRolePo.getId());
+        SysRoleMenuVo sysRoleMenuVo = new SysRoleMenuVo();
+        sysRoleMenuVo.setRoleId(rolePo.getId());
+        sysRoleMenuVo.setRoleName(rolePo.getRoleName());
+        return sysRoleMenuVo;
     }
 
     @Override

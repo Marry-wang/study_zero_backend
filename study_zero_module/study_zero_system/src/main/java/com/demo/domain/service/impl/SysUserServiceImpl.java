@@ -6,10 +6,12 @@ import com.baomidou.mybatisplus.core.toolkit.sql.SqlHelper;
 import com.demo.domain.entry.dto.SysUserDto;
 import com.demo.domain.entry.dto.AddSysUserRoleDto;
 import com.demo.domain.entry.dto.UpdateSysUserRoleDto;
+import com.demo.domain.entry.po.SysRolePo;
 import com.demo.domain.entry.po.SysUserPo;
 import com.demo.domain.entry.po.SysUserRolePo;
 import com.demo.domain.entry.vo.SysRoleVo;
 import com.demo.domain.entry.vo.SysUserRoleVo;
+import com.demo.domain.mapper.SysRoleMapper;
 import com.demo.domain.mapper.SysRoleMenuMapper;
 import com.demo.domain.mapper.SysUserMapper;
 import com.demo.domain.mapper.SysUserRoleMapper;
@@ -35,6 +37,9 @@ public class SysUserServiceImpl implements SysUserService {
 
     @Autowired
     private SysUserRoleMapper sysUserRoleMapper;
+
+    @Autowired
+    private SysRoleMapper sysRoleMapper;
 
     @Override
     public List<SysUserRoleVo> queryUserList(SysUserDto dto) {
@@ -136,9 +141,11 @@ public class SysUserServiceImpl implements SysUserService {
         if(sysUserRolePos.size()>0){
             List<SysRoleVo> sysRoleVos = new ArrayList<>();
             sysUserRolePos.forEach(userRolePo->{
+                SysRolePo sysRolePo = sysRoleMapper.selectById(userRolePo.getRoleId());
+
                 SysRoleVo sysRoleVo = new SysRoleVo();
-                sysRoleVo.setRoleId(userRolePo.getRoleId());
-                sysRoleVo.setRoleName(userRoleVo.getUserName());
+                sysRoleVo.setRoleId(sysRolePo.getId());
+                sysRoleVo.setRoleName(sysRolePo.getRoleName());
                 sysRoleVos.add(sysRoleVo);
             });
             userRoleVo.setSysRoleVos(sysRoleVos);

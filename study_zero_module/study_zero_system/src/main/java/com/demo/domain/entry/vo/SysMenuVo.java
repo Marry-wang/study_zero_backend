@@ -12,6 +12,8 @@ import java.util.List;
 @Data
 public class SysMenuVo {
 
+    private Integer menuId;
+
     /**
      * 对应前端菜单名
      */
