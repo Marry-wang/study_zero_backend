@@ -1,5 +1,6 @@
 package com.demo.domain.service.impl;
 
+import cn.hutool.core.bean.BeanUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.sql.SqlHelper;
@@ -7,10 +8,12 @@ import com.demo.domain.entry.dto.SysMenuDto;
 import com.demo.domain.entry.po.SysMenuPo;
 import com.demo.domain.entry.po.SysRoleMenuPo;
 import com.demo.domain.entry.po.SysUserPo;
+import com.demo.domain.entry.po.SysUserRolePo;
 import com.demo.domain.entry.vo.SysMenuVo;
 import com.demo.domain.mapper.SysMenuMapper;
 import com.demo.domain.mapper.SysRoleMenuMapper;
 import com.demo.domain.mapper.SysUserMapper;
+import com.demo.domain.mapper.SysUserRoleMapper;
 import com.demo.domain.service.SysMenuService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,6 +22,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 /**
  * @Author: 王孟伟
@@ -33,6 +37,43 @@ public class SysMenuServiceImpl implements SysMenuService {
 
     @Autowired
     private SysRoleMenuMapper sysRoleMenuMapper;
+
+    @Autowired
+    private SysUserRoleMapper sysUserRoleMapper;
+
+    @Override
+    public List<SysMenuVo> queryMenuByUserId(Integer userId) {
+        //查询出用户对应的角色
+        LambdaQueryWrapper<SysUserRolePo> userRoleWarpper = new QueryWrapper<SysUserRolePo>().lambda()
+                .eq(SysUserRolePo::getUserId, userId);
+        List<SysUserRolePo> sysUserRolePos = sysUserRoleMapper.selectList(userRoleWarpper);
+
+        List<Integer> roleIdList = sysUserRolePos.stream().map(sysUserRolePo -> sysUserRolePo.getRoleId()).collect(Collectors.toList());
+        //查询出角色对应的菜单
+        LambdaQueryWrapper<SysRoleMenuPo> roleMenuWarpper = new QueryWrapper<SysRoleMenuPo>().lambda()
+                .in(SysRoleMenuPo::getRoleId, roleIdList);
+        List<SysRoleMenuPo> sysRoleMenuPos = sysRoleMenuMapper.selectList(roleMenuWarpper);
+
+        List<Integer> menuIdList = sysRoleMenuPos.stream().distinct().map(SysRoleMenuPo -> SysRoleMenuPo.getMenuId()).collect(Collectors.toList());
+
+        List<SysMenuPo> sysMenuPos = sysMenuMapper.selectBatchIds(menuIdList);
+
+        ArrayList<SysMenuPo> menuParentList = new ArrayList<>();
+        for (SysMenuPo sysMenuPo : sysMenuPos) {
+            if(Objects.isNull(sysMenuPo.getParentId())){
+                menuParentList.add(sysMenuPo);
+            }
+        }
+        getMeuTree(menuParentList,sysMenuPos);
+
+        List<SysMenuVo> sysMenuVoList = new ArrayList<>();
+        menuParentList.forEach(menu->{
+            SysMenuVo sysMenuVo = new SysMenuVo();
+            BeanUtil.copyProperties(menu,sysMenuVo);
+            sysMenuVoList.add(sysMenuVo);
+        });
+        return sysMenuVoList;
+    }
 
     @Override
     public List<SysMenuVo> queryMenuByTRoleId(Integer roleId) {
