@@ -7,12 +7,10 @@ import com.baomidou.mybatisplus.core.toolkit.sql.SqlHelper;
 import com.demo.domain.entry.dto.SysMenuDto;
 import com.demo.domain.entry.po.SysMenuPo;
 import com.demo.domain.entry.po.SysRoleMenuPo;
-import com.demo.domain.entry.po.SysUserPo;
 import com.demo.domain.entry.po.SysUserRolePo;
 import com.demo.domain.entry.vo.SysMenuVo;
 import com.demo.domain.mapper.SysMenuMapper;
 import com.demo.domain.mapper.SysRoleMenuMapper;
-import com.demo.domain.mapper.SysUserMapper;
 import com.demo.domain.mapper.SysUserRoleMapper;
 import com.demo.domain.service.SysMenuService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,16 +58,16 @@ public class SysMenuServiceImpl implements SysMenuService {
 
         ArrayList<SysMenuPo> menuParentList = new ArrayList<>();
         for (SysMenuPo sysMenuPo : sysMenuPos) {
-            if(Objects.isNull(sysMenuPo.getParentId())){
+            if (Objects.isNull(sysMenuPo.getParentId())) {
                 menuParentList.add(sysMenuPo);
             }
         }
-        getMeuTree(menuParentList,sysMenuPos);
+        getMeuTree(menuParentList, sysMenuPos);
 
         List<SysMenuVo> sysMenuVoList = new ArrayList<>();
-        menuParentList.forEach(menu->{
+        menuParentList.forEach(menu -> {
             SysMenuVo sysMenuVo = new SysMenuVo();
-            BeanUtil.copyProperties(menu,sysMenuVo);
+            BeanUtil.copyProperties(menu, sysMenuVo);
             sysMenuVoList.add(sysMenuVo);
         });
         return sysMenuVoList;
@@ -81,7 +79,7 @@ public class SysMenuServiceImpl implements SysMenuService {
                 .eq(SysRoleMenuPo::getRoleId, roleId);
         List<SysRoleMenuPo> sysRoleMenuPos = sysRoleMenuMapper.selectList(queryWrapper);
 
-        if(sysRoleMenuPos.size()>0){
+        if (sysRoleMenuPos.size() > 0) {
             List<SysMenuPo> sysMenuPos = new ArrayList<>();
             sysRoleMenuPos.forEach(roleMenuPo -> {
                 SysMenuPo sysMenuPo = sysMenuMapper.selectById(roleMenuPo.getMenuId());
@@ -90,7 +88,7 @@ public class SysMenuServiceImpl implements SysMenuService {
 
             ArrayList<SysMenuPo> menuParentList = new ArrayList<>();
             for (SysMenuPo sysMenuPo : sysMenuPos) {
-                if(Objects.isNull(sysMenuPo.getParentId())){
+                if (Objects.isNull(sysMenuPo.getParentId())) {
                     menuParentList.add(sysMenuPo);
                 }
             }
@@ -107,19 +105,19 @@ public class SysMenuServiceImpl implements SysMenuService {
 
         ArrayList<SysMenuPo> menuParentList = new ArrayList<>();
         for (SysMenuPo sysMenuPo : sysMenuPos) {
-            if(Objects.isNull(sysMenuPo.getParentId())){
+            if (Objects.isNull(sysMenuPo.getParentId())) {
                 menuParentList.add(sysMenuPo);
             }
         }
-        getMeuTree(menuParentList,sysMenuPos);
+        getMeuTree(menuParentList, sysMenuPos);
         return menuParentList;
     }
 
-    private List<SysMenuPo> getMeuTree(List<SysMenuPo>parentList, List<SysMenuPo>menuList){
-        for(SysMenuPo sysMenuPo:parentList){
+    private List<SysMenuPo> getMeuTree(List<SysMenuPo> parentList, List<SysMenuPo> menuList) {
+        for (SysMenuPo sysMenuPo : parentList) {
             List<SysMenuPo> chridrenMenuList = new ArrayList<>();
-            for (SysMenuPo sysMenuPo1:menuList){
-                if(Objects.equals(sysMenuPo.getId(), sysMenuPo1.getParentId())){
+            for (SysMenuPo sysMenuPo1 : menuList) {
+                if (Objects.equals(sysMenuPo.getId(), sysMenuPo1.getParentId())) {
 
                     chridrenMenuList.add(sysMenuPo1);
                 }
@@ -150,7 +148,7 @@ public class SysMenuServiceImpl implements SysMenuService {
     public Boolean delMenu(SysMenuDto dto) {
         //删除菜单  将对应的角色下的菜单进行删除
         LambdaQueryWrapper<SysRoleMenuPo> lambda = new QueryWrapper<SysRoleMenuPo>().lambda();
-        lambda.eq(SysRoleMenuPo::getMenuId,dto.getMenuId());
+        lambda.eq(SysRoleMenuPo::getMenuId, dto.getMenuId());
         sysRoleMenuMapper.delete(lambda);
         return SqlHelper.retBool(sysMenuMapper.deleteById(dto.getMenuId()));
     }

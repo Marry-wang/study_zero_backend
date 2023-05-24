@@ -5,7 +5,7 @@ package com.demo.enums;
  * @Date: 2023/3/23 10:12
  * @Description:
  */
-public enum ZeroResultEnum {
+public enum BaseResultEnum {
     /**
      * 成功
      */
@@ -31,7 +31,7 @@ public enum ZeroResultEnum {
 
     private final String message;
 
-    ZeroResultEnum(Integer code, String message) {
+    BaseResultEnum(Integer code, String message) {
         this.code = code;
         this.message = message;
     }

@@ -12,7 +12,6 @@ import com.demo.domain.entry.po.SysUserRolePo;
 import com.demo.domain.entry.vo.SysRoleVo;
 import com.demo.domain.entry.vo.SysUserRoleVo;
 import com.demo.domain.mapper.SysRoleMapper;
-import com.demo.domain.mapper.SysRoleMenuMapper;
 import com.demo.domain.mapper.SysUserMapper;
 import com.demo.domain.mapper.SysUserRoleMapper;
 import com.demo.domain.service.SysUserService;
@@ -44,14 +43,14 @@ public class SysUserServiceImpl implements SysUserService {
     @Override
     public List<SysUserRoleVo> queryUserList(SysUserDto dto) {
         LambdaQueryWrapper<SysUserPo> sysUserPoLambdaQueryWrapper = new LambdaQueryWrapper<>();
-        if(!Objects.isNull(dto.getUserId())){
-            sysUserPoLambdaQueryWrapper.eq(SysUserPo::getId,dto.getUserId());
+        if (!Objects.isNull(dto.getUserId())) {
+            sysUserPoLambdaQueryWrapper.eq(SysUserPo::getId, dto.getUserId());
         }
 
         List<SysUserPo> sysUserPos = sysUserMapper.selectList(sysUserPoLambdaQueryWrapper);
 
         List<SysUserRoleVo> sysUserRoleVos = new ArrayList<>();
-        if(sysUserPos.size()>0){
+        if (sysUserPos.size() > 0) {
 
             sysUserPos.forEach(
                     sysUserPo -> {
@@ -81,7 +80,7 @@ public class SysUserServiceImpl implements SysUserService {
         sysUserRoleMapper.delete(delWrapper);
 
         roleIdList.forEach(
-                roleId->{
+                roleId -> {
                     SysUserRolePo sysUserRolePo = new SysUserRolePo();
                     sysUserRolePo.setRoleId(roleId);
                     sysUserRolePo.setUserId(sysUserPo.getId());
@@ -111,6 +110,7 @@ public class SysUserServiceImpl implements SysUserService {
         sysUserRoleMapper.delete(queryWrapper);
         return SqlHelper.retBool(sysUserMapper.deleteById(sysUserPo.getId()));
     }
+
     @Transactional(rollbackFor = Exception.class)
     @Override
     public Boolean addUserRole(AddSysUserRoleDto dto) {
@@ -122,7 +122,7 @@ public class SysUserServiceImpl implements SysUserService {
         sysUserMapper.insert(sysUserPo);
 
         roleIdList.forEach(
-                roleId->{
+                roleId -> {
                     SysUserRolePo sysUserRolePo = new SysUserRolePo();
                     sysUserRolePo.setRoleId(roleId);
                     sysUserRolePo.setUserId(sysUserPo.getId());
@@ -132,15 +132,15 @@ public class SysUserServiceImpl implements SysUserService {
         return true;
     }
 
-    private SysUserRoleVo selectUserRoleByUserId(SysUserRoleVo userRoleVo){
+    private SysUserRoleVo selectUserRoleByUserId(SysUserRoleVo userRoleVo) {
 
         LambdaQueryWrapper<SysUserRolePo> userRoleWrapper = new QueryWrapper<SysUserRolePo>().lambda()
                 .eq(SysUserRolePo::getUserId, userRoleVo.getUserId());
         List<SysUserRolePo> sysUserRolePos = sysUserRoleMapper.selectList(userRoleWrapper);
 
-        if(sysUserRolePos.size()>0){
+        if (sysUserRolePos.size() > 0) {
             List<SysRoleVo> sysRoleVos = new ArrayList<>();
-            sysUserRolePos.forEach(userRolePo->{
+            sysUserRolePos.forEach(userRolePo -> {
                 SysRolePo sysRolePo = sysRoleMapper.selectById(userRolePo.getRoleId());
 
                 SysRoleVo sysRoleVo = new SysRoleVo();
@@ -151,5 +151,7 @@ public class SysUserServiceImpl implements SysUserService {
             userRoleVo.setSysRoleVos(sysRoleVos);
         }
         return userRoleVo;
-    };
+    }
+
+    ;
 }

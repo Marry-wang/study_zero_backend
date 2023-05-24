@@ -1,7 +1,6 @@
 package com.demo.factory;
 
 import com.demo.api.ZeroResult;
-import com.demo.enums.ZeroResultEnum;
 import com.demo.service.RemoteSystemService;
 import org.springframework.cloud.openfeign.FallbackFactory;
 import org.springframework.stereotype.Component;
