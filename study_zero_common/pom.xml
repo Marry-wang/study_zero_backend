@@ -36,6 +36,7 @@
     <module>study_zero_common_task</module>
     <module>study_zero_common_task_quartz_web</module>
     <module>study_zero_common_core</module>
+    <module>study_zero_common_redis</module>
   </modules>
 
   <dependencies>
