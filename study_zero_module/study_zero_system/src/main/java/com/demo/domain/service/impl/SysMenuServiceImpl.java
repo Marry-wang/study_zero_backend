@@ -123,7 +123,7 @@ public class SysMenuServiceImpl implements SysMenuService {
                 }
             }
             List<SysMenuPo> meuTree = getMeuTree(chridrenMenuList, menuList);
-            sysMenuPo.setChrldren(meuTree);
+            sysMenuPo.setChildren(meuTree);
         }
         return parentList;
     }

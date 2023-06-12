@@ -25,7 +25,7 @@ public class SysMenuPo {
     private String path;
 
     @TableField(value = "menu_name")
-    private String name;
+    private String menuName;
 
     @TableField(value = "menu_icon")
     private String icon;
@@ -47,5 +47,5 @@ public class SysMenuPo {
     private Boolean deleFlag;
 
     @TableField(exist = false)
-    private List<SysMenuPo> chrldren;
+    private List<SysMenuPo> children;
 }
