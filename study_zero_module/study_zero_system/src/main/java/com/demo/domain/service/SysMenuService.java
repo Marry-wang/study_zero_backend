@@ -60,7 +60,7 @@ public interface SysMenuService {
      * @param sysMenuPo
      * @return
      */
-    Boolean updateMenu(SysMenuPo sysMenuPo);
+    Boolean addOrUpdateMenu(SysMenuPo sysMenuPo);
 
     /**
      * 删除菜单

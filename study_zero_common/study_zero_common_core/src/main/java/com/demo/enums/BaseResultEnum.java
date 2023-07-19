@@ -24,7 +24,9 @@ public enum BaseResultEnum {
     /**
      * system
      */
-    SYSTEM_ROLE_IS_USER(4001,"此权限正在使用中")
+    SYSTEM_ROLE_IS_USER(4001,"此权限正在使用中"),
+
+    SYSTEM_MENU_IS_USER(4002,"此菜单有子菜单，请查看后进行操作！")
     ;
 
     private final Integer code;

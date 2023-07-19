@@ -1,6 +1,7 @@
 package com.demo.domain.controller;
 
 import com.demo.api.ZeroResult;
+import com.demo.domain.entry.dto.SysMenuDto;
 import com.demo.domain.entry.dto.SysUserDto;
 import com.demo.domain.entry.po.SysMenuPo;
 import com.demo.domain.entry.vo.SysUserRoleVo;
@@ -29,6 +30,16 @@ public class SystemController {
     @PostMapping(value = "/getMenu")
     public ZeroResult<List<SysMenuPo>> menuList() {
         return ZeroResult.success(sysMenuService.queryMenuList());
+    }
+
+    @PostMapping(value = "/addOrUpdateMenu")
+    public ZeroResult<Boolean> updateMenu(@RequestBody SysMenuPo sysMenuPo) {
+        return ZeroResult.success(sysMenuService.addOrUpdateMenu(sysMenuPo));
+    }
+
+    @PostMapping(value = "/delMenu")
+    public ZeroResult<Boolean> delMenu(@RequestBody SysMenuDto sysMenuDto) {
+        return ZeroResult.success(sysMenuService.delMenu(sysMenuDto));
     }
 
     @PostMapping(value = "/getUser")

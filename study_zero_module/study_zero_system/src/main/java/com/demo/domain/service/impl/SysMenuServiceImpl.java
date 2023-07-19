@@ -1,6 +1,7 @@
 package com.demo.domain.service.impl;
 
 import cn.hutool.core.bean.BeanUtil;
+import cn.hutool.core.util.ObjectUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.sql.SqlHelper;
@@ -13,6 +14,8 @@ import com.demo.domain.mapper.SysMenuMapper;
 import com.demo.domain.mapper.SysRoleMenuMapper;
 import com.demo.domain.mapper.SysUserRoleMapper;
 import com.demo.domain.service.SysMenuService;
+import com.demo.enums.BaseResultEnum;
+import com.demo.exception.BaseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -139,8 +142,12 @@ public class SysMenuServiceImpl implements SysMenuService {
     }
 
     @Override
-    public Boolean updateMenu(SysMenuPo sysMenuPo) {
-        return SqlHelper.retBool(sysMenuMapper.updateById(sysMenuPo));
+    public Boolean addOrUpdateMenu(SysMenuPo sysMenuPo) {
+        if(ObjectUtil.isNotNull(sysMenuPo.getId())){
+            return SqlHelper.retBool(sysMenuMapper.updateById(sysMenuPo));
+        }else{
+            return SqlHelper.retBool(sysMenuMapper.insert(sysMenuPo));
+        }
     }
 
     @Override
@@ -150,6 +157,14 @@ public class SysMenuServiceImpl implements SysMenuService {
         LambdaQueryWrapper<SysRoleMenuPo> lambda = new QueryWrapper<SysRoleMenuPo>().lambda();
         lambda.eq(SysRoleMenuPo::getMenuId, dto.getMenuId());
         sysRoleMenuMapper.delete(lambda);
+
+        LambdaQueryWrapper<SysMenuPo> wrapper = new QueryWrapper<SysMenuPo>().lambda();
+        wrapper.eq(SysMenuPo::getParentId,dto.getMenuId());
+        List<SysMenuPo> sysMenuPos = sysMenuMapper.selectList(wrapper);
+        if(sysMenuPos.size()>0){
+            throw new BaseException(BaseResultEnum.SYSTEM_MENU_IS_USER);
+        }
+
         return SqlHelper.retBool(sysMenuMapper.deleteById(dto.getMenuId()));
     }
 
