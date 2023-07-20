@@ -1,6 +1,7 @@
 package com.demo.domain.controller;
 
 import com.demo.api.ZeroResult;
+import com.demo.domain.entry.dto.AddOrUpdateSysUserRoleDto;
 import com.demo.domain.entry.dto.SysMenuDto;
 import com.demo.domain.entry.dto.SysUserDto;
 import com.demo.domain.entry.po.SysMenuPo;
@@ -45,5 +46,16 @@ public class SystemController {
     @PostMapping(value = "/getUser")
     public ZeroResult<List<SysUserRoleVo>> userList(@RequestBody SysUserDto dto) {
         return ZeroResult.success(sysUserService.queryUserList(dto));
+    }
+
+    @PostMapping(value = "/addOrUpdateUser")
+    public ZeroResult<Boolean> addOrUpdateUserRole(@RequestBody AddOrUpdateSysUserRoleDto dto) {
+        return ZeroResult.success(sysUserService.addOrUpdateUserRole(dto));
+    }
+
+
+    @PostMapping(value = "/delUser")
+    public ZeroResult<Boolean> delUser(@RequestBody SysUserDto dto) {
+        return ZeroResult.success(sysUserService.delUser(dto));
     }
 }

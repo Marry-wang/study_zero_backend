@@ -1,11 +1,11 @@
 package com.demo.domain.service.impl;
 
+import cn.hutool.core.util.ObjectUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.sql.SqlHelper;
 import com.demo.domain.entry.dto.SysUserDto;
-import com.demo.domain.entry.dto.AddSysUserRoleDto;
-import com.demo.domain.entry.dto.UpdateSysUserRoleDto;
+import com.demo.domain.entry.dto.AddOrUpdateSysUserRoleDto;
 import com.demo.domain.entry.po.SysRolePo;
 import com.demo.domain.entry.po.SysUserPo;
 import com.demo.domain.entry.po.SysUserRolePo;
@@ -66,28 +66,47 @@ public class SysUserServiceImpl implements SysUserService {
     }
 
     @Override
-    public Boolean updateUser(UpdateSysUserRoleDto dto) {
-        Integer userId = dto.getUserId();
-        String userName = dto.getUserName();
-        List<Integer> roleIdList = dto.getRoleIdList();
+    public Boolean addOrUpdateUserRole(AddOrUpdateSysUserRoleDto dto) {
+        if(ObjectUtil.isNotNull(dto.getUserId())){
+            Integer userId = dto.getUserId();
+            String userName = dto.getUserName();
+            List<Integer> roleIdList = dto.getRoleIdList();
 
-        SysUserPo sysUserPo = new SysUserPo();
-        sysUserPo.setId(userId);
-        sysUserPo.setUserName(userName);
-        sysUserMapper.updateById(sysUserPo);
+            SysUserPo sysUserPo = new SysUserPo();
+            sysUserPo.setId(userId);
+            sysUserPo.setUserName(userName);
+            sysUserMapper.updateById(sysUserPo);
 
-        LambdaQueryWrapper<SysUserRolePo> delWrapper = new QueryWrapper<SysUserRolePo>().lambda().eq(SysUserRolePo::getUserId, userId);
-        sysUserRoleMapper.delete(delWrapper);
+//            LambdaQueryWrapper<SysUserRolePo> delWrapper = new QueryWrapper<SysUserRolePo>().lambda().eq(SysUserRolePo::getUserId, userId);
+//            sysUserRoleMapper.delete(delWrapper);
+//
+//            roleIdList.forEach(
+//                    roleId -> {
+//                        SysUserRolePo sysUserRolePo = new SysUserRolePo();
+//                        sysUserRolePo.setRoleId(roleId);
+//                        sysUserRolePo.setUserId(sysUserPo.getId());
+//                        sysUserRoleMapper.insert(sysUserRolePo);
+//                    }
+//            );
+            return true;
+        }else{
+            String userName = dto.getUserName();
+            List<Integer> roleIdList = dto.getRoleIdList();
 
-        roleIdList.forEach(
-                roleId -> {
-                    SysUserRolePo sysUserRolePo = new SysUserRolePo();
-                    sysUserRolePo.setRoleId(roleId);
-                    sysUserRolePo.setUserId(sysUserPo.getId());
-                    sysUserRoleMapper.insert(sysUserRolePo);
-                }
-        );
-        return true;
+            SysUserPo sysUserPo = new SysUserPo();
+            sysUserPo.setUserName(userName);
+            sysUserMapper.insert(sysUserPo);
+
+//            roleIdList.forEach(
+//                    roleId -> {
+//                        SysUserRolePo sysUserRolePo = new SysUserRolePo();
+//                        sysUserRolePo.setRoleId(roleId);
+//                        sysUserRolePo.setUserId(sysUserPo.getId());
+//                        sysUserRoleMapper.insert(sysUserRolePo);
+//                    }
+//            );
+            return true;
+        }
     }
 
     @Override
@@ -104,32 +123,11 @@ public class SysUserServiceImpl implements SysUserService {
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public Boolean delUser(SysUserPo sysUserPo) {
+    public Boolean delUser(SysUserDto dto) {
         LambdaQueryWrapper<SysUserRolePo> queryWrapper = new QueryWrapper<SysUserRolePo>().lambda()
-                .eq(SysUserRolePo::getUserId, sysUserPo.getId());
+                .eq(SysUserRolePo::getUserId, dto.getUserId());
         sysUserRoleMapper.delete(queryWrapper);
-        return SqlHelper.retBool(sysUserMapper.deleteById(sysUserPo.getId()));
-    }
-
-    @Transactional(rollbackFor = Exception.class)
-    @Override
-    public Boolean addUserRole(AddSysUserRoleDto dto) {
-        String userName = dto.getUserName();
-        List<Integer> roleIdList = dto.getRoleIdList();
-
-        SysUserPo sysUserPo = new SysUserPo();
-        sysUserPo.setUserName(userName);
-        sysUserMapper.insert(sysUserPo);
-
-        roleIdList.forEach(
-                roleId -> {
-                    SysUserRolePo sysUserRolePo = new SysUserRolePo();
-                    sysUserRolePo.setRoleId(roleId);
-                    sysUserRolePo.setUserId(sysUserPo.getId());
-                    sysUserRoleMapper.insert(sysUserRolePo);
-                }
-        );
-        return true;
+        return SqlHelper.retBool(sysUserMapper.deleteById(dto.getUserId()));
     }
 
     private SysUserRoleVo selectUserRoleByUserId(SysUserRoleVo userRoleVo) {

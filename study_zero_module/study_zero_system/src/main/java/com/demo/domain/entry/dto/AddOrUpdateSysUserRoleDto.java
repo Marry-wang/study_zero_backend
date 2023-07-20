@@ -5,7 +5,8 @@ import lombok.Data;
 import java.util.List;
 
 @Data
-public class AddSysUserRoleDto {
+public class AddOrUpdateSysUserRoleDto {
+    private Integer  userId;
 
     private String userName;
 

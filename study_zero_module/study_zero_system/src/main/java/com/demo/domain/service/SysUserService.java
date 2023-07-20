@@ -1,8 +1,7 @@
 package com.demo.domain.service;
 
 import com.demo.domain.entry.dto.SysUserDto;
-import com.demo.domain.entry.dto.AddSysUserRoleDto;
-import com.demo.domain.entry.dto.UpdateSysUserRoleDto;
+import com.demo.domain.entry.dto.AddOrUpdateSysUserRoleDto;
 import com.demo.domain.entry.po.SysUserPo;
 import com.demo.domain.entry.vo.SysUserRoleVo;
 import org.springframework.stereotype.Service;
@@ -30,7 +29,7 @@ public interface SysUserService {
      * @param dto
      * @return
      */
-    Boolean updateUser(UpdateSysUserRoleDto dto);
+    Boolean addOrUpdateUserRole(AddOrUpdateSysUserRoleDto dto);
 
     /**
      * 查询用户
@@ -43,16 +42,9 @@ public interface SysUserService {
     /**
      * 删除用户
      *
-     * @param sysUserPo
-     * @return
-     */
-    Boolean delUser(SysUserPo sysUserPo);
-
-    /**
-     * 添加角色权限
-     *
      * @param dto
      * @return
      */
-    Boolean addUserRole(AddSysUserRoleDto dto);
+    Boolean delUser(SysUserDto dto);
+
 }
