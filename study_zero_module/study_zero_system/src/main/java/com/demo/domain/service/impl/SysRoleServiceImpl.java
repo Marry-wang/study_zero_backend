@@ -1,5 +1,6 @@
 package com.demo.domain.service.impl;
 
+import cn.hutool.core.util.ObjectUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.sql.SqlHelper;
@@ -46,6 +47,7 @@ public class SysRoleServiceImpl implements SysRoleService {
                 SysRoleMenuVo sysRoleMenuVo = new SysRoleMenuVo();
                 sysRoleMenuVo.setRoleId(sysRolePo.getId());
                 sysRoleMenuVo.setRoleName(sysRolePo.getRoleName());
+                sysRoleMenuVos.add(sysRoleMenuVo);
             });
         }
         return sysRoleMenuVos;
@@ -61,13 +63,12 @@ public class SysRoleServiceImpl implements SysRoleService {
     }
 
     @Override
-    public Boolean addRole(SysRolePo sysRolePo) {
-        return SqlHelper.retBool(sysRoleMapper.insert(sysRolePo));
-    }
-
-    @Override
-    public Boolean updateRole(SysRolePo sysRolePo) {
-        return SqlHelper.retBool(sysRoleMapper.updateById(sysRolePo));
+    public Boolean addOrUpdateRole(SysRolePo sysRolePo) {
+        if(ObjectUtil.isNotNull(sysRolePo.getId())){
+            return SqlHelper.retBool(sysRoleMapper.updateById(sysRolePo));
+        }else{
+            return SqlHelper.retBool(sysRoleMapper.insert(sysRolePo));
+        }
     }
 
     @Override

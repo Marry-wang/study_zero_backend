@@ -35,15 +35,7 @@ public interface SysRoleService {
      * @param sysRolePo
      * @return
      */
-    Boolean addRole(SysRolePo sysRolePo);
-
-    /**
-     * 更新角色
-     *
-     * @param sysRolePo
-     * @return
-     */
-    Boolean updateRole(SysRolePo sysRolePo);
+    Boolean addOrUpdateRole(SysRolePo sysRolePo);
 
     /**
      * 删除角色
