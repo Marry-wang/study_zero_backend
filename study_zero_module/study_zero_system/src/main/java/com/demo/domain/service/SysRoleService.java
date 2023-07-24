@@ -27,7 +27,7 @@ public interface SysRoleService {
      *
      * @return
      */
-    SysRoleMenuVo selectRole(SysRolePo sysRolePo);
+    List<Integer> getRoleMenuIds(Integer roleId);
 
     /**
      * 新增角色

@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.annotation.*;
 import lombok.Data;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * @Author: 王孟伟
@@ -35,4 +36,7 @@ public class SysRolePo {
     @TableLogic
     @TableField(value = "del_flag")
     private Boolean delFlag;
+
+    @TableField(exist = false)
+    private List<Integer> roleMenuIds;
 }

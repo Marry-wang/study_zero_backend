@@ -126,7 +126,9 @@ public class SysMenuServiceImpl implements SysMenuService {
                 }
             }
             List<SysMenuPo> meuTree = getMeuTree(chridrenMenuList, menuList);
-            sysMenuPo.setChildren(meuTree);
+            if(meuTree.size()>0){
+                sysMenuPo.setChildren(meuTree);
+            }
         }
         return parentList;
     }

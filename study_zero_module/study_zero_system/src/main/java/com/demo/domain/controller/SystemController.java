@@ -71,6 +71,11 @@ public class SystemController {
         return ZeroResult.success(sysRoleService.queryRoleList(dto));
     }
 
+    @GetMapping(value = "/getRoleMenuIds")
+    public ZeroResult<List<Integer>> getRoleMenuIds(Integer roleId) {
+        return ZeroResult.success(sysRoleService.getRoleMenuIds(roleId));
+    }
+
     @PostMapping(value = "/addOrUpdateRole")
     public ZeroResult<Boolean> addOrUpdateRole(@RequestBody SysRolePo dto) {
         return ZeroResult.success(sysRoleService.addOrUpdateRole(dto));
