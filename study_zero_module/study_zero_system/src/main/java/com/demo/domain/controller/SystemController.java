@@ -8,6 +8,7 @@ import com.demo.domain.entry.dto.SysUserDto;
 import com.demo.domain.entry.po.SysMenuPo;
 import com.demo.domain.entry.po.SysRolePo;
 import com.demo.domain.entry.vo.SysRoleMenuVo;
+import com.demo.domain.entry.vo.SysRoleVo;
 import com.demo.domain.entry.vo.SysUserRoleVo;
 import com.demo.domain.service.SysMenuService;
 import com.demo.domain.service.SysRoleService;
@@ -53,6 +54,11 @@ public class SystemController {
     @PostMapping(value = "/getUser")
     public ZeroResult<List<SysUserRoleVo>> userList(@RequestBody SysUserDto dto) {
         return ZeroResult.success(sysUserService.queryUserList(dto));
+    }
+
+    @GetMapping(value = "/selectUserRole")
+    public ZeroResult<List<Integer>> selectUserRole(Integer userId) {
+        return ZeroResult.success(sysUserService.selectUserRole(userId));
     }
 
     @PostMapping(value = "/addOrUpdateUser")

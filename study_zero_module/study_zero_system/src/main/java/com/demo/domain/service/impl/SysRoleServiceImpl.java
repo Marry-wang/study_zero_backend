@@ -81,7 +81,9 @@ public class SysRoleServiceImpl implements SysRoleService {
     public Boolean addOrUpdateRole(SysRolePo sysRolePo) {
         Integer roleId ;
         if(ObjectUtil.isNotNull(sysRolePo.getId())){
-            sysRoleMapper.updateById(sysRolePo);
+            if(ObjectUtil.isNotNull(sysRolePo.getRoleName())) {
+                sysRoleMapper.updateById(sysRolePo);
+            }
         }else{
            sysRoleMapper.insert(sysRolePo);
         }
