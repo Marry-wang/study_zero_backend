@@ -22,6 +22,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 /**
  * @Author: 王孟伟
@@ -57,7 +58,6 @@ public class SysUserServiceImpl implements SysUserService {
                         SysUserRoleVo sysUserRoleVo = new SysUserRoleVo();
                         sysUserRoleVo.setUserId(sysUserPo.getId());
                         sysUserRoleVo.setUserName(sysUserPo.getUserName());
-                        selectUserRoleByUserId(sysUserRoleVo);
                         sysUserRoleVos.add(sysUserRoleVo);
                     }
             );
@@ -66,28 +66,31 @@ public class SysUserServiceImpl implements SysUserService {
     }
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public Boolean addOrUpdateUserRole(AddOrUpdateSysUserRoleDto dto) {
         if(ObjectUtil.isNotNull(dto.getUserId())){
             Integer userId = dto.getUserId();
-            String userName = dto.getUserName();
+            if(ObjectUtil.isNotNull(dto.getUserName())){
+                String userName = dto.getUserName();
+                SysUserPo sysUserPo = new SysUserPo();
+                sysUserPo.setId(userId);
+                sysUserPo.setUserName(userName);
+                sysUserMapper.updateById(sysUserPo);
+            }
+
             List<Integer> roleIdList = dto.getRoleIdList();
-
-            SysUserPo sysUserPo = new SysUserPo();
-            sysUserPo.setId(userId);
-            sysUserPo.setUserName(userName);
-            sysUserMapper.updateById(sysUserPo);
-
-//            LambdaQueryWrapper<SysUserRolePo> delWrapper = new QueryWrapper<SysUserRolePo>().lambda().eq(SysUserRolePo::getUserId, userId);
-//            sysUserRoleMapper.delete(delWrapper);
-//
-//            roleIdList.forEach(
-//                    roleId -> {
-//                        SysUserRolePo sysUserRolePo = new SysUserRolePo();
-//                        sysUserRolePo.setRoleId(roleId);
-//                        sysUserRolePo.setUserId(sysUserPo.getId());
-//                        sysUserRoleMapper.insert(sysUserRolePo);
-//                    }
-//            );
+            if(roleIdList.size()>0){
+                LambdaQueryWrapper<SysUserRolePo> delWrapper = new QueryWrapper<SysUserRolePo>().lambda().eq(SysUserRolePo::getUserId, userId);
+                sysUserRoleMapper.delete(delWrapper);
+                roleIdList.forEach(
+                        roleId -> {
+                            SysUserRolePo sysUserRolePo = new SysUserRolePo();
+                            sysUserRolePo.setRoleId(roleId);
+                            sysUserRolePo.setUserId(userId);
+                            sysUserRoleMapper.insert(sysUserRolePo);
+                        }
+                );
+            }
             return true;
         }else{
             String userName = dto.getUserName();
@@ -97,28 +100,28 @@ public class SysUserServiceImpl implements SysUserService {
             sysUserPo.setUserName(userName);
             sysUserMapper.insert(sysUserPo);
 
-//            roleIdList.forEach(
-//                    roleId -> {
-//                        SysUserRolePo sysUserRolePo = new SysUserRolePo();
-//                        sysUserRolePo.setRoleId(roleId);
-//                        sysUserRolePo.setUserId(sysUserPo.getId());
-//                        sysUserRoleMapper.insert(sysUserRolePo);
-//                    }
-//            );
+            if(roleIdList.size()>0){
+                roleIdList.forEach(
+                    roleId -> {
+                        SysUserRolePo sysUserRolePo = new SysUserRolePo();
+                        sysUserRolePo.setRoleId(roleId);
+                        sysUserRolePo.setUserId(sysUserPo.getId());
+                        sysUserRoleMapper.insert(sysUserRolePo);
+                    }
+                );
+            }
             return true;
         }
     }
 
     @Override
-    public SysUserRoleVo selectUser(SysUserPo sysUserPo) {
-
-        SysUserRoleVo sysUserRoleVo = new SysUserRoleVo();
-
-        SysUserPo userPo = sysUserMapper.selectById(sysUserPo.getId());
-        sysUserRoleVo.setUserId(userPo.getId());
-        sysUserRoleVo.setUserName(userPo.getUserName());
-        selectUserRoleByUserId(sysUserRoleVo);
-        return sysUserRoleVo;
+    public List<Integer> selectUserRole(Integer userId) {
+        List<SysRoleVo> sysRoleVos = selectUserRoleByUserId(userId);
+        List<Integer> roleIds = new ArrayList<>();
+        if(sysRoleVos.size()>0){
+            roleIds=sysRoleVos.stream().map(SysRoleVo::getRoleId).collect(Collectors.toList());
+        }
+        return roleIds;
     }
 
     @Override
@@ -130,14 +133,13 @@ public class SysUserServiceImpl implements SysUserService {
         return SqlHelper.retBool(sysUserMapper.deleteById(dto.getUserId()));
     }
 
-    private SysUserRoleVo selectUserRoleByUserId(SysUserRoleVo userRoleVo) {
+    private List<SysRoleVo> selectUserRoleByUserId(Integer userId) {
 
         LambdaQueryWrapper<SysUserRolePo> userRoleWrapper = new QueryWrapper<SysUserRolePo>().lambda()
-                .eq(SysUserRolePo::getUserId, userRoleVo.getUserId());
+                .eq(SysUserRolePo::getUserId, userId);
         List<SysUserRolePo> sysUserRolePos = sysUserRoleMapper.selectList(userRoleWrapper);
-
+        List<SysRoleVo> sysRoleVos = new ArrayList<>();
         if (sysUserRolePos.size() > 0) {
-            List<SysRoleVo> sysRoleVos = new ArrayList<>();
             sysUserRolePos.forEach(userRolePo -> {
                 SysRolePo sysRolePo = sysRoleMapper.selectById(userRolePo.getRoleId());
 
@@ -146,9 +148,8 @@ public class SysUserServiceImpl implements SysUserService {
                 sysRoleVo.setRoleName(sysRolePo.getRoleName());
                 sysRoleVos.add(sysRoleVo);
             });
-            userRoleVo.setSysRoleVos(sysRoleVos);
         }
-        return userRoleVo;
+        return sysRoleVos;
     }
 
     ;
