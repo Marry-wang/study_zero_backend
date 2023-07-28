@@ -1,4 +1,4 @@
-package com.demo.handler;
+package com.demo.ExceptionHandel;
 
 import com.demo.api.ZeroResult;
 import org.springframework.web.bind.annotation.ExceptionHandler;
