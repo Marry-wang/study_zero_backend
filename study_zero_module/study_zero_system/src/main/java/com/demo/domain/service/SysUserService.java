@@ -1,9 +1,7 @@
 package com.demo.domain.service;
 
 import com.demo.domain.entry.dto.SysUserDto;
-import com.demo.domain.entry.dto.AddOrUpdateSysUserRoleDto;
-import com.demo.domain.entry.po.SysUserPo;
-import com.demo.domain.entry.vo.SysRoleVo;
+import com.demo.domain.entry.dto.AddOrUpdateUserDto;
 import com.demo.domain.entry.vo.SysUserRoleVo;
 import org.springframework.stereotype.Service;
 
@@ -30,7 +28,7 @@ public interface SysUserService {
      * @param dto
      * @return
      */
-    Boolean addOrUpdateUserRole(AddOrUpdateSysUserRoleDto dto);
+    Boolean addOrUpdateUserRole(AddOrUpdateUserDto dto);
 
     /**
      * 查询用户

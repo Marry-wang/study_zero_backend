@@ -5,7 +5,7 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.sql.SqlHelper;
 import com.demo.domain.entry.dto.SysUserDto;
-import com.demo.domain.entry.dto.AddOrUpdateSysUserRoleDto;
+import com.demo.domain.entry.dto.AddOrUpdateUserDto;
 import com.demo.domain.entry.po.SysRolePo;
 import com.demo.domain.entry.po.SysUserPo;
 import com.demo.domain.entry.po.SysUserRolePo;
@@ -67,10 +67,10 @@ public class SysUserServiceImpl implements SysUserService {
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public Boolean addOrUpdateUserRole(AddOrUpdateSysUserRoleDto dto) {
-        if(ObjectUtil.isNotNull(dto.getUserId())){
+    public Boolean addOrUpdateUserRole(AddOrUpdateUserDto dto) {
+        if (ObjectUtil.isNotNull(dto.getUserId())) {
             Integer userId = dto.getUserId();
-            if(ObjectUtil.isNotNull(dto.getUserName())){
+            if (ObjectUtil.isNotNull(dto.getUserName())) {
                 String userName = dto.getUserName();
                 SysUserPo sysUserPo = new SysUserPo();
                 sysUserPo.setId(userId);
@@ -79,7 +79,7 @@ public class SysUserServiceImpl implements SysUserService {
             }
 
             List<Integer> roleIdList = dto.getRoleIdList();
-            if(roleIdList.size()>0){
+            if (ObjectUtil.isNotNull(dto.getRoleIdList()) && roleIdList.size() > 0) {
                 LambdaQueryWrapper<SysUserRolePo> delWrapper = new QueryWrapper<SysUserRolePo>().lambda().eq(SysUserRolePo::getUserId, userId);
                 sysUserRoleMapper.delete(delWrapper);
                 roleIdList.forEach(
@@ -92,7 +92,7 @@ public class SysUserServiceImpl implements SysUserService {
                 );
             }
             return true;
-        }else{
+        } else {
             String userName = dto.getUserName();
             List<Integer> roleIdList = dto.getRoleIdList();
 
@@ -100,14 +100,14 @@ public class SysUserServiceImpl implements SysUserService {
             sysUserPo.setUserName(userName);
             sysUserMapper.insert(sysUserPo);
 
-            if(roleIdList.size()>0){
+            if (ObjectUtil.isNotNull(dto.getRoleIdList()) && roleIdList.size() > 0) {
                 roleIdList.forEach(
-                    roleId -> {
-                        SysUserRolePo sysUserRolePo = new SysUserRolePo();
-                        sysUserRolePo.setRoleId(roleId);
-                        sysUserRolePo.setUserId(sysUserPo.getId());
-                        sysUserRoleMapper.insert(sysUserRolePo);
-                    }
+                        roleId -> {
+                            SysUserRolePo sysUserRolePo = new SysUserRolePo();
+                            sysUserRolePo.setRoleId(roleId);
+                            sysUserRolePo.setUserId(sysUserPo.getId());
+                            sysUserRoleMapper.insert(sysUserRolePo);
+                        }
                 );
             }
             return true;
@@ -118,8 +118,8 @@ public class SysUserServiceImpl implements SysUserService {
     public List<Integer> selectUserRole(Integer userId) {
         List<SysRoleVo> sysRoleVos = selectUserRoleByUserId(userId);
         List<Integer> roleIds = new ArrayList<>();
-        if(sysRoleVos.size()>0){
-            roleIds=sysRoleVos.stream().map(SysRoleVo::getRoleId).collect(Collectors.toList());
+        if (sysRoleVos.size() > 0) {
+            roleIds = sysRoleVos.stream().map(SysRoleVo::getRoleId).collect(Collectors.toList());
         }
         return roleIds;
     }

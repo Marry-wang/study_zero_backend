@@ -15,7 +15,7 @@ import java.util.List;
 @TableName(value = "sys_menu")
 public class SysMenuPo {
 
-    @TableId(value = "id",type = IdType.AUTO)
+    @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
 
     @TableField(value = "parent_id")

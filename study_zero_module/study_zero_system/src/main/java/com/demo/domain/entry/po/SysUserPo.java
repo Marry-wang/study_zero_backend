@@ -4,7 +4,6 @@ import com.baomidou.mybatisplus.annotation.*;
 import lombok.Data;
 
 import java.util.Date;
-import java.util.List;
 
 /**
  * @Author: 王孟伟
@@ -15,7 +14,7 @@ import java.util.List;
 @TableName(value = "sys_user")
 public class SysUserPo {
 
-    @TableId(value = "id",type = IdType.AUTO)
+    @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
 
     @TableField(value = "user_name")

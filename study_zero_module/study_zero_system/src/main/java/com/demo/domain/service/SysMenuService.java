@@ -1,7 +1,7 @@
 package com.demo.domain.service;
 
+import com.demo.domain.entry.dto.AddOrUpdateMenuDto;
 import com.demo.domain.entry.dto.SysMenuDto;
-import com.demo.domain.entry.po.SysMenuPo;
 import com.demo.domain.entry.vo.SysMenuVo;
 import org.springframework.stereotype.Service;
 
@@ -16,51 +16,19 @@ import java.util.List;
 public interface SysMenuService {
 
     /**
-     * 查询用户下的菜单
-     *
-     * @param userId
-     * @return
-     */
-    List<SysMenuVo> queryMenuByUserId(Integer userId);
-
-    /**
-     * 查询角色下的菜单
-     *
-     * @param roleId
-     * @return
-     */
-    List<SysMenuVo> queryMenuByTRoleId(Integer roleId);
-
-    /**
      * 查询菜单列表
      *
      * @return
      */
-    List<SysMenuPo> queryMenuList();
-
-    /**
-     * 查询菜单详情
-     *
-     * @param dto
-     * @return
-     */
-    SysMenuPo selectMenu(SysMenuDto dto);
-
-    /**
-     * 新增菜单
-     *
-     * @param sysMenuPo
-     * @return
-     */
-    Boolean addMenu(SysMenuPo sysMenuPo);
+    List<SysMenuVo> queryMenuList();
 
     /**
      * 更新菜单
      *
-     * @param sysMenuPo
+     * @param dto
      * @return
      */
-    Boolean addOrUpdateMenu(SysMenuPo sysMenuPo);
+    Boolean addOrUpdateMenu(AddOrUpdateMenuDto dto);
 
     /**
      * 删除菜单

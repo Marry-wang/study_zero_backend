@@ -1,9 +1,11 @@
 package com.demo.domain.service.impl;
 
+import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.util.ObjectUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.sql.SqlHelper;
+import com.demo.domain.entry.dto.AddOrUpdateRoleDto;
 import com.demo.domain.entry.dto.SysRoleDto;
 import com.demo.domain.entry.po.SysRoleMenuPo;
 import com.demo.domain.entry.po.SysRolePo;
@@ -64,12 +66,12 @@ public class SysRoleServiceImpl implements SysRoleService {
     public List<Integer> getRoleMenuIds(Integer roleId) {
 
         LambdaQueryWrapper<SysRoleMenuPo> lambda = new QueryWrapper<SysRoleMenuPo>().lambda();
-        lambda.eq(SysRoleMenuPo::getRoleId,roleId);
+        lambda.eq(SysRoleMenuPo::getRoleId, roleId);
         lambda.select(SysRoleMenuPo::getMenuId);
         List<SysRoleMenuPo> sysRoleMenuPos = sysRoleMenuMapper.selectList(lambda);
 
         List<Integer> roleMenuIds = new ArrayList<>();
-        if(sysRoleMenuPos.size()>0){
+        if (sysRoleMenuPos.size() > 0) {
             roleMenuIds = sysRoleMenuPos.stream().map(SysRoleMenuPo::getMenuId).collect(Collectors.toList());
         }
 
@@ -78,22 +80,24 @@ public class SysRoleServiceImpl implements SysRoleService {
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public Boolean addOrUpdateRole(SysRolePo sysRolePo) {
-        Integer roleId ;
-        if(ObjectUtil.isNotNull(sysRolePo.getId())){
-            if(ObjectUtil.isNotNull(sysRolePo.getRoleName())) {
+    public Boolean addOrUpdateRole(AddOrUpdateRoleDto dto) {
+        SysRolePo sysRolePo = new SysRolePo();
+        BeanUtil.copyProperties(dto, sysRolePo);
+        Integer roleId;
+        if (ObjectUtil.isNotNull(sysRolePo.getId())) {
+            if (ObjectUtil.isNotNull(sysRolePo.getRoleName())) {
                 sysRoleMapper.updateById(sysRolePo);
             }
-        }else{
-           sysRoleMapper.insert(sysRolePo);
+        } else {
+            sysRoleMapper.insert(sysRolePo);
         }
         roleId = sysRolePo.getId();
-        if(sysRolePo.getRoleMenuIds().size()>0){
+        if (ObjectUtil.isNotNull(sysRolePo.getRoleMenuIds()) && sysRolePo.getRoleMenuIds().size() > 0) {
             LambdaQueryWrapper<SysRoleMenuPo> lambda = new QueryWrapper<SysRoleMenuPo>().lambda();
-            lambda.eq(SysRoleMenuPo::getRoleId,roleId);
+            lambda.eq(SysRoleMenuPo::getRoleId, roleId);
             sysRoleMenuMapper.delete(lambda);
 
-            sysRolePo.getRoleMenuIds().forEach(roleMenuId->{
+            sysRolePo.getRoleMenuIds().forEach(roleMenuId -> {
                 SysRoleMenuPo sysRoleMenuPo = new SysRoleMenuPo();
                 sysRoleMenuPo.setRoleId(roleId);
                 sysRoleMenuPo.setMenuId(roleMenuId);
@@ -104,14 +108,14 @@ public class SysRoleServiceImpl implements SysRoleService {
     }
 
     @Override
-    public Boolean delRole(SysRolePo sysRolePo) {
+    public Boolean delRole(SysRoleDto dto) {
 
         LambdaQueryWrapper<SysUserRolePo> wrapper = new QueryWrapper<SysUserRolePo>().lambda()
-                .eq(SysUserRolePo::getRoleId, sysRolePo.getId());
+                .eq(SysUserRolePo::getRoleId, dto.getRoleId());
         List<SysUserRolePo> sysUserRolePos = sysUserRoleMapper.selectList(wrapper);
         if (sysUserRolePos.size() > 0) {
             throw new BaseException(BaseResultEnum.SYSTEM_ROLE_IS_USER);
         }
-        return SqlHelper.retBool(sysRoleMapper.deleteById(sysRolePo.getId()));
+        return SqlHelper.retBool(sysRoleMapper.deleteById(dto.getRoleId()));
     }
 }

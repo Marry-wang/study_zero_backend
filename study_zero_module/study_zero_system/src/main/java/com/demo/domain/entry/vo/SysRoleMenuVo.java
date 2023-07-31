@@ -2,8 +2,6 @@ package com.demo.domain.entry.vo;
 
 import lombok.Data;
 
-import java.util.List;
-
 @Data
 public class SysRoleMenuVo {
 

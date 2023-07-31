@@ -1,14 +1,9 @@
 package com.demo.domain.controller;
 
 import com.demo.api.ZeroResult;
-import com.demo.domain.entry.dto.AddOrUpdateSysUserRoleDto;
-import com.demo.domain.entry.dto.SysMenuDto;
-import com.demo.domain.entry.dto.SysRoleDto;
-import com.demo.domain.entry.dto.SysUserDto;
-import com.demo.domain.entry.po.SysMenuPo;
-import com.demo.domain.entry.po.SysRolePo;
+import com.demo.domain.entry.dto.*;
+import com.demo.domain.entry.vo.SysMenuVo;
 import com.demo.domain.entry.vo.SysRoleMenuVo;
-import com.demo.domain.entry.vo.SysRoleVo;
 import com.demo.domain.entry.vo.SysUserRoleVo;
 import com.demo.domain.service.SysMenuService;
 import com.demo.domain.service.SysRoleService;
@@ -37,13 +32,13 @@ public class SystemController {
     private SysRoleService sysRoleService;
 
     @PostMapping(value = "/getMenu")
-    public ZeroResult<List<SysMenuPo>> menuList() {
+    public ZeroResult<List<SysMenuVo>> menuList() {
         return ZeroResult.success(sysMenuService.queryMenuList());
     }
 
     @PostMapping(value = "/addOrUpdateMenu")
-    public ZeroResult<Boolean> updateMenu(@RequestBody SysMenuPo sysMenuPo) {
-        return ZeroResult.success(sysMenuService.addOrUpdateMenu(sysMenuPo));
+    public ZeroResult<Boolean> updateMenu(@RequestBody AddOrUpdateMenuDto dto) {
+        return ZeroResult.success(sysMenuService.addOrUpdateMenu(dto));
     }
 
     @PostMapping(value = "/delMenu")
@@ -62,7 +57,7 @@ public class SystemController {
     }
 
     @PostMapping(value = "/addOrUpdateUser")
-    public ZeroResult<Boolean> addOrUpdateUserRole(@RequestBody AddOrUpdateSysUserRoleDto dto) {
+    public ZeroResult<Boolean> addOrUpdateUserRole(@RequestBody AddOrUpdateUserDto dto) {
         return ZeroResult.success(sysUserService.addOrUpdateUserRole(dto));
     }
 
@@ -83,13 +78,13 @@ public class SystemController {
     }
 
     @PostMapping(value = "/addOrUpdateRole")
-    public ZeroResult<Boolean> addOrUpdateRole(@RequestBody SysRolePo dto) {
+    public ZeroResult<Boolean> addOrUpdateRole(@RequestBody AddOrUpdateRoleDto dto) {
         return ZeroResult.success(sysRoleService.addOrUpdateRole(dto));
     }
 
 
     @PostMapping(value = "/delRole")
-    public ZeroResult<Boolean> delRole(@RequestBody SysRolePo dto) {
+    public ZeroResult<Boolean> delRole(@RequestBody SysRoleDto dto) {
         return ZeroResult.success(sysRoleService.delRole(dto));
     }
 }

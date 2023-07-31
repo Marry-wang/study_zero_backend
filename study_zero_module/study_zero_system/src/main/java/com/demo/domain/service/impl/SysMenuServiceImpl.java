@@ -5,14 +5,13 @@ import cn.hutool.core.util.ObjectUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.sql.SqlHelper;
+import com.demo.domain.entry.dto.AddOrUpdateMenuDto;
 import com.demo.domain.entry.dto.SysMenuDto;
 import com.demo.domain.entry.po.SysMenuPo;
 import com.demo.domain.entry.po.SysRoleMenuPo;
-import com.demo.domain.entry.po.SysUserRolePo;
 import com.demo.domain.entry.vo.SysMenuVo;
 import com.demo.domain.mapper.SysMenuMapper;
 import com.demo.domain.mapper.SysRoleMenuMapper;
-import com.demo.domain.mapper.SysUserRoleMapper;
 import com.demo.domain.service.SysMenuService;
 import com.demo.enums.BaseResultEnum;
 import com.demo.exception.BaseException;
@@ -23,7 +22,6 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collectors;
 
 /**
  * @Author: 王孟伟
@@ -39,115 +37,56 @@ public class SysMenuServiceImpl implements SysMenuService {
     @Autowired
     private SysRoleMenuMapper sysRoleMenuMapper;
 
-    @Autowired
-    private SysUserRoleMapper sysUserRoleMapper;
-
     @Override
-    public List<SysMenuVo> queryMenuByUserId(Integer userId) {
-        //查询出用户对应的角色
-        LambdaQueryWrapper<SysUserRolePo> userRoleWarpper = new QueryWrapper<SysUserRolePo>().lambda()
-                .eq(SysUserRolePo::getUserId, userId);
-        List<SysUserRolePo> sysUserRolePos = sysUserRoleMapper.selectList(userRoleWarpper);
-
-        List<Integer> roleIdList = sysUserRolePos.stream().map(sysUserRolePo -> sysUserRolePo.getRoleId()).collect(Collectors.toList());
-        //查询出角色对应的菜单
-        LambdaQueryWrapper<SysRoleMenuPo> roleMenuWarpper = new QueryWrapper<SysRoleMenuPo>().lambda()
-                .in(SysRoleMenuPo::getRoleId, roleIdList);
-        List<SysRoleMenuPo> sysRoleMenuPos = sysRoleMenuMapper.selectList(roleMenuWarpper);
-
-        List<Integer> menuIdList = sysRoleMenuPos.stream().distinct().map(SysRoleMenuPo -> SysRoleMenuPo.getMenuId()).collect(Collectors.toList());
-
-        List<SysMenuPo> sysMenuPos = sysMenuMapper.selectBatchIds(menuIdList);
-
-        ArrayList<SysMenuPo> menuParentList = new ArrayList<>();
-        for (SysMenuPo sysMenuPo : sysMenuPos) {
-            if (Objects.isNull(sysMenuPo.getParentId())) {
-                menuParentList.add(sysMenuPo);
-            }
-        }
-        getMeuTree(menuParentList, sysMenuPos);
-
-        List<SysMenuVo> sysMenuVoList = new ArrayList<>();
-        menuParentList.forEach(menu -> {
-            SysMenuVo sysMenuVo = new SysMenuVo();
-            BeanUtil.copyProperties(menu, sysMenuVo);
-            sysMenuVoList.add(sysMenuVo);
-        });
-        return sysMenuVoList;
-    }
-
-    @Override
-    public List<SysMenuVo> queryMenuByTRoleId(Integer roleId) {
-        LambdaQueryWrapper<SysRoleMenuPo> queryWrapper = new QueryWrapper<SysRoleMenuPo>().lambda()
-                .eq(SysRoleMenuPo::getRoleId, roleId);
-        List<SysRoleMenuPo> sysRoleMenuPos = sysRoleMenuMapper.selectList(queryWrapper);
-
-        if (sysRoleMenuPos.size() > 0) {
-            List<SysMenuPo> sysMenuPos = new ArrayList<>();
-            sysRoleMenuPos.forEach(roleMenuPo -> {
-                SysMenuPo sysMenuPo = sysMenuMapper.selectById(roleMenuPo.getMenuId());
-                sysMenuPos.add(sysMenuPo);
-            });
-
-            ArrayList<SysMenuPo> menuParentList = new ArrayList<>();
-            for (SysMenuPo sysMenuPo : sysMenuPos) {
-                if (Objects.isNull(sysMenuPo.getParentId())) {
-                    menuParentList.add(sysMenuPo);
-                }
-            }
-            List<SysMenuPo> meuTree = getMeuTree(menuParentList, sysMenuPos);
-            //TODO 数据转换
-        }
-        return null;
-    }
-
-    @Override
-    public List<SysMenuPo> queryMenuList() {
+    public List<SysMenuVo> queryMenuList() {
         LambdaQueryWrapper<SysMenuPo> sysMenuPoLambdaQueryWrapper = new LambdaQueryWrapper<>();
         List<SysMenuPo> sysMenuPos = sysMenuMapper.selectList(sysMenuPoLambdaQueryWrapper);
 
-        ArrayList<SysMenuPo> menuParentList = new ArrayList<>();
+        ArrayList<SysMenuVo> menuParentList = new ArrayList<>();
         for (SysMenuPo sysMenuPo : sysMenuPos) {
             if (Objects.isNull(sysMenuPo.getParentId())) {
-                menuParentList.add(sysMenuPo);
+                SysMenuVo sysMenuVo = new SysMenuVo();
+                sysMenuVo.setId(sysMenuPo.getId());
+                sysMenuVo.setMenuName(sysMenuPo.getMenuName());
+                sysMenuVo.setPath(sysMenuPo.getPath());
+                sysMenuVo.setIcon(sysMenuPo.getIcon());
+                sysMenuVo.setChildren(sysMenuPo.getChildren());
+                menuParentList.add(sysMenuVo);
             }
         }
         getMeuTree(menuParentList, sysMenuPos);
         return menuParentList;
     }
 
-    private List<SysMenuPo> getMeuTree(List<SysMenuPo> parentList, List<SysMenuPo> menuList) {
-        for (SysMenuPo sysMenuPo : parentList) {
-            List<SysMenuPo> chridrenMenuList = new ArrayList<>();
+    private List<SysMenuVo> getMeuTree(List<SysMenuVo> parentList, List<SysMenuPo> menuList) {
+        for (SysMenuVo sysMenuVo : parentList) {
+            List<SysMenuVo> chridrenMenuList = new ArrayList<>();
             for (SysMenuPo sysMenuPo1 : menuList) {
-                if (Objects.equals(sysMenuPo.getId(), sysMenuPo1.getParentId())) {
-
-                    chridrenMenuList.add(sysMenuPo1);
+                if (Objects.equals(sysMenuVo.getId(), sysMenuPo1.getParentId())) {
+                    SysMenuVo sysMenuVo1 = new SysMenuVo();
+                    sysMenuVo1.setId(sysMenuPo1.getId());
+                    sysMenuVo1.setMenuName(sysMenuPo1.getMenuName());
+                    sysMenuVo1.setPath(sysMenuPo1.getPath());
+                    sysMenuVo1.setIcon(sysMenuPo1.getIcon());
+                    sysMenuVo1.setChildren(sysMenuPo1.getChildren());
+                    chridrenMenuList.add(sysMenuVo1);
                 }
             }
-            List<SysMenuPo> meuTree = getMeuTree(chridrenMenuList, menuList);
-            if(meuTree.size()>0){
-                sysMenuPo.setChildren(meuTree);
+            List<SysMenuVo> meuTree = getMeuTree(chridrenMenuList, menuList);
+            if (meuTree.size() > 0) {
+                sysMenuVo.setChildren(meuTree);
             }
         }
         return parentList;
     }
 
     @Override
-    public SysMenuPo selectMenu(SysMenuDto dto) {
-        return sysMenuMapper.selectById(dto.getMenuId());
-    }
-
-    @Override
-    public Boolean addMenu(SysMenuPo sysMenuPo) {
-        return SqlHelper.retBool(sysMenuMapper.insert(sysMenuPo));
-    }
-
-    @Override
-    public Boolean addOrUpdateMenu(SysMenuPo sysMenuPo) {
-        if(ObjectUtil.isNotNull(sysMenuPo.getId())){
+    public Boolean addOrUpdateMenu(AddOrUpdateMenuDto dto) {
+        SysMenuPo sysMenuPo = new SysMenuPo();
+        BeanUtil.copyProperties(dto, sysMenuPo);
+        if (ObjectUtil.isNotNull(sysMenuPo.getId())) {
             return SqlHelper.retBool(sysMenuMapper.updateById(sysMenuPo));
-        }else{
+        } else {
             return SqlHelper.retBool(sysMenuMapper.insert(sysMenuPo));
         }
     }
@@ -161,9 +100,9 @@ public class SysMenuServiceImpl implements SysMenuService {
         sysRoleMenuMapper.delete(lambda);
 
         LambdaQueryWrapper<SysMenuPo> wrapper = new QueryWrapper<SysMenuPo>().lambda();
-        wrapper.eq(SysMenuPo::getParentId,dto.getMenuId());
+        wrapper.eq(SysMenuPo::getParentId, dto.getMenuId());
         List<SysMenuPo> sysMenuPos = sysMenuMapper.selectList(wrapper);
-        if(sysMenuPos.size()>0){
+        if (sysMenuPos.size() > 0) {
             throw new BaseException(BaseResultEnum.SYSTEM_MENU_IS_USER);
         }
 

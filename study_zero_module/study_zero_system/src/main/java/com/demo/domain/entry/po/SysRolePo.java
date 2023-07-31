@@ -15,7 +15,7 @@ import java.util.List;
 @TableName(value = "sys_role")
 public class SysRolePo {
 
-    @TableId(value = "id",type = IdType.AUTO)
+    @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
 
     @TableField(value = "role_name")

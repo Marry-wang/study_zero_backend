@@ -1,7 +1,7 @@
 package com.demo.domain.service;
 
+import com.demo.domain.entry.dto.AddOrUpdateRoleDto;
 import com.demo.domain.entry.dto.SysRoleDto;
-import com.demo.domain.entry.po.SysRolePo;
 import com.demo.domain.entry.vo.SysRoleMenuVo;
 import org.springframework.stereotype.Service;
 
@@ -32,18 +32,18 @@ public interface SysRoleService {
     /**
      * 新增角色
      *
-     * @param sysRolePo
+     * @param dto
      * @return
      */
-    Boolean addOrUpdateRole(SysRolePo sysRolePo);
+    Boolean addOrUpdateRole(AddOrUpdateRoleDto dto);
 
     /**
      * 删除角色
      *
-     * @param sysRolePo
+     * @param dto
      * @return
      */
-    Boolean delRole(SysRolePo sysRolePo);
+    Boolean delRole(SysRoleDto dto);
 
 
 }
