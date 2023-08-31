@@ -23,6 +23,23 @@ spring:
     testOnReturn: false
     poolPreparedStatements: true
     maxOpenPreparedStatements: 20
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    password:
+    timeout: 30000
+    jedis:
+      pool:
+        #连接池最大连接数（使用负值表示没有限制）
+        max-active: 8
+        #连接池中的最大空闲连接
+        max-idle: 500
+        #连接池最大阻塞等待时间（使用负值表示没有限制）
+        max-wait: -1
+        #连接池中的最小空闲连接
+        min-idle: 0
+    lettuce:
+      shutdown-timeout: 0
 
 
 # mybatis-plus相关配置
@@ -36,4 +53,11 @@ mybatis-plus:
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 
-
+config:
+  jwt:
+    # 加密密钥
+    secret: qwer
+    # token有效时长
+    expire: 3600
+    #header 名称
+    header: accessToken

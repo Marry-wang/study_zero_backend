@@ -1,0 +1,25 @@
+package com.demo.domain.login.controller;
+
+import com.demo.api.ZeroResult;
+import com.demo.domain.login.entry.dto.LoginDto;
+import com.demo.domain.login.service.LoginService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+@RestController
+@RequestMapping(value = "/system")
+public class LoginController {
+
+    @Autowired
+    private LoginService loginService;
+
+    @PostMapping(value = "/login")
+    public ZeroResult<String> login(@RequestBody LoginDto dto) {
+        return ZeroResult.success(loginService.getLoginToken(dto));
+    }
+
+    @GetMapping(value = "/loginMessage")
+    public ZeroResult<String> loginMessage(String token) {
+        return ZeroResult.success(loginService.getLoginMessage(token));
+    }
+}
