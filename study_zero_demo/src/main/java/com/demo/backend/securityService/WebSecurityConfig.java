@@ -5,7 +5,7 @@ import com.demo.backend.dto.ResultCode;
 import com.demo.backend.dto.ResultFactory;
 import com.demo.backend.securityService.SecurityHandler.LoginSuccessHandler;
 import com.demo.config.CorssFilter;
-import com.demo.filter.SecurityTokenFilter;
+//import com.demo.filter.SecurityTokenFilter;
 import com.demo.jwt.Interceptor.TokenInterceptor;
 import com.demo.jwt.jwtconfig.JwtConfig;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -72,8 +72,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private TokenInterceptor tokenInterceptor;
 
-    @Autowired
-    private SecurityTokenFilter securityTokenFilter;
+//    @Autowired
+//    private SecurityTokenFilter securityTokenFilter;
 
     @Autowired
     private LoginSuccessHandler loginSuccessHandler;
@@ -138,10 +138,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
         ;
-        httpSecurity
-                .addFilterBefore(securityTokenFilter, UsernamePasswordAuthenticationFilter.class)
-                .addFilterBefore(corsFilter,UsernamePasswordAuthenticationFilter.class)
-        ;
+//        httpSecurity
+//                .addFilterBefore(securityTokenFilter, UsernamePasswordAuthenticationFilter.class)
+//                .addFilterBefore(corsFilter,UsernamePasswordAuthenticationFilter.class)
+//        ;
     }
 
     @Override  //访问白名单
