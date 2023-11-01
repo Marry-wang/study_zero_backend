@@ -1,5 +1,6 @@
 package com.demo.domain.login.service;
 
+import com.alibaba.fastjson.JSONObject;
 import com.demo.domain.login.entry.dto.LoginDto;
 
 public interface LoginService {
@@ -10,5 +11,5 @@ public interface LoginService {
      */
     String getLoginToken(LoginDto dto);
 
-    String getLoginMessage(String token);
+    JSONObject getLoginMessage(String token);
 }

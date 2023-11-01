@@ -1,5 +1,6 @@
 package com.demo.domain.login.controller;
 
+import com.alibaba.fastjson.JSONObject;
 import com.demo.api.ZeroResult;
 import com.demo.domain.login.entry.dto.LoginDto;
 import com.demo.domain.login.service.LoginService;
@@ -19,7 +20,7 @@ public class LoginController {
     }
 
     @GetMapping(value = "/loginMessage")
-    public ZeroResult<String> loginMessage(String token) {
+    public ZeroResult<JSONObject> loginMessage(String token) {
         return ZeroResult.success(loginService.getLoginMessage(token));
     }
 }

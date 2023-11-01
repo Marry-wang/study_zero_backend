@@ -1,5 +1,6 @@
 package com.demo.domain.login.service.impl;
 
+import com.alibaba.fastjson.JSONObject;
 import com.demo.domain.login.entry.dto.LoginDto;
 import com.demo.domain.login.service.LoginService;
 import com.demo.jwt.jwtconfig.JwtConfig;
@@ -16,14 +17,14 @@ public class LoginServiceImpl implements LoginService {
 
     @Override
     public String getLoginToken(LoginDto dto) {
-        String token = jwtConfig.createToken(dto.getUserName() + dto.getUserPass());
+        String token = jwtConfig.createToken(JSONObject.toJSONString(dto));
         CacheUtil.set(token,token);
         return token;
     }
 
     @Override
-    public String getLoginMessage(String token) {
+    public JSONObject getLoginMessage(String token) {
         String redisMessage = CacheUtil.get(token);
-        return jwtConfig.getUsernameFromToken(redisMessage).toString();
+        return JSONObject.parseObject(jwtConfig.getUsernameFromToken(redisMessage));
     }
 }
