@@ -3,8 +3,6 @@ package com.demo.domain.login.service.impl;
 import com.alibaba.fastjson.JSONObject;
 import com.demo.domain.login.entry.dto.LoginDto;
 import com.demo.domain.login.service.LoginService;
-import com.demo.enums.BaseResultEnum;
-import com.demo.exception.BaseException;
 import com.demo.jwt.jwtconfig.JwtConfig;
 import com.demo.template.CacheUtil;
 import org.springframework.beans.factory.annotation.Autowired;
