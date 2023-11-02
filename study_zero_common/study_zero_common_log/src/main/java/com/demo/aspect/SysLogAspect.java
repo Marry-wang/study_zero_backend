@@ -11,32 +11,24 @@ import org.springframework.stereotype.Component;
 @Component
 public class SysLogAspect {
 
-    @Pointcut("execution(public * com.demo.*.controller.*.*(..)) && @annotation(com.demo.annotation.SysLog)")
+    @Pointcut("@annotation(com.demo.annotation.SysLog)")
     public void addAdvice() {
     }
 
-    @Around("addAdvice()")
-    public Object around(ProceedingJoinPoint joinPoint) {
-        System.out.println("Around Begin");
-//        joinPoint.proceed();//执行到这里开始走进来的方法体（必须声明）
-        Object result = null;
-        Object[] args = joinPoint.getArgs();
-        if (args != null && args.length > 0) {
-            String deviceId = (String) args[0];
-            if (!"03".equals(deviceId)) {
-                return "no anthorization";
-            }
-        }
-        try {
-            result = joinPoint.proceed();
-        } catch (Throwable e) {
-            e.printStackTrace();
-            return ZeroResult.error(BaseResultEnum.ERROR,"系统异常，请联系管理员");
-        }
-        System.out.println("Around End");
-        return result;
+//    @Around("addAdvice()")
+//    public void around(ProceedingJoinPoint joinPoint) {
+//        System.out.println("Around Begin");
+////        joinPoint.proceed();//执行到这里开始走进来的方法体（必须声明）
+//        Object result = null;
+//        try {
+//            result = joinPoint.proceed();
+//        } catch (Throwable e) {
+//            e.printStackTrace();
+//            System.out.println(e);
+//        }
+//        System.out.println("Around End");
 
-    }
+//    }
 
     @Before("addAdvice()")
     public void before(JoinPoint joinPoint) {
@@ -44,8 +36,12 @@ public class SysLogAspect {
     }
 
     @After("addAdvice()")
-    public void after() {
-        System.out.println("方法执行完");
+    public void after(JoinPoint joinPoint) {
+
+        System.out.println("After Begin");
+//        joinPoint.proceed();//执行到这里开始走进来的方法体（必须声明）
+        //TODO 在每一个项目中进行更改，这样可以对应数据库
+        System.out.println("After End");
     }
 
 }
