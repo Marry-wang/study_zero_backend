@@ -1,10 +1,8 @@
 package com.demo.config;
 
 import com.demo.interceptor.HeaderInterceptor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
@@ -17,11 +15,11 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @Configuration
 public class WebSecurityConfig implements WebMvcConfigurer {
     @Bean
-    public HeaderInterceptor getHaHandlerInterceptor(){
-        return new HeaderInterceptor() ;
+    public HeaderInterceptor getHaHandlerInterceptor() {
+        return new HeaderInterceptor();
     }
 
-    public void addInterceptors(InterceptorRegistry registry){
+    public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(getHaHandlerInterceptor())
                 .addPathPatterns("/**");
 

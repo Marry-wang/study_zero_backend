@@ -1,7 +1,6 @@
 package com.demo.interceptor;
 
 import com.demo.template.CacheUtil;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 
@@ -17,12 +16,12 @@ public class HeaderInterceptor implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         System.out.println("进入方法之前");
         String token = request.getHeader("token");
-        if(token.isEmpty()){
-            System.out.println(request.getRequestURL()+"1111111111");
-            System.out.println(request.getServletPath()+"22222222");
+        if (token.isEmpty()) {
+            System.out.println(request.getRequestURL() + "1111111111");
+            System.out.println(request.getServletPath() + "22222222");
         }
         String cacheToken = CacheUtil.get(token);
-        if(cacheToken.isEmpty()){
+        if (cacheToken.isEmpty()) {
 
         }
 

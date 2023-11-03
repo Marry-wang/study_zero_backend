@@ -17,7 +17,7 @@ public class LoginServiceImpl implements LoginService {
     @Override
     public String getLoginToken(LoginDto dto) {
         String token = jwtConfig.createToken(JSONObject.toJSONString(dto));
-        CacheUtil.set(token,token);
+        CacheUtil.set(token, token);
         return token;
     }
 

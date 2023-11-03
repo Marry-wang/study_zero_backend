@@ -5,6 +5,9 @@ import com.alibaba.ttl.TransmittableThreadLocal;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
+/**
+ * @author wangmengwei
+ */
 public class SecurityContextHolder {
 
     private static final TransmittableThreadLocal<Map<String, Object>> THREAD_LOCAL = new TransmittableThreadLocal<>();

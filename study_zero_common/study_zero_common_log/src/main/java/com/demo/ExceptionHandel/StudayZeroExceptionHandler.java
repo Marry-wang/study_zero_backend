@@ -11,12 +11,12 @@ public class StudayZeroExceptionHandler {
     @ExceptionHandler(BaseException.class)
     public ZeroResult handleException(BaseException e) {
         System.out.printf(e.toString());
-        return ZeroResult.fail(e.getErrorCode(),e.getMessage());
+        return ZeroResult.fail(e.getErrorCode(), e.getMessage());
     }
 
     @ExceptionHandler(Exception.class)
     public ZeroResult handleException(Exception e) {
         System.out.printf(e.toString());
-        return ZeroResult.fail(5001,e.getMessage());
+        return ZeroResult.fail(5001, e.getMessage());
     }
 }

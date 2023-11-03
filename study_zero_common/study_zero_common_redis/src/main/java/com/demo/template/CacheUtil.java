@@ -23,7 +23,6 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * Redis缓存工具类
- *
  */
 @SuppressWarnings("unused")
 @RequiredArgsConstructor
@@ -116,10 +115,11 @@ public class CacheUtil {
     }
 
     /**
-    *  key存储的值递增 key不存在 值初始化为0
-    * @Param:
-    * @return:
-    */
+     * key存储的值递增 key不存在 值初始化为0
+     *
+     * @Param:
+     * @return:
+     */
     public static void increment(String key) {
         checkStrTemplate();
         stringRedisTemplate.opsForValue().increment(key);
@@ -207,7 +207,7 @@ public class CacheUtil {
      * @param value 值
      */
     public static void set(String key, String value) {
-        setHour(key, value, 24 * 7);
+        setHour(key, value, 24 * 1);
     }
 
     /**
@@ -462,6 +462,7 @@ public class CacheUtil {
 
     /**
      * 获取剩余生效时间
+     *
      * @param key
      * @return
      */

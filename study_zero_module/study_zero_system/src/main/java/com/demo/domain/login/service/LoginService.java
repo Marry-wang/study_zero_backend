@@ -6,6 +6,7 @@ import com.demo.domain.login.entry.dto.LoginDto;
 public interface LoginService {
     /**
      * 获取登录的token
+     *
      * @param dto
      * @return
      */

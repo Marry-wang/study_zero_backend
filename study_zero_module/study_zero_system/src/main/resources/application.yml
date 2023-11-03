@@ -58,6 +58,6 @@ config:
     # 加密密钥
     secret: qwer
     # token有效时长
-    expire: 3600
+    expire: 30
     #header 名称
     header: accessToken

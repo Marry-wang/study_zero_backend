@@ -1,9 +1,6 @@
 package com.demo.aspect;
 
-import com.demo.api.ZeroResult;
-import com.demo.enums.BaseResultEnum;
 import org.aspectj.lang.JoinPoint;
-import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.*;
 import org.springframework.stereotype.Component;
 

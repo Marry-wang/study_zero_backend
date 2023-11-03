@@ -31,9 +31,6 @@ public class RedisConfig {
     }
 
 
-
-
-
 //    @Value("${spring.redis.cluster.nodes}")
 //    private String clusterNodes;
 //    @Value("${spring.redis.cluster.max-redirects}")
@@ -144,11 +141,6 @@ public class RedisConfig {
 //        redisTemplate.setEnableTransactionSupport(false);
 //        redisTemplate.setConnectionFactory(jedisConnectionFactory());
 //    }
-
-
-
-
-
 
 
 //    @Autowired
