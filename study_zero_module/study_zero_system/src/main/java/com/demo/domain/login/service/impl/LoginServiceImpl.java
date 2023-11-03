@@ -1,9 +1,9 @@
 package com.demo.domain.login.service.impl;
 
 import com.alibaba.fastjson.JSONObject;
+import com.demo.config.JwtConfig;
 import com.demo.domain.login.entry.dto.LoginDto;
 import com.demo.domain.login.service.LoginService;
-import com.demo.jwt.jwtconfig.JwtConfig;
 import com.demo.template.CacheUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

@@ -26,7 +26,6 @@
 
   <modules>
     <module>study_zero_common_es</module>
-    <module>study_zero_common_jwt</module>
     <module>study_zero_common_mail</module>
     <module>study_zero_common_mybatis</module>
     <module>study_zero_common_nacos</module>
