@@ -21,6 +21,9 @@ public enum BaseResultEnum {
      */
     FAIL(900, "fail"),
 
+    TOKENERROR(1000, "token已失效，请重新登录！"),
+    TOKENNOTUSER(1001, "请求体未携带token!"),
+
     /**
      * system
      */

@@ -1,5 +1,7 @@
 package com.demo.Interceptor;
 
+import com.demo.enums.BaseResultEnum;
+import com.demo.exception.BaseException;
 import com.demo.template.CacheUtil;
 import io.netty.util.internal.StringUtil;
 import org.springframework.stereotype.Component;
@@ -18,12 +20,18 @@ public class HeaderInterceptor implements HandlerInterceptor {
         System.out.println("进入方法之前");
         String token = request.getHeader("token");
         if (StringUtil.isNullOrEmpty(token)) {
+            //TODO 做一个白名单处理
             System.out.println(request.getRequestURL() + "全路径 http://127.0.0.1:10002/system/login");
             System.out.println(request.getServletPath() + "请求路径/system/login");
-        }else{
+            if ("/system/login".equals(request.getServletPath())) {
+                return true;
+            } else {
+                throw new BaseException(BaseResultEnum.TOKENNOTUSER);
+            }
+        } else {
             String cacheToken = CacheUtil.get(token);
             if (cacheToken.isEmpty()) {
-
+                throw new BaseException(BaseResultEnum.TOKENERROR);
             }
         }
 

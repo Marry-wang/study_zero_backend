@@ -13,10 +13,4 @@ public class StudayZeroExceptionHandler {
         System.out.printf(e.toString());
         return ZeroResult.fail(e.getErrorCode(), e.getMessage());
     }
-
-    @ExceptionHandler(Exception.class)
-    public ZeroResult handleException(Exception e) {
-        System.out.printf(e.toString());
-        return ZeroResult.fail(5001, e.getMessage());
-    }
 }
