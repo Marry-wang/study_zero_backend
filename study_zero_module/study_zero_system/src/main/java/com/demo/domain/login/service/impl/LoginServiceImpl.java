@@ -8,6 +8,8 @@ import com.demo.template.CacheUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.concurrent.TimeUnit;
+
 @Service
 public class LoginServiceImpl implements LoginService {
 
@@ -17,7 +19,7 @@ public class LoginServiceImpl implements LoginService {
     @Override
     public String getLoginToken(LoginDto dto) {
         String token = jwtConfig.createToken(JSONObject.toJSONString(dto));
-        CacheUtil.set(token, token);
+        CacheUtil.set(token, token, TimeUnit.SECONDS);
         return token;
     }
 
