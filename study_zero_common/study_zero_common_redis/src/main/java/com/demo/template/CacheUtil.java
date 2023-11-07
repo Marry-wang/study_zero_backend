@@ -45,7 +45,7 @@ public class CacheUtil {
     public void init() {
         stringRedisTemplate = beanStringRedisTemplate;
         redisTemplate = beanRedisTemplate;
-        redisProperties =properties;
+        redisProperties = properties;
     }
 
     /**
@@ -186,9 +186,9 @@ public class CacheUtil {
     /**
      * string方式设置缓存
      *
-     * @param key        键
-     * @param value      值
-     * @param timeUnit   过期时间的单位
+     * @param key      键
+     * @param value    值
+     * @param timeUnit 过期时间的单位
      */
     public static boolean set(final String key, String value, TimeUnit timeUnit) {
         checkStrTemplate();
@@ -211,7 +211,7 @@ public class CacheUtil {
      * @param value 值
      */
     public static void set(String key, String value) {
-        setHour(key, value, 24*7);
+        setHour(key, value, 24 * 7);
     }
 
     /**
