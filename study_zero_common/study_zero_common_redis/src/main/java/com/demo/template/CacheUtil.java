@@ -2,6 +2,7 @@ package com.demo.template;
 
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.TypeReference;
+import com.demo.properties.RedisProperties;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.redis.connection.DataType;
@@ -30,6 +31,9 @@ import java.util.concurrent.TimeUnit;
 @Slf4j
 public class CacheUtil {
 
+    private static RedisProperties redisProperties;
+    private final RedisProperties properties;
+
     private static StringRedisTemplate stringRedisTemplate;
 
     private final StringRedisTemplate beanStringRedisTemplate;
@@ -41,6 +45,7 @@ public class CacheUtil {
     public void init() {
         stringRedisTemplate = beanStringRedisTemplate;
         redisTemplate = beanRedisTemplate;
+        redisProperties =properties;
     }
 
     /**
@@ -207,7 +212,7 @@ public class CacheUtil {
      * @param value 值
      */
     public static void set(String key, String value) {
-        setHour(key, value, 24 * 1);
+        setHour(key, value, redisProperties.getTimeout());
     }
 
     /**

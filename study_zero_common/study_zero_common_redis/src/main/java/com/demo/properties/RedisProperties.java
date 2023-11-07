@@ -39,10 +39,10 @@ import org.springframework.core.annotation.Order;
 @Order(-1)
 public class RedisProperties {
 
-    private String host;
+    public String host;
 
-    private String password;
+    public String password;
 
-    private Integer timeout;
+    public Integer timeout;
 
 }

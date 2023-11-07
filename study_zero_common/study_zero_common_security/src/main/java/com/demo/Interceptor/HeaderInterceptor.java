@@ -23,14 +23,14 @@ public class HeaderInterceptor implements HandlerInterceptor {
             //TODO 做一个白名单处理
             System.out.println(request.getRequestURL() + "全路径 http://127.0.0.1:10002/system/login");
             System.out.println(request.getServletPath() + "请求路径/system/login");
-            if ("/system/login".equals(request.getServletPath())) {
+            if ("/system/login".equals(request.getServletPath()) || "/error".equals(request.getServletPath())) {
                 return true;
             } else {
                 throw new BaseException(BaseResultEnum.TOKENNOTUSER);
             }
         } else {
             String cacheToken = CacheUtil.get(token);
-            if (cacheToken.isEmpty()) {
+            if (StringUtil.isNullOrEmpty(cacheToken)) {
                 throw new BaseException(BaseResultEnum.TOKENERROR);
             }
         }
