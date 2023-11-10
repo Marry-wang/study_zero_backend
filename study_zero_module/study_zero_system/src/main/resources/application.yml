@@ -52,7 +52,6 @@ mybatis-plus:
   # mybatis-plus相关配置
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
-
 config:
   jwt:
     # 加密密钥
@@ -61,3 +60,6 @@ config:
     expire: 300
     #header 名称
     header: accessToken
+logging:
+  level:
+    com.demo: debug
