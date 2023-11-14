@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.TypeReference;
 import com.demo.properties.RedisProperties;
 import lombok.RequiredArgsConstructor;
+import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.redis.connection.DataType;
 import org.springframework.data.redis.connection.RedisConnection;
@@ -51,9 +52,11 @@ public class CacheUtil {
     /**
      * 校验字符串方式的redis操作类是否异常
      */
+    @SneakyThrows
     private static void checkStrTemplate() {
         if (null == stringRedisTemplate) {
             log.error("缓存类初始化失败，请检查");
+            throw new RuntimeException("缓存类初始化失败，请检查");
         }
     }
 
