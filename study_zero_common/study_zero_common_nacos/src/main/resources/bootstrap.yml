@@ -6,6 +6,7 @@ spring:
     #激活的配置
   profiles:
     active: dev
+
   cloud:
     nacos:
       #配置中心配置
