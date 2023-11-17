@@ -23,12 +23,12 @@ spring:
         # 区分不同应⽤：同⼀个环境内，不同应⽤的配置，通过group来区分。
         group: DEFAULT_GROUP
         # 配置文件的格式：指定yaml格式，配置 默认properties
-        file-extension: yaml
+        file-extension: yml
         # 自动刷新配置文件,默认true
-        refresh-enabled: true
-        # Nacos 认证用户
-        username: nacos
-        # Nacos 认证密码
-        password: nacos
+#        refresh-enabled: true
+#        # Nacos 认证用户
+#        username: nacos
+#        # Nacos 认证密码
+#        password: nacos
         # 配置文件prefix
         prefix: study-zero-system
