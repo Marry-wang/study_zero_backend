@@ -1,0 +1,34 @@
+server:
+  port: 9999
+
+spring:
+  application:
+    name: study-zero-gateway
+  cloud:
+    nacos:
+      discovery:
+        # Nacos服务注册中心地址
+        server-addr: 127.0.0.1:8848
+        # 分组，不同分组之间不能调用，用于微服务之间的隔离
+        group: DEFAULT_GROUP
+        # 生产环境
+        namespace:
+      config:
+        # 是否开启配置中心 默认true
+        enabled: true
+        # 指定Nacos配置中心的地址
+        server-addr: 127.0.0.1:8848
+        # 区分环境：开发环境、测试环境、预发布环境、⽣产环境
+        namespace:
+        # 区分不同应⽤：同⼀个环境内，不同应⽤的配置，通过group来区分。
+        group: DEFAULT_GROUP
+        # 配置文件的格式：指定yaml格式，配置 默认properties
+        file-extension: yml
+        # 自动刷新配置文件,默认true
+        #        refresh-enabled: true
+        #        # Nacos 认证用户
+        #        username: nacos
+        #        # Nacos 认证密码
+        #        password: nacos
+        # 配置文件prefix
+        prefix: study-zero-gateway
