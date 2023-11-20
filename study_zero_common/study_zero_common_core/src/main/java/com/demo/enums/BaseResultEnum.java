@@ -25,6 +25,11 @@ public enum BaseResultEnum {
     TOKENNOTUSER(1001, "请求体未携带token!"),
 
     /**
+     * user
+     */
+    USERNOTEXIT(2001,"用户不存在！"),
+
+    /**
      * system
      */
     SYSTEM_ROLE_IS_USER(4001,"此权限正在使用中"),
