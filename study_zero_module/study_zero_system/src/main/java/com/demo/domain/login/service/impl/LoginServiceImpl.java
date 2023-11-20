@@ -26,6 +26,7 @@ public class LoginServiceImpl implements LoginService {
     @Override
     public JSONObject getLoginMessage(String token) {
         String redisMessage = CacheUtil.get(token);
-        return JSONObject.parseObject(jwtConfig.getUsernameFromToken(redisMessage));
+        String message = jwtConfig.getUsernameFromToken(redisMessage);
+        return JSONObject.parseObject(message);
     }
 }
