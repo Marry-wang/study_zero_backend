@@ -1,10 +1,12 @@
 package com.demo.domain.system.service.impl;
 
 import cn.hutool.core.bean.BeanUtil;
+import cn.hutool.core.collection.CollectionUtil;
 import cn.hutool.core.util.ObjectUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.sql.SqlHelper;
+import com.demo.context.SecurityContextHolder;
 import com.demo.domain.system.entry.dto.AddOrUpdateMenuDto;
 import com.demo.domain.system.entry.dto.SysMenuDto;
 import com.demo.domain.system.entry.po.SysMenuPo;
@@ -22,6 +24,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 /**
  * @Author: 王孟伟
@@ -37,12 +40,37 @@ public class SysMenuServiceImpl implements SysMenuService {
     @Autowired
     private SysRoleMenuMapper sysRoleMenuMapper;
 
+    @Autowired
+    private SysUserServiceImpl userService;
+
     @Override
     public List<SysMenuVo> queryMenuList() {
-        LambdaQueryWrapper<SysMenuPo> sysMenuPoLambdaQueryWrapper = new LambdaQueryWrapper<>();
-        List<SysMenuPo> sysMenuPos = sysMenuMapper.selectList(sysMenuPoLambdaQueryWrapper);
 
+        List<SysMenuPo> sysMenuPos = new ArrayList<>();
         ArrayList<SysMenuVo> menuParentList = new ArrayList<>();
+
+        String userId = SecurityContextHolder.get("id");
+        List<Integer> roleIds = userService.selectUserRole(Integer.parseInt(userId));
+
+        if(CollectionUtil.isEmpty(roleIds)){
+            return menuParentList;
+        }
+        List<SysRoleMenuPo> sysRoleMenuPos = sysRoleMenuMapper.selectList(new QueryWrapper<SysRoleMenuPo>().lambda()
+                .in(SysRoleMenuPo::getRoleId, roleIds));
+
+        List<Integer> menuIds = new ArrayList<>();
+        if(CollectionUtil.isNotEmpty(sysRoleMenuPos)){
+            menuIds = sysRoleMenuPos.stream().map(SysRoleMenuPo::getMenuId).collect(Collectors.toList());
+        }else{
+            return menuParentList;
+        }
+
+
+        LambdaQueryWrapper<SysMenuPo> sysMenuPoLambdaQueryWrapper = new LambdaQueryWrapper<>();
+        sysMenuPoLambdaQueryWrapper.in(SysMenuPo::getId,menuIds);
+        sysMenuPos = sysMenuMapper.selectList(sysMenuPoLambdaQueryWrapper);
+
+
         for (SysMenuPo sysMenuPo : sysMenuPos) {
             if (Objects.isNull(sysMenuPo.getParentId())) {
                 SysMenuVo sysMenuVo = new SysMenuVo();

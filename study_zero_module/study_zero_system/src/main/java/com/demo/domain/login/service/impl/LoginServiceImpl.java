@@ -35,7 +35,7 @@ public class LoginServiceImpl implements LoginService {
             throw new BaseException(BaseResultEnum.USERNOTEXIT);
         }
 
-        String token = jwtConfig.createToken(JSONObject.toJSONString(dto));
+        String token = jwtConfig.createToken(JSONObject.toJSONString(sysUserPo));
         CacheUtil.set(token, token, TimeUnit.SECONDS);
         return token;
     }
