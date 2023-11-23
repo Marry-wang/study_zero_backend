@@ -12,5 +12,5 @@ public interface LoginService {
      */
     String getLoginToken(LoginDto dto);
 
-    JSONObject getLoginMessage(String token);
+    Object getLoginMessage(String token);
 }

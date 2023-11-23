@@ -22,7 +22,7 @@ public class LoginController {
 
     @SysLog
     @GetMapping(value = "/loginMessage")
-    public ZeroResult<JSONObject> loginMessage(@RequestParam(value = "token")String token) {
+    public ZeroResult<Object> loginMessage(@RequestParam(value = "token")String token) {
         return ZeroResult.success(loginService.getLoginMessage(token));
     }
 }

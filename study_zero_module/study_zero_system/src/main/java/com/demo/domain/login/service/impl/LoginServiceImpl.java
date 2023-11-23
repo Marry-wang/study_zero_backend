@@ -4,6 +4,7 @@ import cn.hutool.core.util.ObjectUtil;
 import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.demo.config.JwtConfig;
+import com.demo.context.SecurityContextHolder;
 import com.demo.domain.login.entry.dto.LoginDto;
 import com.demo.domain.login.service.LoginService;
 import com.demo.domain.system.entry.po.SysUserPo;
@@ -40,9 +41,7 @@ public class LoginServiceImpl implements LoginService {
     }
 
     @Override
-    public JSONObject getLoginMessage(String token) {
-        String redisMessage = CacheUtil.get(token);
-        String message = jwtConfig.getUsernameFromToken(redisMessage);
-        return JSONObject.parseObject(message);
+    public Object getLoginMessage(String token) {
+        return SecurityContextHolder.getLocalMap();
     }
 }
