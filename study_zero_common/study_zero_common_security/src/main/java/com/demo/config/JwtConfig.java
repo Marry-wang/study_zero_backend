@@ -28,13 +28,26 @@ public class JwtConfig {
      * @ConstructorProperties
      */
 //    @Value("${config.jwt.secret}")
-    private String secret;
+    private static String secret;
 
     //    @Value("${config.jwt.expire}")
-    private long expire;
+    private static long expire;
 
     //    @Value("${config.jwt.header}")
-    private String header;
+    private static String header;
+
+
+    public void setSecret(String secret){
+        JwtConfig.secret = secret;
+    }
+
+    public void setExpire(Long expire){
+        JwtConfig.expire = expire;
+    }
+
+    public void setHeader(String header){
+        JwtConfig.header = header;
+    }
 
     /**
      * 生成Token
@@ -42,7 +55,7 @@ public class JwtConfig {
      * @param subject
      * @return
      */
-    public String createToken(String subject) {
+    public static String createToken(String subject) {
         Date nowDate = new Date();
         Date expireDate = new Date(nowDate.getTime() + expire * 1000);
 
@@ -61,7 +74,7 @@ public class JwtConfig {
      * @param token
      * @return
      */
-    public Claims getTokenClaim(String token) {
+    public static Claims getTokenClaim(String token) {
         try {
             return Jwts.parser().setSigningKey(secret).parseClaimsJws(token).getBody();
         } catch (Exception e) {
@@ -75,7 +88,7 @@ public class JwtConfig {
      * @param expirationTime
      * @return
      */
-    public boolean isTokenExpired(Date expirationTime) {
+    public static boolean isTokenExpired(Date expirationTime) {
         return expirationTime.before(new Date());
     }
 
@@ -85,7 +98,7 @@ public class JwtConfig {
      * @param token
      * @return
      */
-    public Date getExpirationDateFromToken(String token) {
+    public static Date getExpirationDateFromToken(String token) {
         return getTokenClaim(token).getExpiration();
     }
 
@@ -95,7 +108,7 @@ public class JwtConfig {
      * @param token
      * @return
      */
-    public String getUsernameFromToken(String token) {
+    public static String getUsernameFromToken(String token) {
         return getTokenClaim(token).getSubject();
     }
 
@@ -105,7 +118,7 @@ public class JwtConfig {
      * @param token
      * @return
      */
-    public Date getIssuedAtDateFromToken(String token) {
+    public static Date getIssuedAtDateFromToken(String token) {
         return getTokenClaim(token).getIssuedAt();
     }
 

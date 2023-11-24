@@ -21,9 +21,6 @@ import java.util.concurrent.TimeUnit;
 public class LoginServiceImpl implements LoginService {
 
     @Autowired
-    private JwtConfig jwtConfig;
-
-    @Autowired
     private SysUserMapper sysUserMapper;
 
     @Override
@@ -35,7 +32,7 @@ public class LoginServiceImpl implements LoginService {
             throw new BaseException(BaseResultEnum.USERNOTEXIT);
         }
 
-        String token = jwtConfig.createToken(JSONObject.toJSONString(sysUserPo));
+        String token = JwtConfig.createToken(JSONObject.toJSONString(sysUserPo));
         CacheUtil.set(token, token, TimeUnit.SECONDS);
         return token;
     }

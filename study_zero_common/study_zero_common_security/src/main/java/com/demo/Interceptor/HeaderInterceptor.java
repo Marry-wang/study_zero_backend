@@ -7,7 +7,6 @@ import com.demo.enums.BaseResultEnum;
 import com.demo.exception.BaseException;
 import com.demo.template.CacheUtil;
 import io.netty.util.internal.StringUtil;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 
@@ -20,8 +19,6 @@ import javax.servlet.http.HttpServletResponse;
 @Component
 public class HeaderInterceptor implements HandlerInterceptor {
 
-    @Autowired
-    private JwtConfig jwtConfig;
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         System.out.println("进入方法之前");
@@ -41,7 +38,7 @@ public class HeaderInterceptor implements HandlerInterceptor {
                 throw new BaseException(BaseResultEnum.TOKENERROR);
             }
 
-            String message = jwtConfig.getUsernameFromToken(cacheToken);
+            String message = JwtConfig.getUsernameFromToken(cacheToken);
             SecurityContextHolder.setLocalMap(JSONObject.parseObject(message));
         }
 
