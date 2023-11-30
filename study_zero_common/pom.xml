@@ -37,6 +37,7 @@
     <module>study_zero_common_core</module>
     <module>study_zero_common_redis</module>
     <module>study_zero_common_log</module>
+    <module>study_zero_common_file</module>
   </modules>
 
   <dependencies>
