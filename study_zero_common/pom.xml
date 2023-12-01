@@ -25,15 +25,10 @@
   </properties>
 
   <modules>
-    <module>study_zero_common_es</module>
     <module>study_zero_common_mail</module>
-    <module>study_zero_common_mybatis</module>
     <module>study_zero_common_nacos</module>
     <module>study_zero_common_rocketmq</module>
     <module>study_zero_common_security</module>
-    <module>study_zero_common_shardingSphere</module>
-    <module>study_zero_common_task</module>
-    <module>study_zero_common_task_quartz_web</module>
     <module>study_zero_common_core</module>
     <module>study_zero_common_redis</module>
     <module>study_zero_common_log</module>
