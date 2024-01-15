@@ -14,7 +14,6 @@
   <packaging>pom</packaging>
   <version>1.0-SNAPSHOT</version>
   <modules>
-    <module>study_zero_demo</module>
     <module>study_zero_common</module>
     <module>study_zero_module</module>
     <module>study_zero_api</module>
