@@ -10,6 +10,7 @@
     </parent>
 
     <artifactId>study_zero_common_redis</artifactId>
+    <packaging>jar</packaging>
     <dependencies>
         <dependency>
             <groupId>redis.clients</groupId>

@@ -10,6 +10,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>study_zero_common_core</artifactId>
+    <packaging>jar</packaging>
 
     <name>study_zero_common_core</name>
     <!-- FIXME change it to the project's website -->
