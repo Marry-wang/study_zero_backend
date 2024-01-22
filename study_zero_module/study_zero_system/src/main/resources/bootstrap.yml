@@ -8,18 +8,18 @@ spring:
     nacos:
       discovery:
         # Nacos服务注册中心地址
-        server-addr: 127.0.0.1:8848
+        server-addr: 120.46.57.252:8848
         # 分组，不同分组之间不能调用，用于微服务之间的隔离
         group: DEFAULT_GROUP
         # 生产环境
-        namespace:
+        namespace: prod
       config:
         # 是否开启配置中心 默认true
         enabled: true
         # 指定Nacos配置中心的地址
-        server-addr: 127.0.0.1:8848
+        server-addr: 120.46.57.252:8848
         # 区分环境：开发环境、测试环境、预发布环境、⽣产环境
-        namespace:
+        namespace: prod
         # 区分不同应⽤：同⼀个环境内，不同应⽤的配置，通过group来区分。
         group: DEFAULT_GROUP
         # 配置文件的格式：指定yaml格式，配置 默认properties
