@@ -32,8 +32,13 @@ public class SystemController {
     @Autowired
     private SysRoleService sysRoleService;
 
-    @PostMapping(value = "/getMenu")
+    @PostMapping(value = "/getRoleMenus")
     public ZeroResult<List<SysMenuVo>> menuList() {
+        return ZeroResult.success(sysMenuService.queryRoleMenuList());
+    }
+
+    @PostMapping(value = "/getMenus")
+    public ZeroResult<List<SysMenuVo>> getRoleMenus() {
         return ZeroResult.success(sysMenuService.queryMenuList());
     }
 

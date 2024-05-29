@@ -44,7 +44,7 @@ public class SysMenuServiceImpl implements SysMenuService {
     private SysUserServiceImpl userService;
 
     @Override
-    public List<SysMenuVo> queryMenuList() {
+    public List<SysMenuVo> queryRoleMenuList() {
 
         List<SysMenuPo> sysMenuPos = new ArrayList<>();
         ArrayList<SysMenuVo> menuParentList = new ArrayList<>();
@@ -70,6 +70,28 @@ public class SysMenuServiceImpl implements SysMenuService {
         sysMenuPoLambdaQueryWrapper.in(SysMenuPo::getId,menuIds);
         sysMenuPos = sysMenuMapper.selectList(sysMenuPoLambdaQueryWrapper);
 
+
+        for (SysMenuPo sysMenuPo : sysMenuPos) {
+            if (Objects.isNull(sysMenuPo.getParentId())) {
+                SysMenuVo sysMenuVo = new SysMenuVo();
+                sysMenuVo.setId(sysMenuPo.getId());
+                sysMenuVo.setMenuName(sysMenuPo.getMenuName());
+                sysMenuVo.setPath(sysMenuPo.getPath());
+                sysMenuVo.setIcon(sysMenuPo.getIcon());
+                sysMenuVo.setChildren(sysMenuPo.getChildren());
+                menuParentList.add(sysMenuVo);
+            }
+        }
+        getMeuTree(menuParentList, sysMenuPos);
+        return menuParentList;
+    }
+
+    @Override
+    public List<SysMenuVo> queryMenuList() {
+
+        ArrayList<SysMenuVo> menuParentList = new ArrayList<>();
+
+        List<SysMenuPo> sysMenuPos = sysMenuMapper.selectList(new LambdaQueryWrapper<>());
 
         for (SysMenuPo sysMenuPo : sysMenuPos) {
             if (Objects.isNull(sysMenuPo.getParentId())) {

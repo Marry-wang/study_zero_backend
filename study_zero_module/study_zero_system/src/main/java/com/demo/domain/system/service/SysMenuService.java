@@ -16,6 +16,13 @@ import java.util.List;
 public interface SysMenuService {
 
     /**
+     * 查询角色菜单列表
+     *
+     * @return
+     */
+    List<SysMenuVo> queryRoleMenuList();
+
+    /**
      * 查询菜单列表
      *
      * @return
