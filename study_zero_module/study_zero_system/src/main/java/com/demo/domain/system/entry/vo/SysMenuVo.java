@@ -30,6 +30,16 @@ public class SysMenuVo {
     private String icon;
 
     /**
+     * 跳转路径
+     */
+    private String redirect;
+
+    /**
+     * 对应的路径位置
+     */
+    private String component;
+
+    /**
      * 子级
      */
     private List<?> children;

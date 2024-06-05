@@ -30,6 +30,12 @@ public class SysMenuPo {
     @TableField(value = "menu_icon")
     private String icon;
 
+    @TableField(value = "menu_redirect")
+    private String redirect;
+
+    @TableField(value = "menu_component")
+    private String component;
+
     @TableField(value = "create_time")
     private Date createTime;
 

@@ -79,6 +79,8 @@ public class SysMenuServiceImpl implements SysMenuService {
                 sysMenuVo.setPath(sysMenuPo.getPath());
                 sysMenuVo.setIcon(sysMenuPo.getIcon());
                 sysMenuVo.setChildren(sysMenuPo.getChildren());
+                sysMenuVo.setComponent(sysMenuPo.getComponent());
+                sysMenuVo.setRedirect(sysMenuPo.getRedirect());
                 menuParentList.add(sysMenuVo);
             }
         }
@@ -119,6 +121,8 @@ public class SysMenuServiceImpl implements SysMenuService {
                     sysMenuVo1.setPath(sysMenuPo1.getPath());
                     sysMenuVo1.setIcon(sysMenuPo1.getIcon());
                     sysMenuVo1.setChildren(sysMenuPo1.getChildren());
+                    sysMenuVo1.setRedirect(sysMenuPo1.getRedirect());
+                    sysMenuVo1.setComponent(sysMenuPo1.getComponent());
                     chridrenMenuList.add(sysMenuVo1);
                 }
             }
