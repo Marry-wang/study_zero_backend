@@ -38,7 +38,14 @@ public class LoginServiceImpl implements LoginService {
     }
 
     @Override
-    public Object getLoginMessage(String token) {
+    public Object getLoginMessage() {
         return SecurityContextHolder.getLocalMap();
+    }
+
+    @Override
+    public Boolean loginOut() {
+        String token = SecurityContextHolder.get("token");
+        CacheUtil.del(token);
+        return true;
     }
 }

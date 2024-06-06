@@ -22,7 +22,12 @@ public class LoginController {
 
     @SysLog
     @GetMapping(value = "/loginMessage")
-    public ZeroResult<Object> loginMessage(@RequestParam(value = "token")String token) {
-        return ZeroResult.success(loginService.getLoginMessage(token));
+    public ZeroResult<Object> loginMessage() {
+        return ZeroResult.success(loginService.getLoginMessage());
+    }
+
+    @GetMapping(value = "/loginOut")
+    public ZeroResult<Object> loginOut() {
+        return ZeroResult.success(loginService.loginOut());
     }
 }

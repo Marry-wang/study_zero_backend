@@ -40,6 +40,7 @@ public class HeaderInterceptor implements HandlerInterceptor {
 
             String message = JwtConfig.getUsernameFromToken(cacheToken);
             SecurityContextHolder.setLocalMap(JSONObject.parseObject(message));
+            SecurityContextHolder.set("token",token);
         }
 
 

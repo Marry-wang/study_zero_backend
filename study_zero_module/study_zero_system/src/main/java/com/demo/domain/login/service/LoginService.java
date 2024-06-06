@@ -12,5 +12,7 @@ public interface LoginService {
      */
     String getLoginToken(LoginDto dto);
 
-    Object getLoginMessage(String token);
+    Object getLoginMessage();
+
+    Boolean loginOut();
 }
