@@ -14,7 +14,7 @@ public class BookDto {
     /**
      * bookId
      */
-    private Integer BookId;
+    private Integer bookId;
 
     /**
      * bookTypeId

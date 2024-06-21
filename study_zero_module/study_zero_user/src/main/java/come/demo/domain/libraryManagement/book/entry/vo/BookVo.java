@@ -22,6 +22,11 @@ public class BookVo {
     private Integer bookTypeId;
 
     /**
+     * bookTypeName
+     */
+    private String bookTypeName;
+
+    /**
      * 图书名称
      */
     private String bookName;

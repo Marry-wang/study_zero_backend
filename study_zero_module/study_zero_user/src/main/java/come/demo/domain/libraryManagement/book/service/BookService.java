@@ -139,6 +139,8 @@ public class BookService {
 
                 List<BookTypePo> bookTypePos = bookTypeMapper.selectList(new QueryWrapper<BookTypePo>().lambda().eq(BookTypePo::getBookId, bookPo.getId()));
                 bookVo.setBookTypeId(bookTypePos.get(0).getBookTypeId());
+                BookTypeSummaryPo bookTypeSummaryPo = bookTypeSummaryMapper.selectById(bookTypePos.get(0).getBookTypeId());
+                bookVo.setBookTypeName(bookTypeSummaryPo.getBookTypeName());
                 bookVo.setBookId(bookPo.getId());
                 bookVoList.add(bookVo);
             }
