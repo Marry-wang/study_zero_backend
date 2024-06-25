@@ -1,4 +1,4 @@
-package come.demo.domain.libraryManagement.book.entry.vo;
+package com.demo.domain.libraryManagement.book.entry.dto;
 
 import lombok.Data;
 
@@ -10,7 +10,7 @@ import java.util.Date;
  * @TableName book
  */
 @Data
-public class BookVo {
+public class BookDto {
     /**
      * bookId
      */
@@ -20,11 +20,6 @@ public class BookVo {
      * bookTypeId
      */
     private Integer bookTypeId;
-
-    /**
-     * bookTypeName
-     */
-    private String bookTypeName;
 
     /**
      * 图书名称

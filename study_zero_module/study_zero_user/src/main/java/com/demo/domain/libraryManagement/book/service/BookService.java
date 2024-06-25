@@ -1,4 +1,4 @@
-package come.demo.domain.libraryManagement.book.service;
+package com.demo.domain.libraryManagement.book.service;
 
 import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.collection.CollectionUtil;
@@ -6,16 +6,16 @@ import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.sql.SqlHelper;
-import come.demo.domain.libraryManagement.book.entry.dto.BookDto;
-import come.demo.domain.libraryManagement.book.entry.dto.BookTypeSummaryDto;
-import come.demo.domain.libraryManagement.book.entry.po.BookPo;
-import come.demo.domain.libraryManagement.book.entry.po.BookTypePo;
-import come.demo.domain.libraryManagement.book.entry.po.BookTypeSummaryPo;
-import come.demo.domain.libraryManagement.book.entry.vo.BookTypeSummaryVo;
-import come.demo.domain.libraryManagement.book.entry.vo.BookVo;
-import come.demo.domain.libraryManagement.book.mapper.BookMapper;
-import come.demo.domain.libraryManagement.book.mapper.BookTypeMapper;
-import come.demo.domain.libraryManagement.book.mapper.BookTypeSummaryMapper;
+import com.demo.domain.libraryManagement.book.entry.dto.BookDto;
+import com.demo.domain.libraryManagement.book.entry.dto.BookTypeSummaryDto;
+import com.demo.domain.libraryManagement.book.entry.po.BookPo;
+import com.demo.domain.libraryManagement.book.entry.po.BookTypePo;
+import com.demo.domain.libraryManagement.book.entry.po.BookTypeSummaryPo;
+import com.demo.domain.libraryManagement.book.entry.vo.BookTypeSummaryVo;
+import com.demo.domain.libraryManagement.book.entry.vo.BookVo;
+import com.demo.domain.libraryManagement.book.mapper.BookMapper;
+import com.demo.domain.libraryManagement.book.mapper.BookTypeMapper;
+import com.demo.domain.libraryManagement.book.mapper.BookTypeSummaryMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

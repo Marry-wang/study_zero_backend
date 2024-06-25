@@ -1,4 +1,4 @@
-package come.demo.domain.libraryManagement.book.entry.po;
+package com.demo.domain.libraryManagement.book.entry.po;
 
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;

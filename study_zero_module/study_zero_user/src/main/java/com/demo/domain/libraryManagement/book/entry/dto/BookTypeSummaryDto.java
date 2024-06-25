@@ -1,4 +1,4 @@
-package come.demo.domain.libraryManagement.book.entry.dto;
+package com.demo.domain.libraryManagement.book.entry.dto;
 
 import lombok.Data;
 

@@ -1,7 +1,7 @@
-package come.demo.domain.libraryManagement.book.mapper;
+package com.demo.domain.libraryManagement.book.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import come.demo.domain.libraryManagement.book.entry.po.BookTypeSummaryPo;
+import com.demo.domain.libraryManagement.book.entry.po.BookTypeSummaryPo;
 import org.apache.ibatis.annotations.Mapper;
 
 /**
