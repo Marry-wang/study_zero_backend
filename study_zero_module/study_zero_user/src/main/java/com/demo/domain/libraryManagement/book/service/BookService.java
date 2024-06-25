@@ -78,10 +78,10 @@ public class BookService {
         }
         List<BookTypeSummaryPo> bookTypeSummaryPos = bookTypeSummaryMapper.selectList(wrapper);
         List<BookTypeSummaryVo> bookTypeSummaryVos = new ArrayList<>();
-        if(CollectionUtil.isNotEmpty(bookTypeSummaryPos)){
+        if (CollectionUtil.isNotEmpty(bookTypeSummaryPos)) {
             for (BookTypeSummaryPo bookTypeSummaryPo : bookTypeSummaryPos) {
-                BookTypeSummaryVo bookTypeSummaryVo =new BookTypeSummaryVo();
-                BeanUtil.copyProperties(bookTypeSummaryPo,bookTypeSummaryVo);
+                BookTypeSummaryVo bookTypeSummaryVo = new BookTypeSummaryVo();
+                BeanUtil.copyProperties(bookTypeSummaryPo, bookTypeSummaryVo);
                 bookTypeSummaryVos.add(bookTypeSummaryVo);
             }
         }
