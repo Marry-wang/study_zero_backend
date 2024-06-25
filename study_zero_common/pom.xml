@@ -33,7 +33,6 @@
     <module>study_zero_common_redis</module>
     <module>study_zero_common_log</module>
     <module>study_zero_common_file</module>
-      <module>study_zero_common_job</module>
   </modules>
 
   <dependencies>
