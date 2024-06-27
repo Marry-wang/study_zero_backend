@@ -1,5 +1,6 @@
 package com.demo.domain.libraryManagement.book.entry.po;
 
+import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
@@ -53,25 +54,25 @@ public class BookBorrowingRecordPo implements Serializable {
     /**
      * 
      */
-    @TableField(value = "create_by")
+    @TableField(value = "create_by",fill = FieldFill.INSERT)
     private Integer createBy;
 
     /**
      * 
      */
-    @TableField(value = "create_time")
+    @TableField(value = "create_time",fill = FieldFill.INSERT)
     private Date createTime;
 
     /**
      * 
      */
-    @TableField(value = "update_by")
+    @TableField(value = "update_by",fill = FieldFill.UPDATE)
     private Integer updateBy;
 
     /**
      * 
      */
-    @TableField(value = "update_time")
+    @TableField(value = "update_time",fill = FieldFill.UPDATE)
     private Date updateTime;
 
     @TableField(exist = false)

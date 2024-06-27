@@ -82,6 +82,11 @@
       <groupId>org.projectlombok</groupId>
       <artifactId>lombok</artifactId>
     </dependency>
+    <dependency>
+      <groupId>com.baomidou</groupId>
+      <artifactId>mybatis-plus-boot-starter</artifactId>
+      <version>3.0.5</version>
+    </dependency>
   </dependencies>
 
   <!-- 需要被引入的工程  杜绝打包问题-->
