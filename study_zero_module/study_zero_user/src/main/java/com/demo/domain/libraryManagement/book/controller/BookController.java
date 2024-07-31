@@ -1,8 +1,10 @@
 package com.demo.domain.libraryManagement.book.controller;
 
 import com.demo.api.ZeroResult;
+import com.demo.domain.libraryManagement.book.entry.dto.BookBorrowingRecordDto;
 import com.demo.domain.libraryManagement.book.entry.dto.BookDto;
 import com.demo.domain.libraryManagement.book.entry.dto.BookTypeSummaryDto;
+import com.demo.domain.libraryManagement.book.entry.vo.BookBorrowingRecordVo;
 import com.demo.domain.libraryManagement.book.entry.vo.BookTypeSummaryVo;
 import com.demo.domain.libraryManagement.book.entry.vo.BookVo;
 import com.demo.domain.libraryManagement.book.service.BookService;
@@ -106,4 +108,24 @@ public class BookController {
         return ZeroResult.success(bookService.editBook(dto));
     }
 
+    /**
+     * 图书借阅记录
+     *
+     * @param dto
+     * @return
+     */
+    @PostMapping(value = "/addOrUpdateBookBorrowingRecord")
+    public ZeroResult<Boolean> addOrUpdateBookBorrowingRecord(@RequestBody BookBorrowingRecordDto dto) {
+        return ZeroResult.success(bookService.addOrUpdateBookBorrowingRecord(dto));
+    }
+
+    /**
+     * 图书借阅记录
+     *
+     * @return
+     */
+    @GetMapping (value = "/selectBorrowingRecords")
+    public ZeroResult<List<BookBorrowingRecordVo>> selectBorrowingRecords() {
+        return ZeroResult.success(bookService.selectBorrowingRecords());
+    }
 }

@@ -2,25 +2,33 @@ package com.demo.domain.libraryManagement.book.service;
 
 import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.collection.CollectionUtil;
+import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.sql.SqlHelper;
+import com.demo.domain.libraryManagement.book.entry.dto.BookBorrowingRecordDto;
 import com.demo.domain.libraryManagement.book.entry.dto.BookDto;
 import com.demo.domain.libraryManagement.book.entry.dto.BookTypeSummaryDto;
+import com.demo.domain.libraryManagement.book.entry.po.BookBorrowingRecordPo;
 import com.demo.domain.libraryManagement.book.entry.po.BookPo;
 import com.demo.domain.libraryManagement.book.entry.po.BookTypePo;
 import com.demo.domain.libraryManagement.book.entry.po.BookTypeSummaryPo;
+import com.demo.domain.libraryManagement.book.entry.vo.BookBorrowingRecordVo;
 import com.demo.domain.libraryManagement.book.entry.vo.BookTypeSummaryVo;
 import com.demo.domain.libraryManagement.book.entry.vo.BookVo;
+import com.demo.domain.libraryManagement.book.mapper.BookBorrowingRecordMapper;
 import com.demo.domain.libraryManagement.book.mapper.BookMapper;
 import com.demo.domain.libraryManagement.book.mapper.BookTypeMapper;
 import com.demo.domain.libraryManagement.book.mapper.BookTypeSummaryMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -29,6 +37,7 @@ public class BookService {
     private final BookMapper bookMapper;
     private final BookTypeMapper bookTypeMapper;
     private final BookTypeSummaryMapper bookTypeSummaryMapper;
+    private final BookBorrowingRecordMapper recordMapper;
 
     /**
      * 新增图书类别
@@ -168,6 +177,70 @@ public class BookService {
         bookTypeMapper.insert(bookTypePo);
 
         return true;
+    }
+
+    /**
+     * 新增/修改图书借阅记录
+     *
+     * @param dto
+     * @return
+     */
+    @Transactional(rollbackFor = Exception.class)
+    public boolean addOrUpdateBookBorrowingRecord(BookBorrowingRecordDto dto) {
+        List<BookBorrowingRecordPo> bookBorrowingRecordPos = recordMapper.selectList(new QueryWrapper<BookBorrowingRecordPo>().lambda()
+                .eq(BookBorrowingRecordPo::getBookId, dto.getBookId())
+                .eq(BookBorrowingRecordPo::getBorrowingBy, dto.getBorrowingBy())
+                .eq(BookBorrowingRecordPo::getStatus, "0")
+        );
+        if (CollectionUtil.isNotEmpty(bookBorrowingRecordPos)) {
+            BookBorrowingRecordPo recordPo = new BookBorrowingRecordPo();
+            recordPo.setBookId(dto.getBookId());
+            recordPo.setBorrowingBy(dto.getBorrowingBy());
+            recordPo.setReturnTime(new Date());
+            recordPo.setStatus("1");
+            recordMapper.update(recordPo,new QueryWrapper<BookBorrowingRecordPo>().lambda()
+                    .eq(BookBorrowingRecordPo::getBookId, dto.getBookId())
+                    .eq(BookBorrowingRecordPo::getBorrowingBy, dto.getBorrowingBy())
+                    .eq(BookBorrowingRecordPo::getStatus, "0")
+            );
+        } else {
+            BookBorrowingRecordPo recordPo = new BookBorrowingRecordPo();
+            recordPo.setBookId(dto.getBookId());
+            recordPo.setBorrowingBy(dto.getBorrowingBy());
+            recordPo.setBorrowingTime(new Date());
+            recordPo.setStatus("0");
+            recordMapper.insert(recordPo);
+        }
+        return true;
+    }
+
+    /**
+     * 图书借阅记录
+     *
+     * @return
+     */
+    public List<BookBorrowingRecordVo> selectBorrowingRecords() {
+        List<BookBorrowingRecordPo> bookBorrowingRecordPos = recordMapper.selectList(new QueryWrapper<BookBorrowingRecordPo>().lambda());
+
+        List<Integer> collect = bookBorrowingRecordPos.stream().map(BookBorrowingRecordPo::getBookId).collect(Collectors.toList());
+        List<BookPo> bookPos = bookMapper.selectList(new QueryWrapper<BookPo>().lambda().in(BookPo::getId, collect));
+
+        List<BookBorrowingRecordVo> bookBorrowingRecordVos = new ArrayList<>();
+        if(bookBorrowingRecordPos.size()>0){
+            BeanUtil.copyProperties(bookBorrowingRecordVos,bookBorrowingRecordPos);
+            for (BookBorrowingRecordPo bookBorrowingRecordPo : bookBorrowingRecordPos) {
+                BookBorrowingRecordVo bookBorrowingRecordVo = new BookBorrowingRecordVo();
+                BeanUtil.copyProperties(bookBorrowingRecordPo,bookBorrowingRecordVo);
+                for (BookPo bookPo : bookPos) {
+                    if(bookBorrowingRecordVo.getBookId().equals(bookPo.getId())){
+                        bookBorrowingRecordVo.setBookName(bookPo.getBookName());
+                        break;
+                    }
+                }
+                bookBorrowingRecordVos.add(bookBorrowingRecordVo);
+            }
+        }
+        return bookBorrowingRecordVos;
     }
 
 }
