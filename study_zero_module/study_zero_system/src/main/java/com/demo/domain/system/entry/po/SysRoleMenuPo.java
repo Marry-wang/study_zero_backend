@@ -1,5 +1,6 @@
 package com.demo.domain.system.entry.po;
 
+import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableLogic;
 import com.baomidou.mybatisplus.annotation.TableName;
@@ -25,16 +26,16 @@ public class SysRoleMenuPo {
     @TableField(value = "create_time")
     private Date createTime;
 
-    @TableField(value = "create_by")
+    @TableField(value = "create_by",fill = FieldFill.INSERT)
     private Integer createBy;
 
-    @TableField(value = "create_time")
+    @TableField(value = "create_time",fill = FieldFill.INSERT)
     private Date updateTime;
 
-    @TableField(value = "update_by")
+    @TableField(value = "update_by",fill = FieldFill.UPDATE)
     private Integer updateBy;
 
     @TableLogic
-    @TableField(value = "del_flag")
+    @TableField(value = "del_flag",fill = FieldFill.UPDATE)
     private Boolean delFlag;
 }

@@ -36,16 +36,16 @@ public class SysMenuPo {
     @TableField(value = "menu_component")
     private String component;
 
-    @TableField(value = "create_time")
+    @TableField(value = "create_time",fill = FieldFill.INSERT)
     private Date createTime;
 
-    @TableField(value = "create_by")
+    @TableField(value = "create_by",fill = FieldFill.INSERT)
     private Integer createBy;
 
-    @TableField(value = "update_time")
+    @TableField(value = "update_time",fill = FieldFill.UPDATE)
     private Date updateTime;
 
-    @TableField(value = "update_by")
+    @TableField(value = "update_by",fill = FieldFill.UPDATE)
     private Date updateBy;
 
     @TableLogic
