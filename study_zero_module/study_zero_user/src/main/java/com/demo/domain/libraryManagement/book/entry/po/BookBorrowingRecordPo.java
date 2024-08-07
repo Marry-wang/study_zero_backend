@@ -13,10 +13,13 @@ import java.util.Date;
 @TableName(value ="book_borrowing_record")
 @Data
 public class BookBorrowingRecordPo implements Serializable {
+
+    @TableId(value = "borrowing_record_id",type = IdType.AUTO)
+    private Integer borrowingRecordId;
     /**
      * 图书id
      */
-    @TableId(value = "book_id",type = IdType.INPUT)
+    @TableField(value = "book_id")
     private Integer bookId;
 
     /**

@@ -20,6 +20,11 @@ public class BookBorrowingRecordDto {
     private Integer bookId;
 
     /**
+     * 借阅记录id
+     */
+    private Integer borrowingRecordId;
+
+    /**
      * 借书人
      */
     private Integer borrowingBy;

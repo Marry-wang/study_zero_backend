@@ -15,6 +15,8 @@ import java.util.Date;
  */
 @Data
 public class BookBorrowingRecordVo{
+
+    private Integer borrowingRecordId;
     /**
      * 图书id
      */

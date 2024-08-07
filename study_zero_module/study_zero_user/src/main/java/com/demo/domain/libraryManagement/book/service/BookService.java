@@ -21,6 +21,8 @@ import com.demo.domain.libraryManagement.book.mapper.BookBorrowingRecordMapper;
 import com.demo.domain.libraryManagement.book.mapper.BookMapper;
 import com.demo.domain.libraryManagement.book.mapper.BookTypeMapper;
 import com.demo.domain.libraryManagement.book.mapper.BookTypeSummaryMapper;
+import com.demo.enums.BaseResultEnum;
+import com.demo.exception.BaseException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -187,29 +189,28 @@ public class BookService {
      */
     @Transactional(rollbackFor = Exception.class)
     public boolean addOrUpdateBookBorrowingRecord(BookBorrowingRecordDto dto) {
-        List<BookBorrowingRecordPo> bookBorrowingRecordPos = recordMapper.selectList(new QueryWrapper<BookBorrowingRecordPo>().lambda()
-                .eq(BookBorrowingRecordPo::getBookId, dto.getBookId())
-                .eq(BookBorrowingRecordPo::getBorrowingBy, dto.getBorrowingBy())
-                .eq(BookBorrowingRecordPo::getStatus, "0")
-        );
-        if (CollectionUtil.isNotEmpty(bookBorrowingRecordPos)) {
-            BookBorrowingRecordPo recordPo = new BookBorrowingRecordPo();
-            recordPo.setBookId(dto.getBookId());
-            recordPo.setBorrowingBy(dto.getBorrowingBy());
-            recordPo.setReturnTime(new Date());
-            recordPo.setStatus("1");
-            recordMapper.update(recordPo,new QueryWrapper<BookBorrowingRecordPo>().lambda()
+        if(ObjectUtil.isEmpty(dto.getBorrowingRecordId())){
+            List<BookBorrowingRecordPo> bookBorrowingRecordPos = recordMapper.selectList(new QueryWrapper<BookBorrowingRecordPo>().lambda()
                     .eq(BookBorrowingRecordPo::getBookId, dto.getBookId())
                     .eq(BookBorrowingRecordPo::getBorrowingBy, dto.getBorrowingBy())
                     .eq(BookBorrowingRecordPo::getStatus, "0")
             );
-        } else {
+            if (CollectionUtil.isNotEmpty(bookBorrowingRecordPos)) {
+                throw new BaseException(BaseResultEnum.BOOK_RECORD_IS_EXIT);
+            } else {
+                BookBorrowingRecordPo recordPo = new BookBorrowingRecordPo();
+                recordPo.setBookId(dto.getBookId());
+                recordPo.setBorrowingBy(dto.getBorrowingBy());
+                recordPo.setBorrowingTime(new Date());
+                recordPo.setStatus("0");
+                recordMapper.insert(recordPo);
+            }
+        }else{
             BookBorrowingRecordPo recordPo = new BookBorrowingRecordPo();
-            recordPo.setBookId(dto.getBookId());
-            recordPo.setBorrowingBy(dto.getBorrowingBy());
-            recordPo.setBorrowingTime(new Date());
-            recordPo.setStatus("0");
-            recordMapper.insert(recordPo);
+            recordPo.setBorrowingRecordId(dto.getBorrowingRecordId());
+            recordPo.setReturnTime(new Date());
+            recordPo.setStatus("1");
+            recordMapper.updateById(recordPo);
         }
         return true;
     }

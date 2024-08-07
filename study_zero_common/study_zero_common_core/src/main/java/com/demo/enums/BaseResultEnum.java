@@ -29,6 +29,8 @@ public enum BaseResultEnum {
      */
     USERNOTEXIT(2001,"用户不存在！"),
 
+    BOOK_RECORD_IS_EXIT(2002,"此用户已经借阅次书，并且未归还！"),
+
     /**
      * system
      */
