@@ -1,19 +1,13 @@
 package com.demo.domain.libraryManagement.book.entry.dto;
 
-import com.baomidou.mybatisplus.annotation.FieldFill;
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
-import java.io.Serializable;
-import java.util.Date;
-
 /**
- * 图书借阅记录
- * @TableName book_borrowing_record
+ * 图书借阅记录 添加DTO
+ * @TableName
  */
 @Data
-public class BookBorrowingRecordDto {
+public class AddBookBorrowingRecordDto {
     /**
      * 图书id
      */

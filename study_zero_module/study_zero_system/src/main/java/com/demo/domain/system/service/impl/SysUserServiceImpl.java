@@ -3,7 +3,7 @@ package com.demo.domain.system.service.impl;
 import cn.hutool.core.util.ObjectUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.core.toolkit.sql.SqlHelper;
+import com.baomidou.mybatisplus.extension.toolkit.SqlHelper;
 import com.demo.domain.system.entry.dto.SysUserDto;
 import com.demo.domain.system.entry.dto.AddOrUpdateUserDto;
 import com.demo.domain.system.entry.po.SysRolePo;

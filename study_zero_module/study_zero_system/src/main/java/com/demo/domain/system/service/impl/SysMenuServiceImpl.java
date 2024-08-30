@@ -5,7 +5,7 @@ import cn.hutool.core.collection.CollectionUtil;
 import cn.hutool.core.util.ObjectUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.core.toolkit.sql.SqlHelper;
+import com.baomidou.mybatisplus.extension.toolkit.SqlHelper;
 import com.demo.context.SecurityContextHolder;
 import com.demo.domain.system.entry.dto.AddOrUpdateMenuDto;
 import com.demo.domain.system.entry.dto.SysMenuDto;

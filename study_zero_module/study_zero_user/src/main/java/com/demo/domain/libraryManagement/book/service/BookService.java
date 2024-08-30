@@ -6,10 +6,12 @@ import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.core.toolkit.sql.SqlHelper;
-import com.demo.domain.libraryManagement.book.entry.dto.BookBorrowingRecordDto;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.baomidou.mybatisplus.extension.toolkit.SqlHelper;
+import com.demo.domain.libraryManagement.book.entry.dto.AddBookBorrowingRecordDto;
 import com.demo.domain.libraryManagement.book.entry.dto.BookDto;
 import com.demo.domain.libraryManagement.book.entry.dto.BookTypeSummaryDto;
+import com.demo.domain.libraryManagement.book.entry.dto.SelectBookBorrowingRecordDto;
 import com.demo.domain.libraryManagement.book.entry.po.BookBorrowingRecordPo;
 import com.demo.domain.libraryManagement.book.entry.po.BookPo;
 import com.demo.domain.libraryManagement.book.entry.po.BookTypePo;
@@ -60,7 +62,7 @@ public class BookService {
      * @return
      */
     public boolean delBookTypeSummary(BookTypeSummaryDto dto) {
-        return SqlHelper.delBool(bookTypeSummaryMapper.deleteById(dto.getId()));
+        return SqlHelper.retBool(bookTypeSummaryMapper.deleteById(dto.getId()));
     }
 
     /**
@@ -188,7 +190,7 @@ public class BookService {
      * @return
      */
     @Transactional(rollbackFor = Exception.class)
-    public boolean addOrUpdateBookBorrowingRecord(BookBorrowingRecordDto dto) {
+    public boolean addOrUpdateBookBorrowingRecord(AddBookBorrowingRecordDto dto) {
         if(ObjectUtil.isEmpty(dto.getBorrowingRecordId())){
             List<BookBorrowingRecordPo> bookBorrowingRecordPos = recordMapper.selectList(new QueryWrapper<BookBorrowingRecordPo>().lambda()
                     .eq(BookBorrowingRecordPo::getBookId, dto.getBookId())
@@ -220,8 +222,9 @@ public class BookService {
      *
      * @return
      */
-    public List<BookBorrowingRecordVo> selectBorrowingRecords() {
-        List<BookBorrowingRecordPo> bookBorrowingRecordPos = recordMapper.selectList(new QueryWrapper<BookBorrowingRecordPo>().lambda());
+    public Page<BookBorrowingRecordVo> selectBorrowingRecords(SelectBookBorrowingRecordDto dto) {
+        Page<BookBorrowingRecordPo> page = recordMapper.selectPage(new Page<>(dto.getPageNum(), dto.getPageSize()), new QueryWrapper<BookBorrowingRecordPo>().lambda());
+        List<BookBorrowingRecordPo> bookBorrowingRecordPos = page.getRecords();
 
         List<Integer> collect = bookBorrowingRecordPos.stream().map(BookBorrowingRecordPo::getBookId).collect(Collectors.toList());
         List<BookPo> bookPos = bookMapper.selectList(new QueryWrapper<BookPo>().lambda().in(BookPo::getId, collect));
@@ -241,7 +244,9 @@ public class BookService {
                 bookBorrowingRecordVos.add(bookBorrowingRecordVo);
             }
         }
-        return bookBorrowingRecordVos;
+        Page<BookBorrowingRecordVo> pageVo = new Page<>();
+        BeanUtil.copyProperties(page,pageVo);
+        return pageVo.setRecords(bookBorrowingRecordVos);
     }
 
 }

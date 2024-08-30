@@ -1,11 +1,13 @@
 package com.demo.domain.libraryManagement.book.controller;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.demo.api.ZeroResult;
-import com.demo.domain.libraryManagement.book.entry.dto.BookBorrowingRecordDto;
 import com.demo.domain.libraryManagement.book.entry.dto.BookDto;
+import com.demo.domain.libraryManagement.book.entry.dto.SelectBookBorrowingRecordDto;
+import com.demo.domain.libraryManagement.book.entry.vo.BookTypeSummaryVo;
+import com.demo.domain.libraryManagement.book.entry.dto.AddBookBorrowingRecordDto;
 import com.demo.domain.libraryManagement.book.entry.dto.BookTypeSummaryDto;
 import com.demo.domain.libraryManagement.book.entry.vo.BookBorrowingRecordVo;
-import com.demo.domain.libraryManagement.book.entry.vo.BookTypeSummaryVo;
 import com.demo.domain.libraryManagement.book.entry.vo.BookVo;
 import com.demo.domain.libraryManagement.book.service.BookService;
 import lombok.RequiredArgsConstructor;
@@ -115,7 +117,7 @@ public class BookController {
      * @return
      */
     @PostMapping(value = "/addOrUpdateBookBorrowingRecord")
-    public ZeroResult<Boolean> addOrUpdateBookBorrowingRecord(@RequestBody BookBorrowingRecordDto dto) {
+    public ZeroResult<Boolean> addOrUpdateBookBorrowingRecord(@RequestBody AddBookBorrowingRecordDto dto) {
         return ZeroResult.success(bookService.addOrUpdateBookBorrowingRecord(dto));
     }
 
@@ -124,8 +126,8 @@ public class BookController {
      *
      * @return
      */
-    @GetMapping (value = "/selectBorrowingRecords")
-    public ZeroResult<List<BookBorrowingRecordVo>> selectBorrowingRecords() {
-        return ZeroResult.success(bookService.selectBorrowingRecords());
+    @PostMapping (value = "/selectBorrowingRecords")
+    public ZeroResult<Page<BookBorrowingRecordVo>> selectBorrowingRecords(@RequestBody SelectBookBorrowingRecordDto dto) {
+        return ZeroResult.success(bookService.selectBorrowingRecords(dto ));
     }
 }
