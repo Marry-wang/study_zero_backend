@@ -223,7 +223,7 @@ public class BookService {
      * @return
      */
     public Page<BookBorrowingRecordVo> selectBorrowingRecords(SelectBookBorrowingRecordDto dto) {
-        Page<BookBorrowingRecordPo> page = recordMapper.selectPage(new Page<>(dto.getPageNum(), dto.getPageSize()), new QueryWrapper<BookBorrowingRecordPo>().lambda());
+        Page<BookBorrowingRecordPo> page = recordMapper.selectPage(new Page<>(dto.getPageNum(), dto.getPageSize()), new QueryWrapper<BookBorrowingRecordPo>().lambda().orderByDesc(BookBorrowingRecordPo::getCreateTime));
         List<BookBorrowingRecordPo> bookBorrowingRecordPos = page.getRecords();
 
         List<Integer> collect = bookBorrowingRecordPos.stream().map(BookBorrowingRecordPo::getBookId).collect(Collectors.toList());
