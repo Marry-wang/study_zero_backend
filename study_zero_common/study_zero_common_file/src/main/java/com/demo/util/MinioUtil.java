@@ -46,15 +46,19 @@ public class MinioUtil implements InitializingBean {
         minioClient = new MinioClient(ENDPOINT,ACCESSKEY,SECRETKEY);
     }
 
+    public static void bucketExists() throws Exception{
+        //存入bucket不存在则创建，并设置为只读
+        if (!minioClient.bucketExists(BUCKETNAME)) {
+            minioClient.makeBucket(BUCKETNAME);
+            minioClient.setBucketPolicy(BUCKETNAME, "*.*", PolicyType.READ_ONLY);
+        }
+    }
+
     public static ZeroResult upload(MultipartFile file){
         try {
-            String s=null;
-            minioClient = new MinioClient(ENDPOINT, ACCESSKEY, SECRETKEY);
-            //存入bucket不存在则创建，并设置为只读
-            if (!minioClient.bucketExists(BUCKETNAME)) {
-                minioClient.makeBucket(BUCKETNAME);
-                minioClient.setBucketPolicy(BUCKETNAME, "*.*", PolicyType.READ_ONLY);
-            }
+//            minioClient = new MinioClient(ENDPOINT, ACCESSKEY, SECRETKEY);
+            bucketExists();
+
             String filename = file.getOriginalFilename();
             String fileType = filename.substring(filename.lastIndexOf("."));
             String uploadfilename = UUID.randomUUID().toString().replaceAll("-","") + fileType;
@@ -65,8 +69,7 @@ public class MinioUtil implements InitializingBean {
             // 存储文件
             minioClient.putObject(BUCKETNAME, objectName, file.getInputStream(), file.getContentType());
             log.info("文件上传成功!");
-            s= objectName;
-            return ZeroResult.success(s);
+            return ZeroResult.success(objectName);
         }catch (Exception e){
             log.info("文件上传失败",e);
             return ZeroResult.error(4000,"文件上传失败");
