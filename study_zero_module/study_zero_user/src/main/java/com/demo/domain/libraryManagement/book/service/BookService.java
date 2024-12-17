@@ -25,7 +25,9 @@ import com.demo.domain.libraryManagement.book.mapper.BookTypeMapper;
 import com.demo.domain.libraryManagement.book.mapper.BookTypeSummaryMapper;
 import com.demo.enums.BaseResultEnum;
 import com.demo.exception.BaseException;
+import com.demo.util.MinioUtil;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -34,6 +36,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class BookService {
@@ -107,9 +110,13 @@ public class BookService {
      * @param dto
      * @return
      */
-    public boolean addBook(BookDto dto) {
+    public boolean addBook(BookDto dto) throws Exception {
+
+        String imagePath = MinioUtil.viewUrl(dto.getBookImageName());
+        log.info("上传图片路径：{}",imagePath);
         BookPo bookPo = new BookPo();
         BeanUtil.copyProperties(dto, bookPo);
+        bookPo.setBookImagePath(imagePath);
         bookMapper.insert(bookPo);
 
         BookTypePo bookTypePo = new BookTypePo();

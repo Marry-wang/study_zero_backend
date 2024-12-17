@@ -27,6 +27,12 @@ public class BookPo implements Serializable {
     private String bookName;
 
     /**
+     * 图书封面路径
+     */
+    @TableField(value = "book_image_path")
+    private String bookImagePath;
+
+    /**
      * 记录时间
      */
     @TableField(value = "in_time")

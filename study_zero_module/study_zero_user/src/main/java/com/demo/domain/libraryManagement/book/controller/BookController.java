@@ -73,7 +73,7 @@ public class BookController {
      * @return
      */
     @PostMapping(value = "/addBook")
-    public ZeroResult<Boolean> addBook(@RequestBody BookDto dto) {
+    public ZeroResult<Boolean> addBook(@RequestBody BookDto dto) throws Exception {
         return ZeroResult.success(bookService.addBook(dto));
     }
 

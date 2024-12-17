@@ -2,13 +2,18 @@ package com.demo.util;
 
 import com.demo.api.ZeroResult;
 import io.minio.MinioClient;
+import io.minio.errors.*;
 import io.minio.policy.PolicyType;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
+import org.xmlpull.v1.XmlPullParserException;
 
+import java.io.IOException;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
 import java.text.SimpleDateFormat;
 import java.util.UUID;
 
@@ -54,7 +59,7 @@ public class MinioUtil implements InitializingBean {
         }
     }
 
-    public static ZeroResult upload(MultipartFile file){
+    public static String upload(MultipartFile file){
         try {
 //            minioClient = new MinioClient(ENDPOINT, ACCESSKEY, SECRETKEY);
             bucketExists();
@@ -69,10 +74,15 @@ public class MinioUtil implements InitializingBean {
             // 存储文件
             minioClient.putObject(BUCKETNAME, objectName, file.getInputStream(), file.getContentType());
             log.info("文件上传成功!");
-            return ZeroResult.success(objectName);
+            minioClient.presignedGetObject(BUCKETNAME, objectName);
+            return objectName;
         }catch (Exception e){
             log.info("文件上传失败",e);
-            return ZeroResult.error(4000,"文件上传失败");
+            throw new RuntimeException("文件上传失败");
         }
+    }
+
+    public static String viewUrl(String fileName) {
+        return ENDPOINT+"/"+BUCKETNAME+"/"+fileName;
     }
 }

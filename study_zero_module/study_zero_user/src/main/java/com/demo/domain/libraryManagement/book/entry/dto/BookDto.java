@@ -1,6 +1,7 @@
 package com.demo.domain.libraryManagement.book.entry.dto;
 
 import lombok.Data;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -66,4 +67,6 @@ public class BookDto {
      *
      */
     private Date updateTime;
+
+    private String bookImageName;
 }
