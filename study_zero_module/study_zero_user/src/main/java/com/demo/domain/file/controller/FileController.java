@@ -18,13 +18,13 @@ public class FileController {
     @Autowired
     private FileService fileService;
 
-    @PostMapping (value = "/upload")
-    public ZeroResult<String> uploadFile(@RequestParam(value = "file")MultipartFile file){
+    @PostMapping(value = "/upload")
+    public ZeroResult<String> uploadFile(@RequestParam(value = "file") MultipartFile file) {
         return ZeroResult.success(fileService.uploadFile(file));
     }
 
     @GetMapping(value = "/viewUrl")
-    public ZeroResult<String> uploadFile(@RequestParam(value = "fileName")String fileName) {
+    public ZeroResult<String> uploadFile(@RequestParam(value = "fileName") String fileName) {
         return ZeroResult.success(fileService.viewUrl(fileName));
     }
 }

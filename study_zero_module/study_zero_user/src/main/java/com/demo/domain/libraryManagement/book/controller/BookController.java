@@ -126,8 +126,8 @@ public class BookController {
      *
      * @return
      */
-    @PostMapping (value = "/selectBorrowingRecords")
+    @PostMapping(value = "/selectBorrowingRecords")
     public ZeroResult<Page<BookBorrowingRecordVo>> selectBorrowingRecords(@RequestBody SelectBookBorrowingRecordDto dto) {
-        return ZeroResult.success(bookService.selectBorrowingRecords(dto ));
+        return ZeroResult.success(bookService.selectBorrowingRecords(dto));
     }
 }

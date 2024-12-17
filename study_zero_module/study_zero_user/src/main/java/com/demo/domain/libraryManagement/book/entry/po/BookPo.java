@@ -33,12 +33,6 @@ public class BookPo implements Serializable {
     private String bookImagePath;
 
     /**
-     * 记录时间
-     */
-    @TableField(value = "in_time")
-    private Date inTime;
-
-    /**
      * 出版社
      */
     @TableField(value = "press")

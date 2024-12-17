@@ -113,7 +113,7 @@ public class BookService {
     public boolean addBook(BookDto dto) throws Exception {
 
         String imagePath = MinioUtil.viewUrl(dto.getBookImageName());
-        log.info("上传图片路径：{}",imagePath);
+        log.info("上传图片路径：{}", imagePath);
         BookPo bookPo = new BookPo();
         BeanUtil.copyProperties(dto, bookPo);
         bookPo.setBookImagePath(imagePath);
@@ -198,7 +198,7 @@ public class BookService {
      */
     @Transactional(rollbackFor = Exception.class)
     public boolean addOrUpdateBookBorrowingRecord(AddBookBorrowingRecordDto dto) {
-        if(ObjectUtil.isEmpty(dto.getBorrowingRecordId())){
+        if (ObjectUtil.isEmpty(dto.getBorrowingRecordId())) {
             List<BookBorrowingRecordPo> bookBorrowingRecordPos = recordMapper.selectList(new QueryWrapper<BookBorrowingRecordPo>().lambda()
                     .eq(BookBorrowingRecordPo::getBookId, dto.getBookId())
                     .eq(BookBorrowingRecordPo::getBorrowingBy, dto.getBorrowingBy())
@@ -214,7 +214,7 @@ public class BookService {
                 recordPo.setStatus("0");
                 recordMapper.insert(recordPo);
             }
-        }else{
+        } else {
             BookBorrowingRecordPo recordPo = new BookBorrowingRecordPo();
             recordPo.setBorrowingRecordId(dto.getBorrowingRecordId());
             recordPo.setReturnTime(new Date());
@@ -237,13 +237,13 @@ public class BookService {
         List<BookPo> bookPos = bookMapper.selectList(new QueryWrapper<BookPo>().lambda().in(BookPo::getId, collect));
 
         List<BookBorrowingRecordVo> bookBorrowingRecordVos = new ArrayList<>();
-        if(bookBorrowingRecordPos.size()>0){
-            BeanUtil.copyProperties(bookBorrowingRecordVos,bookBorrowingRecordPos);
+        if (bookBorrowingRecordPos.size() > 0) {
+            BeanUtil.copyProperties(bookBorrowingRecordVos, bookBorrowingRecordPos);
             for (BookBorrowingRecordPo bookBorrowingRecordPo : bookBorrowingRecordPos) {
                 BookBorrowingRecordVo bookBorrowingRecordVo = new BookBorrowingRecordVo();
-                BeanUtil.copyProperties(bookBorrowingRecordPo,bookBorrowingRecordVo);
+                BeanUtil.copyProperties(bookBorrowingRecordPo, bookBorrowingRecordVo);
                 for (BookPo bookPo : bookPos) {
-                    if(bookBorrowingRecordVo.getBookId().equals(bookPo.getId())){
+                    if (bookBorrowingRecordVo.getBookId().equals(bookPo.getId())) {
                         bookBorrowingRecordVo.setBookName(bookPo.getBookName());
                         break;
                     }
@@ -252,7 +252,7 @@ public class BookService {
             }
         }
         Page<BookBorrowingRecordVo> pageVo = new Page<>();
-        BeanUtil.copyProperties(page,pageVo);
+        BeanUtil.copyProperties(page, pageVo);
         return pageVo.setRecords(bookBorrowingRecordVos);
     }
 

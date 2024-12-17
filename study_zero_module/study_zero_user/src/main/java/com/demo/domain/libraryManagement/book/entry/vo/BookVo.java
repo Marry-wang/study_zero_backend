@@ -7,6 +7,7 @@ import java.util.Date;
 
 /**
  * 图书
+ *
  * @TableName book
  */
 @Data
@@ -57,22 +58,22 @@ public class BookVo {
     private String bookCode;
 
     /**
-     * 
+     *
      */
     private Integer createBy;
 
     /**
-     * 
+     *
      */
     private Date createTime;
 
     /**
-     * 
+     *
      */
     private Integer updateBy;
 
     /**
-     * 
+     *
      */
     private Date updateTime;
 }
