@@ -112,11 +112,8 @@ public class BookService {
      */
     public boolean addBook(BookDto dto) throws Exception {
 
-        String imagePath = MinioUtil.viewUrl(dto.getBookImageName());
-        log.info("上传图片路径：{}", imagePath);
         BookPo bookPo = new BookPo();
         BeanUtil.copyProperties(dto, bookPo);
-        bookPo.setBookImagePath(imagePath);
         bookMapper.insert(bookPo);
 
         BookTypePo bookTypePo = new BookTypePo();

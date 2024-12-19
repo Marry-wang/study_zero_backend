@@ -22,4 +22,10 @@ public class FileServiceImpl implements FileService {
     public String viewUrl(String minioFileName) {
         return MinioUtil.viewUrl(minioFileName);
     }
+
+    @Override
+    public Boolean delFile(String minioFileName) {
+        MinioUtil.delFile(minioFileName);
+        return true;
+    }
 }

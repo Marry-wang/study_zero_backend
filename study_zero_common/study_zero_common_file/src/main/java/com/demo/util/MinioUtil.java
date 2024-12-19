@@ -87,4 +87,13 @@ public class MinioUtil implements InitializingBean {
     public static String viewUrl(String fileName) {
         return ENDPOINT + "/" + BUCKETNAME + "/" + fileName;
     }
+
+    public static void delFile(String fileName) {
+        try{
+            minioClient.removeObject(BUCKETNAME,fileName);
+        }catch (Exception e) {
+            log.info("文件删除失败", e);
+            throw new RuntimeException("文件删除失败");
+        }
+    }
 }

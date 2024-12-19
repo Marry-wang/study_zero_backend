@@ -67,5 +67,13 @@ public class BookDto {
      */
     private Date updateTime;
 
+    /**
+     * 图书图片名称
+     */
     private String bookImageName;
+
+     /**
+     * 图书图片路径
+     */
+    private String bookImagePath;
 }

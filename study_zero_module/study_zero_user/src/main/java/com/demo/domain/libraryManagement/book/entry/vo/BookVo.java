@@ -38,6 +38,11 @@ public class BookVo {
     private String bookImagePath;
 
     /**
+     * 图书封面名称
+     */
+    private String bookImageName;
+
+    /**
      * 记录时间
      */
     private Date inTime;

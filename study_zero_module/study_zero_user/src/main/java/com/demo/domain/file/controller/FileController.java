@@ -27,4 +27,9 @@ public class FileController {
     public ZeroResult<String> uploadFile(@RequestParam(value = "fileName") String fileName) {
         return ZeroResult.success(fileService.viewUrl(fileName));
     }
+
+    @GetMapping(value = "/del")
+    public ZeroResult<Boolean> delFile(@RequestParam(value = "fileName") String fileName) {
+        return ZeroResult.success(fileService.delFile(fileName));
+    }
 }

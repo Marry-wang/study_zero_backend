@@ -15,4 +15,6 @@ public interface FileService {
 
 
     public String viewUrl(String minioFileName);
+
+    public Boolean delFile(String minioFileName);
 }
