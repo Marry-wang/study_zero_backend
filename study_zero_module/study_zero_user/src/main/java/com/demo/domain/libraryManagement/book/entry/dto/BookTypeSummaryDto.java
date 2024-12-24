@@ -11,4 +11,8 @@ public class BookTypeSummaryDto {
      * 图书类别
      */
     private String bookTypeName;
+
+    private int  pageNum =1;
+
+    private int pageSize =10;
 }

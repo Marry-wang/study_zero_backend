@@ -87,12 +87,16 @@ public class BookService {
      * @param dto
      * @return
      */
-    public List<BookTypeSummaryVo> selectBookTypeSummary(BookTypeSummaryDto dto) {
+    public Page<BookTypeSummaryVo> selectBookTypeSummary(BookTypeSummaryDto dto) {
         LambdaQueryWrapper<BookTypeSummaryPo> wrapper = new LambdaQueryWrapper<>();
         if (StrUtil.isNotEmpty(dto.getBookTypeName())) {
             wrapper.like(BookTypeSummaryPo::getBookTypeName, dto.getBookTypeName());
         }
-        List<BookTypeSummaryPo> bookTypeSummaryPos = bookTypeSummaryMapper.selectList(wrapper);
+        Page<BookTypeSummaryPo> bookTypeSummaryPoPage = bookTypeSummaryMapper.selectPage(new Page<>(dto.getPageNum(), dto.getPageSize()), wrapper);
+        List<BookTypeSummaryPo> bookTypeSummaryPos = bookTypeSummaryPoPage.getRecords();
+        Page<BookTypeSummaryVo> bookTypeSummaryVoPage = new Page<>();
+        BeanUtil.copyProperties(bookTypeSummaryPoPage, bookTypeSummaryVoPage);
+
         List<BookTypeSummaryVo> bookTypeSummaryVos = new ArrayList<>();
         if (CollectionUtil.isNotEmpty(bookTypeSummaryPos)) {
             for (BookTypeSummaryPo bookTypeSummaryPo : bookTypeSummaryPos) {
@@ -101,7 +105,7 @@ public class BookService {
                 bookTypeSummaryVos.add(bookTypeSummaryVo);
             }
         }
-        return bookTypeSummaryVos;
+        return bookTypeSummaryVoPage.setRecords(bookTypeSummaryVos);
     }
 
     /**
@@ -144,10 +148,13 @@ public class BookService {
      * @param dto
      * @return
      */
-    public List<BookVo> selectBook(BookDto dto) {
+    public Page<BookVo> selectBook(BookDto dto) {
         LambdaQueryWrapper<BookPo> wrapper = new LambdaQueryWrapper<>();
-        List<BookPo> bookPos = bookMapper.selectList(wrapper);
+        Page<BookPo> bookPoPage = bookMapper.selectPage(new Page<>(dto.getPageNum(), dto.getPageSize()), wrapper);
+        List<BookPo> bookPos = bookPoPage.getRecords();
 
+        Page<BookVo> bookVoPage =new Page<>();
+        BeanUtil.copyProperties(bookPoPage, bookVoPage);
         List<BookVo> bookVoList = new ArrayList<>();
         if (CollectionUtil.isNotEmpty(bookPos)) {
             for (BookPo bookPo : bookPos) {
@@ -163,7 +170,7 @@ public class BookService {
             }
         }
 
-        return bookVoList;
+        return bookVoPage.setRecords(bookVoList);
     }
 
     /**

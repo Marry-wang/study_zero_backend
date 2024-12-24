@@ -62,7 +62,7 @@ public class BookController {
      * @return
      */
     @PostMapping(value = "/selectBookTypeSummary")
-    public ZeroResult<List<BookTypeSummaryVo>> selectBookTypeSummary(@RequestBody BookTypeSummaryDto dto) {
+    public ZeroResult<Page<BookTypeSummaryVo>> selectBookTypeSummary(@RequestBody BookTypeSummaryDto dto) {
         return ZeroResult.success(bookService.selectBookTypeSummary(dto));
     }
 
@@ -95,7 +95,7 @@ public class BookController {
      * @return
      */
     @PostMapping(value = "/selectBook")
-    public ZeroResult<List<BookVo>> selectBook(@RequestBody BookDto dto) {
+    public ZeroResult<Page<BookVo>> selectBook(@RequestBody BookDto dto) {
         return ZeroResult.success(bookService.selectBook(dto));
     }
 

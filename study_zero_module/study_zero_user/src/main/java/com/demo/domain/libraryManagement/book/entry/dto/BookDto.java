@@ -76,4 +76,8 @@ public class BookDto {
      * 图书图片路径
      */
     private String bookImagePath;
+
+    private int  pageNum =1;
+
+    private int pageSize =10;
 }
