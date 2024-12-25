@@ -1,5 +1,6 @@
 package com.demo.domain.system.service;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.demo.domain.system.entry.dto.SysUserDto;
 import com.demo.domain.system.entry.dto.AddOrUpdateUserDto;
 import com.demo.domain.system.entry.vo.SysUserRoleVo;
@@ -20,7 +21,7 @@ public interface SysUserService {
      *
      * @return
      */
-    List<SysUserRoleVo> queryUserList(SysUserDto dto);
+    Page<SysUserRoleVo> queryUserList(SysUserDto dto);
 
     /**
      * 更新用户

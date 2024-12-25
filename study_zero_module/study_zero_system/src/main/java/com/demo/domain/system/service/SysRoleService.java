@@ -1,5 +1,6 @@
 package com.demo.domain.system.service;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.demo.domain.system.entry.dto.AddOrUpdateRoleDto;
 import com.demo.domain.system.entry.dto.SysRoleDto;
 import com.demo.domain.system.entry.vo.SysRoleMenuVo;
@@ -20,7 +21,7 @@ public interface SysRoleService {
      *
      * @return
      */
-    List<SysRoleMenuVo> queryRoleList(SysRoleDto dto);
+    Page<SysRoleMenuVo> queryRoleList(SysRoleDto dto);
 
     /**
      * 查看角色详情

@@ -4,6 +4,7 @@ import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.util.ObjectUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.toolkit.SqlHelper;
 import com.demo.domain.system.entry.dto.AddOrUpdateRoleDto;
 import com.demo.domain.system.entry.dto.SysRoleDto;
@@ -44,12 +45,15 @@ public class SysRoleServiceImpl implements SysRoleService {
     private SysRoleMenuMapper sysRoleMenuMapper;
 
     @Override
-    public List<SysRoleMenuVo> queryRoleList(SysRoleDto dto) {
+    public Page<SysRoleMenuVo> queryRoleList(SysRoleDto dto) {
         LambdaQueryWrapper<SysRolePo> queryWrapper = new QueryWrapper<SysRolePo>().lambda();
         if (!Objects.isNull(dto.getRoleId())) {
             queryWrapper.eq(SysRolePo::getId, dto.getRoleId());
         }
-        List<SysRolePo> sysRolePos = sysRoleMapper.selectList(queryWrapper);
+        Page<SysRolePo> sysRolePoPage = sysRoleMapper.selectPage(new Page<>(dto.getPageNum(), dto.getPageSize()), queryWrapper);
+        Page<SysRoleMenuVo> sysRoleVoPage =new Page<>();
+        BeanUtil.copyProperties(sysRolePoPage, sysRoleVoPage);
+        List<SysRolePo> sysRolePos = sysRolePoPage.getRecords();
         List<SysRoleMenuVo> sysRoleMenuVos = new ArrayList<>();
         if (sysRolePos.size() > 0) {
             sysRolePos.forEach(sysRolePo -> {
@@ -59,7 +63,8 @@ public class SysRoleServiceImpl implements SysRoleService {
                 sysRoleMenuVos.add(sysRoleMenuVo);
             });
         }
-        return sysRoleMenuVos;
+
+        return sysRoleVoPage.setRecords(sysRoleMenuVos);
     }
 
     @Override

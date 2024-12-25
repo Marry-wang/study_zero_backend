@@ -6,4 +6,8 @@ import lombok.Data;
 public class SysRoleDto {
 
     private Integer roleId;
+
+    private int  pageNum =1;
+
+    private int pageSize =10;
 }

@@ -30,7 +30,7 @@ public class SysUserPo {
     private Date updateTime;
 
     @TableField(value = "update_by",fill = FieldFill.UPDATE)
-    private Date updateBy;
+    private Integer updateBy;
 
     @TableLogic
     @TableField(value = "dele_flag")

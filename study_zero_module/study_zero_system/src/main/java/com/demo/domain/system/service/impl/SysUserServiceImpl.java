@@ -1,8 +1,10 @@
 package com.demo.domain.system.service.impl;
 
+import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.util.ObjectUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.toolkit.SqlHelper;
 import com.demo.domain.system.entry.dto.SysUserDto;
 import com.demo.domain.system.entry.dto.AddOrUpdateUserDto;
@@ -42,13 +44,16 @@ public class SysUserServiceImpl implements SysUserService {
     private SysRoleMapper sysRoleMapper;
 
     @Override
-    public List<SysUserRoleVo> queryUserList(SysUserDto dto) {
+    public Page<SysUserRoleVo> queryUserList(SysUserDto dto) {
         LambdaQueryWrapper<SysUserPo> sysUserPoLambdaQueryWrapper = new LambdaQueryWrapper<>();
         if (!Objects.isNull(dto.getUserId())) {
             sysUserPoLambdaQueryWrapper.eq(SysUserPo::getId, dto.getUserId());
         }
 
-        List<SysUserPo> sysUserPos = sysUserMapper.selectList(sysUserPoLambdaQueryWrapper);
+        Page<SysUserPo> sysUserPoPage = sysUserMapper.selectPage(new Page<>(dto.getPageNum(), dto.getPageSize()), sysUserPoLambdaQueryWrapper);
+        Page<SysUserRoleVo> sysUserVoPage = new Page<>();
+        List<SysUserPo> sysUserPos = sysUserPoPage.getRecords();
+        BeanUtil.copyProperties(sysUserPoPage, sysUserVoPage);
 
         List<SysUserRoleVo> sysUserRoleVos = new ArrayList<>();
         if (sysUserPos.size() > 0) {
@@ -62,7 +67,8 @@ public class SysUserServiceImpl implements SysUserService {
                     }
             );
         }
-        return sysUserRoleVos;
+        sysUserVoPage.setRecords(sysUserRoleVos);
+        return sysUserVoPage;
     }
 
     @Override

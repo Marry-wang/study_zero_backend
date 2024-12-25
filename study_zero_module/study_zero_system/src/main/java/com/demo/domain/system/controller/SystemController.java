@@ -1,5 +1,6 @@
 package com.demo.domain.system.controller;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.demo.api.ZeroResult;
 import com.demo.domain.system.entry.dto.*;
 import com.demo.domain.system.entry.dto.*;
@@ -53,7 +54,7 @@ public class SystemController {
     }
 
     @PostMapping(value = "/getUser")
-    public ZeroResult<List<SysUserRoleVo>> userList(@RequestBody SysUserDto dto) {
+    public ZeroResult<Page<SysUserRoleVo>> userList(@RequestBody SysUserDto dto) {
         return ZeroResult.success(sysUserService.queryUserList(dto));
     }
 
@@ -74,7 +75,7 @@ public class SystemController {
     }
 
     @PostMapping(value = "/getRole")
-    public ZeroResult<List<SysRoleMenuVo>> getRole(@RequestBody SysRoleDto dto) {
+    public ZeroResult<Page<SysRoleMenuVo>> getRole(@RequestBody SysRoleDto dto) {
         return ZeroResult.success(sysRoleService.queryRoleList(dto));
     }
 
