@@ -25,7 +25,6 @@ import com.demo.domain.libraryManagement.book.mapper.BookTypeMapper;
 import com.demo.domain.libraryManagement.book.mapper.BookTypeSummaryMapper;
 import com.demo.enums.BaseResultEnum;
 import com.demo.exception.BaseException;
-import com.demo.util.MinioUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -153,7 +152,7 @@ public class BookService {
         Page<BookPo> bookPoPage = bookMapper.selectPage(new Page<>(dto.getPageNum(), dto.getPageSize()), wrapper);
         List<BookPo> bookPos = bookPoPage.getRecords();
 
-        Page<BookVo> bookVoPage =new Page<>();
+        Page<BookVo> bookVoPage = new Page<>();
         BeanUtil.copyProperties(bookPoPage, bookVoPage);
         List<BookVo> bookVoList = new ArrayList<>();
         if (CollectionUtil.isNotEmpty(bookPos)) {

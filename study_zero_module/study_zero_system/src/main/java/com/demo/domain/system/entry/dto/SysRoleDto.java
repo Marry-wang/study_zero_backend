@@ -7,7 +7,7 @@ public class SysRoleDto {
 
     private Integer roleId;
 
-    private int  pageNum =1;
+    private int pageNum = 1;
 
-    private int pageSize =10;
+    private int pageSize = 10;
 }

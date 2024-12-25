@@ -51,7 +51,7 @@ public class SysRoleServiceImpl implements SysRoleService {
             queryWrapper.eq(SysRolePo::getId, dto.getRoleId());
         }
         Page<SysRolePo> sysRolePoPage = sysRoleMapper.selectPage(new Page<>(dto.getPageNum(), dto.getPageSize()), queryWrapper);
-        Page<SysRoleMenuVo> sysRoleVoPage =new Page<>();
+        Page<SysRoleMenuVo> sysRoleVoPage = new Page<>();
         BeanUtil.copyProperties(sysRolePoPage, sysRoleVoPage);
         List<SysRolePo> sysRolePos = sysRolePoPage.getRecords();
         List<SysRoleMenuVo> sysRoleMenuVos = new ArrayList<>();

@@ -8,13 +8,14 @@ import java.util.Date;
 
 /**
  * 图书借阅记录
+ *
  * @TableName book_borrowing_record
  */
-@TableName(value ="book_borrowing_record")
+@TableName(value = "book_borrowing_record")
 @Data
 public class BookBorrowingRecordPo implements Serializable {
 
-    @TableId(value = "borrowing_record_id",type = IdType.AUTO)
+    @TableId(value = "borrowing_record_id", type = IdType.AUTO)
     private Integer borrowingRecordId;
     /**
      * 图书id
@@ -53,27 +54,27 @@ public class BookBorrowingRecordPo implements Serializable {
     private Integer managerBy;
 
     /**
-     * 
+     *
      */
-    @TableField(value = "create_by",fill = FieldFill.INSERT)
+    @TableField(value = "create_by", fill = FieldFill.INSERT)
     private Integer createBy;
 
     /**
-     * 
+     *
      */
-    @TableField(value = "create_time",fill = FieldFill.INSERT)
+    @TableField(value = "create_time", fill = FieldFill.INSERT)
     private Date createTime;
 
     /**
-     * 
+     *
      */
-    @TableField(value = "update_by",fill = FieldFill.UPDATE)
+    @TableField(value = "update_by", fill = FieldFill.UPDATE)
     private Integer updateBy;
 
     /**
-     * 
+     *
      */
-    @TableField(value = "update_time",fill = FieldFill.UPDATE)
+    @TableField(value = "update_time", fill = FieldFill.UPDATE)
     private Date updateTime;
 
     @TableField(exist = false)

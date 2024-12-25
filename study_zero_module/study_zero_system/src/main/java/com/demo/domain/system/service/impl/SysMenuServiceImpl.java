@@ -52,22 +52,22 @@ public class SysMenuServiceImpl implements SysMenuService {
         String userId = SecurityContextHolder.get("id");
         List<Integer> roleIds = userService.selectUserRole(Integer.parseInt(userId));
 
-        if(CollectionUtil.isEmpty(roleIds)){
+        if (CollectionUtil.isEmpty(roleIds)) {
             return menuParentList;
         }
         List<SysRoleMenuPo> sysRoleMenuPos = sysRoleMenuMapper.selectList(new QueryWrapper<SysRoleMenuPo>().lambda()
                 .in(SysRoleMenuPo::getRoleId, roleIds));
 
         List<Integer> menuIds = new ArrayList<>();
-        if(CollectionUtil.isNotEmpty(sysRoleMenuPos)){
+        if (CollectionUtil.isNotEmpty(sysRoleMenuPos)) {
             menuIds = sysRoleMenuPos.stream().map(SysRoleMenuPo::getMenuId).collect(Collectors.toList());
-        }else{
+        } else {
             return menuParentList;
         }
 
 
         LambdaQueryWrapper<SysMenuPo> sysMenuPoLambdaQueryWrapper = new LambdaQueryWrapper<>();
-        sysMenuPoLambdaQueryWrapper.in(SysMenuPo::getId,menuIds);
+        sysMenuPoLambdaQueryWrapper.in(SysMenuPo::getId, menuIds);
         sysMenuPos = sysMenuMapper.selectList(sysMenuPoLambdaQueryWrapper);
 
 

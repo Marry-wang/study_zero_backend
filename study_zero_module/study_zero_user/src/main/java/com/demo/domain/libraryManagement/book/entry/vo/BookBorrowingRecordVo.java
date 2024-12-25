@@ -1,20 +1,17 @@
 package com.demo.domain.libraryManagement.book.entry.vo;
 
-import com.baomidou.mybatisplus.annotation.FieldFill;
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableName;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
-import java.io.Serializable;
 import java.util.Date;
 
 /**
  * 图书借阅记录
+ *
  * @TableName book_borrowing_record
  */
 @Data
-public class BookBorrowingRecordVo{
+public class BookBorrowingRecordVo {
 
     private Integer borrowingRecordId;
     /**
@@ -62,12 +59,12 @@ public class BookBorrowingRecordVo{
     private Integer managerBy;
 
     /**
-     * 
+     *
      */
     private Integer createBy;
 
     /**
-     * 
+     *
      */
     private Date createTime;
 

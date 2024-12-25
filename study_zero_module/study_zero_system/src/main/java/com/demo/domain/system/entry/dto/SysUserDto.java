@@ -7,7 +7,7 @@ public class SysUserDto {
 
     private Integer userId;
 
-    private int  pageNum =1;
+    private int pageNum = 1;
 
-    private int pageSize =10;
+    private int pageSize = 10;
 }

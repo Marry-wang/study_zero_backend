@@ -12,7 +12,7 @@ public class BookTypeSummaryDto {
      */
     private String bookTypeName;
 
-    private int  pageNum =1;
+    private int pageNum = 1;
 
-    private int pageSize =10;
+    private int pageSize = 10;
 }

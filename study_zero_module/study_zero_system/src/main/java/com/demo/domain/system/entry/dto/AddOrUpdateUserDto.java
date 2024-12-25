@@ -6,7 +6,7 @@ import java.util.List;
 
 @Data
 public class AddOrUpdateUserDto {
-    private Integer  userId;
+    private Integer userId;
 
     private String userName;
 

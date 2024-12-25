@@ -28,7 +28,7 @@ public class LoginServiceImpl implements LoginService {
         SysUserPo sysUserPo = sysUserMapper.selectOne(new QueryWrapper<SysUserPo>()
                 .lambda()
                 .eq(SysUserPo::getUserName, dto.getUserName()));
-        if(ObjectUtil.isEmpty(sysUserPo)){
+        if (ObjectUtil.isEmpty(sysUserPo)) {
             throw new BaseException(BaseResultEnum.USERNOTEXIT);
         }
 

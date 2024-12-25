@@ -72,12 +72,12 @@ public class BookDto {
      */
     private String bookImageName;
 
-     /**
+    /**
      * 图书图片路径
      */
     private String bookImagePath;
 
-    private int  pageNum =1;
+    private int pageNum = 1;
 
-    private int pageSize =10;
+    private int pageSize = 10;
 }

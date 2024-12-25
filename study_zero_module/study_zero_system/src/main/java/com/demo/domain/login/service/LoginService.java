@@ -1,6 +1,5 @@
 package com.demo.domain.login.service;
 
-import com.alibaba.fastjson.JSONObject;
 import com.demo.domain.login.entry.dto.LoginDto;
 
 public interface LoginService {
