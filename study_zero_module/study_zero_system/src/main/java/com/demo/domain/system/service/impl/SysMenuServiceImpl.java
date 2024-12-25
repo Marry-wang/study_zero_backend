@@ -98,11 +98,7 @@ public class SysMenuServiceImpl implements SysMenuService {
         for (SysMenuPo sysMenuPo : sysMenuPos) {
             if (Objects.isNull(sysMenuPo.getParentId())) {
                 SysMenuVo sysMenuVo = new SysMenuVo();
-                sysMenuVo.setId(sysMenuPo.getId());
-                sysMenuVo.setMenuName(sysMenuPo.getMenuName());
-                sysMenuVo.setPath(sysMenuPo.getPath());
-                sysMenuVo.setIcon(sysMenuPo.getIcon());
-                sysMenuVo.setChildren(sysMenuPo.getChildren());
+                BeanUtil.copyProperties(sysMenuPo, sysMenuVo);
                 menuParentList.add(sysMenuVo);
             }
         }
@@ -123,6 +119,7 @@ public class SysMenuServiceImpl implements SysMenuService {
                     sysMenuVo1.setChildren(sysMenuPo1.getChildren());
                     sysMenuVo1.setRedirect(sysMenuPo1.getRedirect());
                     sysMenuVo1.setComponent(sysMenuPo1.getComponent());
+                    sysMenuVo1.setParentId(sysMenuPo1.getParentId());
                     chridrenMenuList.add(sysMenuVo1);
                 }
             }

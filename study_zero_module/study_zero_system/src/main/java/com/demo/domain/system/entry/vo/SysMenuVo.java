@@ -14,6 +14,8 @@ public class SysMenuVo {
 
     private Integer id;
 
+    private Integer parentId;
+
     /**
      * 对应前端菜单名
      */
