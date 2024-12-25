@@ -1,0 +1,1 @@
+"id"	"data_id"	"group_id"	"app_name"	"content"	"beta_ips"	"md5"	"gmt_create"	"gmt_modified"	"src_user"	"src_ip"	"tenant_id"	"encrypted_data_key"

@@ -1,0 +1,1 @@
+"id"	"tenant_id"	"quota"	"usage"	"max_size"	"max_aggr_count"	"max_aggr_size"	"max_history_count"	"gmt_create"	"gmt_modified"

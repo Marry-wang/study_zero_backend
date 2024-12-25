@@ -1,0 +1,1 @@
+"id"	"tag_name"	"tag_type"	"data_id"	"group_id"	"tenant_id"	"nid"

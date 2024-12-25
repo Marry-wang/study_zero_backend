@@ -1,0 +1,160 @@
+"id"	"data_id"	"group_id"	"content"	"md5"	"gmt_create"	"gmt_modified"	"src_user"	"src_ip"	"app_name"	"tenant_id"	"c_desc"	"c_use"	"effect"	"type"	"c_schema"	"encrypted_data_key"
+"2"	"study-zero-system.yml"	"DEFAULT_GROUP"	"server:
+  port: 10002
+
+spring:
+  application:
+    name: study-zero-system
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/zero?useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&allowMultiQueries=true&serverTimezone=Asia/Shanghai
+    username: root
+    password: root
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    filters: stat
+    maxActive: 100
+    initialSize: 1
+    maxWait: 60000
+    minIdle: 1
+    timeBetweenEvictionRunsMillis: 60000
+    minEvictableIdleTimeMillis: 300000
+    validationQuery: select 'x'
+    testWhileIdle: true
+    testOnBorrow: false
+    testOnReturn: false
+    poolPreparedStatements: true
+    maxOpenPreparedStatements: 20
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    password:
+    timeout: 86400000
+    jedis:
+      pool:
+        max-active: 8
+        max-idle: 500
+        max-wait: -1
+        min-idle: 0
+    lettuce:
+      shutdown-timeout: 0
+
+
+mybatis-plus:
+  global-config:
+    db-config:
+      logic-delete-field: deleFlag 
+      logic-delete-value: 1 
+      logic-not-delete-value: 0 
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+config:
+  jwt:
+    secret: qwer
+    expire: 86400
+    header: accessToken
+logging:
+  level:
+    com.demo: debug
+"	"73bec4d5c076fd36f540e86493874f25"	"15/11/2023 09:59:55"	"25/6/2024 06:08:35"		"192.168.0.36"						"yaml"		
+"21"	"study-zero-gateway.yml"	"DEFAULT_GROUP"	"spring:
+  cloud:
+    gateway:
+      globalcors:
+        add-to-simple-url-handler-mapping: true
+        corsConfigurations:
+          '[/**]':
+            allowedOriginPatterns: ""*""
+            allowedMethods:
+              - ""GET""
+              - ""POST""
+              - ""DELETE""
+              - ""PUT""
+              - ""OPTIONS""
+            allowedHeaders: ""*""
+            allowCredentials: true
+            maxAge: 360000
+      routes:
+        - id: study-zero-user
+          uri: http://127.0.0.1:10001
+          predicates:
+            - Path=/user/**
+          filters:
+            - StripPrefix=1
+        - id: study-zero-system
+          uri: http://127.0.0.1:10002
+          predicates:
+            - Path=/system/**
+          filters:
+            - StripPrefix=1
+        - id: study-zero-pay
+          uri: http://127.0.0.1:1003
+          predicates:
+            - Path=/pay/**
+          filters:
+            - StripPrefix=1"	"716edb200c83458c951faa35ff6d0898"	"16/11/2023 09:03:16"	"25/6/2024 06:10:33"		"192.168.0.36"						"yaml"		
+"37"	"study-zero-user.yml"	"DEFAULT_GROUP"	"server:
+  port: 10001
+
+spring:
+  application:
+    name: study-zero-user
+  servlet:
+    multipart:
+      max-file-size: 10MB
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/zero?useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&allowMultiQueries=true&serverTimezone=Asia/Shanghai
+    username: root
+    password: root
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    filters: stat
+    maxActive: 100
+    initialSize: 1
+    maxWait: 60000
+    minIdle: 1
+    timeBetweenEvictionRunsMillis: 60000
+    minEvictableIdleTimeMillis: 300000
+    validationQuery: select 'x'
+    testWhileIdle: true
+    testOnBorrow: false
+    testOnReturn: false
+    poolPreparedStatements: true
+    maxOpenPreparedStatements: 20
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    password:
+    timeout: 86400000
+    jedis:
+      pool:
+        max-active: 8
+        max-idle: 500
+        max-wait: -1
+        min-idle: 0
+    lettuce:
+      shutdown-timeout: 0
+
+
+mybatis-plus:
+  global-config:
+    db-config:
+      logic-delete-field: deleFlag 
+      logic-delete-value: 1 
+      logic-not-delete-value: 0 
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+config:
+  jwt:
+    secret: qwer
+    expire: 86400
+    header: accessToken
+logging:
+  level:
+    com.demo: debug
+
+minio:
+  endpoint: http://127.0.0.1:9000
+  accessKey: minioadmin
+  secretKey: minioadmin
+  bucketName: zero
+"	"9f64de3b9de9c7fab5d2ebf4ba678ec0"	"24/6/2024 06:37:11"	"12/12/2024 07:32:01"		"0:0:0:0:0:0:0:1"						"yaml"		
