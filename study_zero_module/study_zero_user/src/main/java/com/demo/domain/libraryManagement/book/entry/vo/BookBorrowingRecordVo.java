@@ -45,9 +45,16 @@ public class BookBorrowingRecordVo{
     private Integer borrowingBy;
 
     /**
+     * 借书人
+     */
+    private String borrowingByName;
+
+    /**
      * 状态(0未还，1已还)
      */
     private String status;
+
+    private String statusName;
 
     /**
      * 记录人员
