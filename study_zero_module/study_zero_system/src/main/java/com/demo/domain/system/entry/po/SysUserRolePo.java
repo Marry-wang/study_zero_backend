@@ -29,7 +29,7 @@ public class SysUserRolePo {
     @TableField(value = "create_by",fill = FieldFill.INSERT)
     private Integer createBy;
 
-    @TableField(value = "create_time",fill = FieldFill.UPDATE)
+    @TableField(value = "update_time",fill = FieldFill.UPDATE)
     private Date updateTime;
 
     @TableField(value = "update_by",fill = FieldFill.UPDATE)

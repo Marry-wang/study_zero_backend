@@ -23,19 +23,19 @@ public class SysRoleMenuPo {
     @TableField(value = "menu_id")
     private Integer menuId;
 
-    @TableField(value = "create_time")
+    @TableField(value = "create_time",fill = FieldFill.INSERT)
     private Date createTime;
 
     @TableField(value = "create_by",fill = FieldFill.INSERT)
     private Integer createBy;
 
-    @TableField(value = "create_time",fill = FieldFill.INSERT)
+    @TableField(value = "create_time",fill = FieldFill.UPDATE)
     private Date updateTime;
 
     @TableField(value = "update_by",fill = FieldFill.UPDATE)
     private Integer updateBy;
 
     @TableLogic
-    @TableField(value = "del_flag",fill = FieldFill.UPDATE)
+    @TableField(value = "del_flag")
     private Boolean delFlag;
 }
